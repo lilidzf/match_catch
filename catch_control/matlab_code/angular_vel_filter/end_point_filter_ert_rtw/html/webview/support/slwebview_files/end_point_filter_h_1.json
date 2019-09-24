@@ -1,0 +1,67 @@
+[
+ {
+  "hid":1,
+  "sid":"end_point_filter",
+  "esid":"",
+  "parent":"root",
+  "children":[
+   2
+  ],
+  "name":"end_point_filter",
+  "label":"end_point_filter",
+  "fullname":"end_point_filter",
+  "icon":"WebViewIcon0",
+  "svg":"support/slwebview_files/end_point_filter_d.svg",
+  "thumbnail":"support/slwebview_files/end_point_filter_d.png",
+  "backingUrl":"support/slwebview_files/end_point_filter_d.json",
+  "elements":[
+   ":119",
+   ":105",
+   ":121",
+   ":122",
+   ":105#out:1",
+   ":119#out:1",
+   ":122#out:1"
+  ],
+  "sameAsElement":false
+ },
+ {
+  "hid":2,
+  "sid":"end_point_filter:122",
+  "esid":"end_point_filter:122",
+  "parent":1,
+  "children":[
+  ],
+  "name":"LTI filter ",
+  "label":"LTI filter ",
+  "fullname":"end_point_filter/LTI filter ",
+  "icon":"WebViewIcon2",
+  "svg":"support/slwebview_files/end_point_filter_122_d.svg",
+  "thumbnail":"support/slwebview_files/end_point_filter_122_d.png",
+  "backingUrl":"support/slwebview_files/end_point_filter_122_d.json",
+  "elements":[
+   ":124",
+   ":131",
+   ":123",
+   ":138",
+   ":132",
+   ":133",
+   ":140",
+   ":143",
+   ":144",
+   ":145",
+   ":131#out:1",
+   ":123#out:1",
+   ":132#out:1",
+   ":133#out:1",
+   ":140#out:1",
+   ":124#out:1",
+   ":143#out:1",
+   ":144#out:1",
+   ":124#out:2",
+   ":124#out:3",
+   ":145#out:1"
+  ],
+  "sameAsElement":true
+ }
+]

@@ -1,0 +1,21 @@
+<launch>
+    <arg name="debug" default="false" />
+    <arg     if="$(arg debug)" name="launch_prefix" value="gdb -ex run --args" />
+    <arg     unless="$(arg debug)" name="launch_prefix" value="" />
+
+    <group ns = "moveit_group">
+        <node pkg="catch_control" type="match_demo_node" name="mymoveit_node" output="screen" launch-prefix="$(arg launch_prefix)" />
+        <rosparam command="load" file="$(find catch_control)/config/bottle.yaml" />
+
+        <!--  add table to world   rviz 很卡  kdl_kinematics_plugin/KDLKinematicsPlugin-->
+<!--        <node pkg="catch_control" type="add_table_node" name="add_table_node"/>-->
+    </group>
+
+
+
+
+<!--    <group ns = "robotiq">-->
+<!--        <node pkg="catch_control" type="gripper_moveit_node" name="gripper_moveit_node" output="screen" launch-prefix="$(arg launch_prefix)" />-->
+<!--    </group>-->
+
+</launch>

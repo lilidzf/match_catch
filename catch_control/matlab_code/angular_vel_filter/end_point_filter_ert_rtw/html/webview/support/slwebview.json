@@ -1,0 +1,25 @@
+{
+ "baseUrl":"support/slwebview_files",
+ "homeHid":1,
+ "initialElement":"",
+ "sections":[
+  {
+   "hid":1,
+   "sid":"end_point_filter",
+   "name":"end_point_filter",
+   "fullname":"end_point_filter",
+   "parent":"root",
+   "descendants":[
+    2
+   ],
+   "hierarchyUrl":"support/slwebview_files/end_point_filter_h_1.json",
+   "backingUrl":"support/slwebview_files/end_point_filter_m.json"
+  }
+ ],
+ "optViews":[
+ ],
+ "display":{
+  "informer":false
+ },
+ "iconsUrl":"support/slwebview_files/end_point_filter_icons.css"
+}

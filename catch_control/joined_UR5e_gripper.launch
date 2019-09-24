@@ -1,0 +1,39 @@
+<launch>
+    <group ns = "robotiq">
+        <include file="$(find robotiq_85_bringup)/launch/robotiq_85.launch"/>
+    </group>
+
+    <group ns = "UR5e">
+<!--        <include file="$(find ur_modern_driver)/launch/ur5e_bringup.launch"/>-->
+        <include file="$(find ur_modern_driver)/launch/ur5e_ros_control.launch"/>
+    </group>
+
+    <!-- 10.1.1.198 -->
+    <include file="$(find cortex_bridge)/launch/cortex_bridge.launch"/>
+
+    <group ns="moveit_group">
+        <include file="$(find UR5e_robotiq_moveit_config)/launch/move_group.launch"/>
+    </group>
+
+
+    <node pkg="catch_control" type="joint_state_maintain_node" name="joined_joint_state_publisher" respawn="true" output="screen"/>
+
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find catch_control)/config/moveit.rviz">
+    </node>
+
+    <rosparam command="load" file="$(find catch_control)/config/env_param.yaml" />
+
+    <node pkg="tf" type="static_transform_publisher" name="gripper2tool0"
+          args="0 0 0 0 -1.570796327 -1.570796327  tool0 gripper_root_link  1000" />
+
+    <node pkg="tf" type="static_transform_publisher" name="ur5e_world"
+          args="-0.01 0.377 0.808 1.570796327 0 0 ur_world base_link 1000" />
+
+    <!-- base_link is fixed. Markers is relative to map-->
+    <node pkg="tf" type="static_transform_publisher" name="base2map"
+          args="-0.323803 -0.374581 -0.0393763 0.0001191 0.000309095 0.70524 0.708969 base_link map  500" />
+
+
+
+
+</launch>

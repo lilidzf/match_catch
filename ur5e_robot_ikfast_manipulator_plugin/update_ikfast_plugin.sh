@@ -1,0 +1,1 @@
+rosrun moveit_kinematics create_ikfast_moveit_plugin.py UR5e_robotiq manipulator ur5e_robot_ikfast_manipulator_plugin /home/yang/catch_bottle/ur5e_robot_ikfast_manipulator_plugin/src/UR5e_robotiq_manipulator_ikfast_solver.cpp

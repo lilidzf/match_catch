@@ -1,0 +1,43 @@
+<robot
+  name="table">
+  <link
+    name="table">
+    <inertial>
+      <origin
+        xyz="-0.0074245 0.051498 0.61219"
+        rpy="0 0 0" />
+      <mass
+        value="30.118" />
+      <inertia
+        ixx="5.2287"
+        ixy="0.0061081"
+        ixz="0.022985"
+        iyy="4.6538"
+        iyz="-0.29996"
+        izz="5.6994" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://catch_control/urdf/table.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.64706 0.61961 0.58824 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://catch_control/urdf/table.STL" />
+      </geometry>
+    </collision>
+  </link>
+</robot>

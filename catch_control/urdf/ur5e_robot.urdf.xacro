@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro"
+       name="UR5e_robotiq" >
+
+  <!-- common stuff -->
+  <xacro:include filename="$(find ur_e_description)/urdf/common.gazebo.xacro" />
+
+  <!-- ur5e -->
+  <xacro:include filename="$(find ur_e_description)/urdf/ur5e.urdf.xacro" />
+
+  <!--table-->
+  <xacro:include filename="$(find catch_control)/urdf/table.urdf"/>
+
+  <!--gripper-->
+  <xacro:include filename="$(find robotiq_85_description)/urdf/robotiq_85_gripper.xacro"/>
+
+  <!-- arm -->
+  <xacro:ur5e_robot prefix="" joint_limited="false"/>
+
+  <link name="ur_world" />
+
+  <joint name="world_joint" type="fixed">
+    <parent link="ur_world" />
+    <child link = "table" />
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />
+  </joint>
+
+
+  <joint name="table_joint" type="fixed">
+    <parent link="table" />
+    <child link = "base_link" />
+    <origin xyz="-0.01 0.377 0.808" rpy="0.0 0.0 1.570796327" />
+  </joint>
+
+  <joint name="UR5e_gripper" type="fixed">
+    <parent link="tool0" />
+    <child link = "gripper_root_link" />
+    <origin xyz="0 0 0" rpy="0.0 -1.570796327 -1.570796327" />
+  </joint>
+
+<!--  <joint name="world_joint" type="fixed">-->
+<!--    <parent link="ur_world" />-->
+<!--    <child link = "base_link" />-->
+<!--    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0" />-->
+<!--  </joint>-->
+
+</robot>

@@ -1,0 +1,1133 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>RTW Report - end_point_filter.cpp</title>
+<style> .LN { font-style: italic; color: #888888 } </style>
+<style> .CT { font-style: italic; color: #117755 } </style>
+<style> .PP { font-style: bold;   color: #992211 } </style>
+<style> .KW { font-style: bold;   color: #112266 } </style>
+<style> .DT { font-style: bold;   color: #112266 } </style>
+<link rel="stylesheet" type="text/css" href="rtwreport.css"></link><script language="JavaScript" type="text/javascript" src="rtwreport_utils.js"></script>
+<SCRIPT type="text/javascript" language="JavaScript" src="slwebview.js"></SCRIPT>
+<SCRIPT type="text/javascript" language="JavaScript" src="id_mapping.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="rtwannotate.js"></SCRIPT>
+</head>
+<body bgcolor="#eeeeee" text="#1122aa" onload="try {if (top) { if (top.rtwFileOnLoad) top.rtwFileOnLoad(window.document); else local_onload();}} catch(err) {};if (typeof rtwannotate === 'function') {rtwannotate('end_point_filter_cpp_cov.xml');}">
+<p>
+<table border="0" cellspacing="0" cellpadding="6" width="100%%" height="100%%"><tr><td width="100%%" valign="top" bgcolor="#ffffff">
+<h4>File: <a href="../end_point_filter.cpp" target="rtwreport_document_frame" id="linkToText_plain">end_point_filter.cpp</a></h4>
+<pre id="RTWcode">
+<span><a class="LN" name="1">    1   </a><span class="CT">//</span>
+</span><span><a class="LN" name="2">    2   </a><span class="CT">// File: end_point_filter.cpp</span>
+</span><span><a class="LN" name="3">    3   </a><span class="CT">//</span>
+</span><span><a class="LN" name="4">    4   </a><span class="CT">// Code generated for Simulink model 'end_point_filter'.</span>
+</span><span><a class="LN" name="5">    5   </a><span class="CT">//</span>
+</span><span><a class="LN" name="6">    6   </a><span class="CT">// Model version                  : 1.142</span>
+</span><span><a class="LN" name="7">    7   </a><span class="CT">// Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016</span>
+</span><span><a class="LN" name="8">    8   </a><span class="CT">// C/C++ source code generated on : Sun Jun  9 11:45:23 2019</span>
+</span><span><a class="LN" name="9">    9   </a><span class="CT">//</span>
+</span><span><a class="LN" name="10">   10   </a><span class="CT">// Target selection: ert.tlc</span>
+</span><span><a class="LN" name="11">   11   </a><span class="CT">// Embedded hardware selection: Intel-&gt;x86-64 (Windows64)</span>
+</span><span><a class="LN" name="12">   12   </a><span class="CT">// Code generation objectives: Unspecified</span>
+</span><span><a class="LN" name="13">   13   </a><span class="CT">// Validation result: Not run</span>
+</span><span><a class="LN" name="14">   14   </a><span class="CT">//</span>
+</span><span><a class="LN" name="15">   15   </a><font color="#992211">#</font><span class="PP">include</span> <font color="#992211">&quot;end_point_filter.h&quot;</font>
+</span><span><a class="LN" name="16">   16   </a>
+</span><span><a class="LN" name="17">   17   </a><span class="DT">extern</span> <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> <a href="#fcn_PadBSymm_uD" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_PadBSymm_uD');" target="_self"><font color="#1122aa">PadBSymm_uD</font></a>(<span class="DT">const</span> <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> u[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uStride[], <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a>
+</span><span><a class="LN" name="18">   18   </a>  idx[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uDims[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uStart[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uEnd[],
+</span><span><a class="LN" name="19">   19   </a>  <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sNumPreEdges, <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sPreEdges[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a>
+</span><span><a class="LN" name="20">   20   </a>  sNumPostEdges, <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sPostEdges[]);
+</span><span><a class="LN" name="21">   21   </a><span class="DT">extern</span> <span class="DT">void</span> <a href="#fcn_MdnFltH15_M_BSymm_uD_yD" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_MdnFltH15_M_BSymm_uD_yD');" target="_self"><font color="#1122aa">MdnFltH15_M_BSymm_uD_yD</font></a>(<span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hLoc[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hDims[],
+</span><span><a class="LN" name="22">   22   </a>  <span class="DT">const</span> <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> u[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uDims[], <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> y[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yDims[],
+</span><span><a class="LN" name="23">   23   </a>  <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yOrigin[]);
+</span><span><a class="LN" name="24">   24   </a><a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> <a name="fcn_PadBSymm_uD">PadBSymm_uD</a>(<span class="DT">const</span> <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> u[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uStride[], <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> idx[],
+</span><span><a class="LN" name="25">   25   </a>                   <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uDims[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uStart[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a>
+</span><span><a class="LN" name="26">   26   </a>                   uEnd[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sNumPreEdges, <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sPreEdges[],
+</span><span><a class="LN" name="27">   27   </a>                   <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sNumPostEdges, <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sPostEdges[])
+</span><span><a class="LN" name="28">   28   </a><b>{</b>
+</span><span><a class="LN" name="29">   29   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> uOut;
+</span><span><a class="LN" name="30">   30   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> edgeNum;
+</span><span><a class="LN" name="31">   31   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> idxI;
+</span><span><a class="LN" name="32">   32   </a>
+</span><span><a class="LN" name="33">   33   </a>  <span class="CT">// S-Function (svipmdnfilter): '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="34">   34   </a>  <span class="CT">// For boundary sectors:</span>
+</span><span><a class="LN" name="35">   35   </a>  <span class="CT">// -check if index is outside of input bounds ...</span>
+</span><span><a class="LN" name="36">   36   </a>  <span class="CT">//   -if so then return pad extended value</span>
+</span><span><a class="LN" name="37">   37   </a>  <span class="CT">//   -else fetch input data at the index</span>
+</span><span><a class="LN" name="38">   38   </a>  <span class="CT">// loop through preEdges</span>
+</span><span><a class="LN" name="39">   39   </a>  <span class="KW">for</span> (edgeNum = 0; edgeNum &lt; sNumPreEdges; edgeNum++) <b>{</b>
+</span><span><a class="LN" name="40">   40   </a>    <span class="KW">if</span> (idx[sPreEdges[edgeNum]] &lt; uStart[sPreEdges[edgeNum]]) <b>{</b>
+</span><span><a class="LN" name="41">   41   </a>      <span class="CT">// redirect index across a pre edge</span>
+</span><span><a class="LN" name="42">   42   </a>      <span class="CT">// reflect across pre-edge</span>
+</span><span><a class="LN" name="43">   43   </a>      <span class="CT">// check if it is a case of multiple reflections</span>
+</span><span><a class="LN" name="44">   44   </a>      <span class="CT">// get modulo distance</span>
+</span><span><a class="LN" name="45">   45   </a>      idxI = ((uStart[sPreEdges[edgeNum]] - idx[sPreEdges[edgeNum]]) - 1) %
+</span><span><a class="LN" name="46">   46   </a>        (uDims[sPreEdges[edgeNum]] &lt;&lt; 1);
+</span><span><a class="LN" name="47">   47   </a>
+</span><span><a class="LN" name="48">   48   </a>      <span class="CT">// if distance&lt;dim then index is safe to be reflected</span>
+</span><span><a class="LN" name="49">   49   </a>      <span class="KW">if</span> (idxI &lt; uDims[sPreEdges[edgeNum]]) <b>{</b>
+</span><span><a class="LN" name="50">   50   </a>        idxI += uStart[sPreEdges[edgeNum]];
+</span><span><a class="LN" name="51">   51   </a>
+</span><span><a class="LN" name="52">   52   </a>        <span class="CT">// else d%dim is reflected across opposite edge</span>
+</span><span><a class="LN" name="53">   53   </a>      <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="54">   54   </a>        idxI = uEnd[sPreEdges[edgeNum]] - idxI % uDims[sPreEdges[edgeNum]];
+</span><span><a class="LN" name="55">   55   </a>      <b>}</b>
+</span><span><a class="LN" name="56">   56   </a>
+</span><span><a class="LN" name="57">   57   </a>      idx[sPreEdges[edgeNum]] = idxI;
+</span><span><a class="LN" name="58">   58   </a>    <b>}</b>
+</span><span><a class="LN" name="59">   59   </a>  <b>}</b>
+</span><span><a class="LN" name="60">   60   </a>
+</span><span><a class="LN" name="61">   61   </a>  <span class="CT">// loop through postEdges</span>
+</span><span><a class="LN" name="62">   62   </a>  <span class="KW">for</span> (edgeNum = 0; edgeNum &lt; sNumPostEdges; edgeNum++) <b>{</b>
+</span><span><a class="LN" name="63">   63   </a>    <span class="KW">if</span> (idx[sPostEdges[edgeNum]] &gt; uEnd[sPostEdges[edgeNum]]) <b>{</b>
+</span><span><a class="LN" name="64">   64   </a>      <span class="CT">// redirect index across a post edge</span>
+</span><span><a class="LN" name="65">   65   </a>      <span class="CT">// reflect across post-edge</span>
+</span><span><a class="LN" name="66">   66   </a>      <span class="CT">// check if it is a case of multiple reflections</span>
+</span><span><a class="LN" name="67">   67   </a>      <span class="CT">// get modulo distance</span>
+</span><span><a class="LN" name="68">   68   </a>      idxI = ((idx[sPostEdges[edgeNum]] - uEnd[sPostEdges[edgeNum]]) - 1) %
+</span><span><a class="LN" name="69">   69   </a>        (uDims[sPostEdges[edgeNum]] &lt;&lt; 1);
+</span><span><a class="LN" name="70">   70   </a>
+</span><span><a class="LN" name="71">   71   </a>      <span class="CT">// if distance&lt;dim then index is safe to be reflected</span>
+</span><span><a class="LN" name="72">   72   </a>      <span class="KW">if</span> (idxI &lt; uDims[sPostEdges[edgeNum]]) <b>{</b>
+</span><span><a class="LN" name="73">   73   </a>        idxI = uEnd[sPostEdges[edgeNum]] - idxI;
+</span><span><a class="LN" name="74">   74   </a>
+</span><span><a class="LN" name="75">   75   </a>        <span class="CT">// else d%dim is reflected across opposite edge</span>
+</span><span><a class="LN" name="76">   76   </a>      <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="77">   77   </a>        idxI = idxI % uDims[sPostEdges[edgeNum]] + uStart[sPostEdges[edgeNum]];
+</span><span><a class="LN" name="78">   78   </a>      <b>}</b>
+</span><span><a class="LN" name="79">   79   </a>
+</span><span><a class="LN" name="80">   80   </a>      idx[sPostEdges[edgeNum]] = idxI;
+</span><span><a class="LN" name="81">   81   </a>    <b>}</b>
+</span><span><a class="LN" name="82">   82   </a>  <b>}</b>
+</span><span><a class="LN" name="83">   83   </a>
+</span><span><a class="LN" name="84">   84   </a>  <span class="CT">// linearize index and return input data</span>
+</span><span><a class="LN" name="85">   85   </a>  uOut = u[idx[0U] * uStride[0U] + idx[1U] * uStride[1U]];
+</span><span><a class="LN" name="86">   86   </a>
+</span><span><a class="LN" name="87">   87   </a>  <span class="CT">// End of S-Function (svipmdnfilter): '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="88">   88   </a>  <span class="KW">return</span> uOut;
+</span><span><a class="LN" name="89">   89   </a><b>}</b>
+</span><span><a class="LN" name="90">   90   </a>
+</span><span><a class="LN" name="91">   91   </a><span class="DT">void</span> <a name="fcn_MdnFltH15_M_BSymm_uD_yD">MdnFltH15_M_BSymm_uD_yD</a>(<span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hLoc[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hDims[], <span class="DT">const</span>
+</span><span><a class="LN" name="92">   92   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> u[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uDims[], <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> y[], <span class="DT">const</span> <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yDims[], <span class="DT">const</span>
+</span><span><a class="LN" name="93">   93   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yOrigin[])
+</span><span><a class="LN" name="94">   94   </a><b>{</b>
+</span><span><a class="LN" name="95">   95   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> acc;
+</span><span><a class="LN" name="96">   96   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> uW[15];
+</span><span><a class="LN" name="97">   97   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> pivot;
+</span><span><a class="LN" name="98">   98   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uOrigin[2];
+</span><span><a class="LN" name="99">   99   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uEnd[2];
+</span><span><a class="LN" name="100">  100   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uStride[2];
+</span><span><a class="LN" name="101">  101   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hEnd[2];
+</span><span><a class="LN" name="102">  102   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yEnd[2];
+</span><span><a class="LN" name="103">  103   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> mLoc[10];
+</span><span><a class="LN" name="104">  104   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> mWidth[10];
+</span><span><a class="LN" name="105">  105   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hPre;
+</span><span><a class="LN" name="106">  106   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hPost;
+</span><span><a class="LN" name="107">  107   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> bPreEnd;
+</span><span><a class="LN" name="108">  108   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> bPostEnd;
+</span><span><a class="LN" name="109">  109   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sStart[2];
+</span><span><a class="LN" name="110">  110   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sEnd[2];
+</span><span><a class="LN" name="111">  111   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sPreEdges[2];
+</span><span><a class="LN" name="112">  112   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> sPostEdges[2];
+</span><span><a class="LN" name="113">  113   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> c[2];
+</span><span><a class="LN" name="114">  114   </a>  <a href="rtwtypes_h.html#type_int8_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int8_T');" target="_self"><font color="#1122aa">int8_T</font></a> o[5];
+</span><span><a class="LN" name="115">  115   </a>  <a href="rtwtypes_h.html#type_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_boolean_T');" target="_self"><font color="#1122aa">boolean_T</font></a> isEnd;
+</span><span><a class="LN" name="116">  116   </a>  <a href="rtwtypes_h.html#type_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_boolean_T');" target="_self"><font color="#1122aa">boolean_T</font></a> isSEmpty;
+</span><span><a class="LN" name="117">  117   </a>  <a href="rtwtypes_h.html#type_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_boolean_T');" target="_self"><font color="#1122aa">boolean_T</font></a> dimIsPre;
+</span><span><a class="LN" name="118">  118   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> offset[2];
+</span><span><a class="LN" name="119">  119   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> idxA[2];
+</span><span><a class="LN" name="120">  120   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> idxB[2];
+</span><span><a class="LN" name="121">  121   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> idxBLin[2];
+</span><span><a class="LN" name="122">  122   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hIdxA[2];
+</span><span><a class="LN" name="123">  123   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hIdxB[2];
+</span><span><a class="LN" name="124">  124   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> order;
+</span><span><a class="LN" name="125">  125   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> left;
+</span><span><a class="LN" name="126">  126   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> right;
+</span><span><a class="LN" name="127">  127   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> mid;
+</span><span><a class="LN" name="128">  128   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> rightIdx;
+</span><span><a class="LN" name="129">  129   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> temp;
+</span><span><a class="LN" name="130">  130   </a>
+</span><span><a class="LN" name="131">  131   </a>  <span class="CT">// S-Function (svipmdnfilter): '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="132">  132   </a>  uOrigin[0U] = 0;
+</span><span><a class="LN" name="133">  133   </a>  uEnd[0U] = uDims[0U] - 1;
+</span><span><a class="LN" name="134">  134   </a>  uStride[0U] = 1;
+</span><span><a class="LN" name="135">  135   </a>  uOrigin[1U] = 0;
+</span><span><a class="LN" name="136">  136   </a>  uEnd[1U] = uDims[1U] - 1;
+</span><span><a class="LN" name="137">  137   </a>  uStride[1U] = uDims[0U];
+</span><span><a class="LN" name="138">  138   </a>  hEnd[0U] = hDims[0U] - 1;
+</span><span><a class="LN" name="139">  139   </a>  hEnd[1U] = hDims[1U] - 1;
+</span><span><a class="LN" name="140">  140   </a>  yEnd[0U] = yDims[0U] - 1;
+</span><span><a class="LN" name="141">  141   </a>  yEnd[1U] = yDims[1U] - 1;
+</span><span><a class="LN" name="142">  142   </a>
+</span><span><a class="LN" name="143">  143   </a>  <span class="CT">//  COMPUTE MARGINS BETWEEN INPUT AND OUTPUT</span>
+</span><span><a class="LN" name="144">  144   </a>  <span class="CT">// ===============================================</span>
+</span><span><a class="LN" name="145">  145   </a>  <span class="CT">//      _________________________________________</span>
+</span><span><a class="LN" name="146">  146   </a>  <span class="CT">//     |u                                        |</span>
+</span><span><a class="LN" name="147">  147   </a>  <span class="CT">//     |                                         |</span>
+</span><span><a class="LN" name="148">  148   </a>  <span class="CT">//     |         ______________________          |</span>
+</span><span><a class="LN" name="149">  149   </a>  <span class="CT">//     |        |y                     |         |</span>
+</span><span><a class="LN" name="150">  150   </a>  <span class="CT">//     |        |                      |         |</span>
+</span><span><a class="LN" name="151">  151   </a>  <span class="CT">//     |&lt;-yPre-&gt;|                      |&lt;-yPost-&gt;|</span>
+</span><span><a class="LN" name="152">  152   </a>  <span class="CT">//     |        |                      |         |</span>
+</span><span><a class="LN" name="153">  153   </a>  <span class="CT">//</span>
+</span><span><a class="LN" name="154">  154   </a>  <span class="CT">//  KERNEL MARIGINS</span>
+</span><span><a class="LN" name="155">  155   </a>  <span class="CT">// ==============================================</span>
+</span><span><a class="LN" name="156">  156   </a>  <span class="CT">//      ____________________</span>
+</span><span><a class="LN" name="157">  157   </a>  <span class="CT">//     |h                   |</span>
+</span><span><a class="LN" name="158">  158   </a>  <span class="CT">//     |        |&lt;--hPost--&gt;|</span>
+</span><span><a class="LN" name="159">  159   </a>  <span class="CT">//     |        |           |</span>
+</span><span><a class="LN" name="160">  160   </a>  <span class="CT">//     |        x(hCenter)  |</span>
+</span><span><a class="LN" name="161">  161   </a>  <span class="CT">//     |&lt;-hPre-&gt;|           |</span>
+</span><span><a class="LN" name="162">  162   </a>  <span class="CT">//     |        |           |</span>
+</span><span><a class="LN" name="163">  163   </a>  <span class="CT">//</span>
+</span><span><a class="LN" name="164">  164   </a>  <span class="CT">//  MARGINS (Valid, Boundary and Outside) definitions:</span>
+</span><span><a class="LN" name="165">  165   </a>  <span class="CT">//  Valid Margin: Processing region where entire kernel stays inside input boundaries. All input data thus considered is 'valid' data </span>
+</span><span><a class="LN" name="166">  166   </a>  <span class="CT">//  Boundary Margin: Processing region where part of kernel stays inside the input boundaries and part of it goes outside input boundaries. </span>
+</span><span><a class="LN" name="167">  167   </a>  <span class="CT">//  Outside Margin: Processing region where entire kernel stays outside the input boundaries and never touches input data. In most situations this region does not need to be processed. Instead output pad values are filled in </span>
+</span><span><a class="LN" name="168">  168   </a>  <span class="CT">// ===========================================================</span>
+</span><span><a class="LN" name="169">  169   </a>  <span class="CT">//   y |        |        |               |         |         |</span>
+</span><span><a class="LN" name="170">  170   </a>  <span class="CT">//     |&lt;-oPre-&gt;|&lt;-bPre-&gt;|&lt;----valid----&gt;|&lt;-bPost-&gt;|&lt;-oPost-&gt;|</span>
+</span><span><a class="LN" name="171">  171   </a>  <span class="CT">//     |        |        |               |         |         |</span>
+</span><span><a class="LN" name="172">  172   </a>  <span class="CT">//</span>
+</span><span><a class="LN" name="173">  173   </a>  <span class="CT">//  All margin locations are stored relative to the output origin</span>
+</span><span><a class="LN" name="174">  174   </a>  <span class="CT">// margins between y and u</span>
+</span><span><a class="LN" name="175">  175   </a>  right = -yOrigin[0];
+</span><span><a class="LN" name="176">  176   </a>  mid = (yOrigin[0] + yEnd[0]) - uEnd[0];
+</span><span><a class="LN" name="177">  177   </a>
+</span><span><a class="LN" name="178">  178   </a>  <span class="CT">// margins caused by kernel - defined by center location</span>
+</span><span><a class="LN" name="179">  179   </a>  <span class="CT">// hLoc and hEnd are defined relative to origin</span>
+</span><span><a class="LN" name="180">  180   </a>  hPre = -hLoc[0];
+</span><span><a class="LN" name="181">  181   </a>  hPost = hLoc[0] + hEnd[0];
+</span><span><a class="LN" name="182">  182   </a>
+</span><span><a class="LN" name="183">  183   </a>  <span class="CT">// margins outside of kernel's influence around input</span>
+</span><span><a class="LN" name="184">  184   </a>  <span class="CT">// note that we subtract h'Post' from y'Pre'</span>
+</span><span><a class="LN" name="185">  185   </a>  rightIdx = right - hPost;
+</span><span><a class="LN" name="186">  186   </a>
+</span><span><a class="LN" name="187">  187   </a>  <span class="CT">// note that we subtract h'Pre' from y'Post'</span>
+</span><span><a class="LN" name="188">  188   </a>  left = mid - hPre;
+</span><span><a class="LN" name="189">  189   </a>  hPre += right;
+</span><span><a class="LN" name="190">  190   </a>  hPost += mid;
+</span><span><a class="LN" name="191">  191   </a>
+</span><span><a class="LN" name="192">  192   </a>  <span class="CT">// W refers to margin Width</span>
+</span><span><a class="LN" name="193">  193   </a>  <span class="CT">// L refers to margin Location</span>
+</span><span><a class="LN" name="194">  194   </a>  <span class="CT">// outer Pre</span>
+</span><span><a class="LN" name="195">  195   </a>  <span class="CT">// saturate</span>
+</span><span><a class="LN" name="196">  196   </a>  <span class="KW">if</span> (rightIdx &lt; 0) <b>{</b>
+</span><span><a class="LN" name="197">  197   </a>    right = 0;
+</span><span><a class="LN" name="198">  198   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (rightIdx &gt; yDims[0]) <b>{</b>
+</span><span><a class="LN" name="199">  199   </a>    right = yDims[0];
+</span><span><a class="LN" name="200">  200   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="201">  201   </a>    right = rightIdx;
+</span><span><a class="LN" name="202">  202   </a>  <b>}</b>
+</span><span><a class="LN" name="203">  203   </a>
+</span><span><a class="LN" name="204">  204   </a>  <span class="CT">// boundary Pre</span>
+</span><span><a class="LN" name="205">  205   </a>  <span class="CT">// saturate</span>
+</span><span><a class="LN" name="206">  206   </a>  <span class="KW">if</span> (hPre &lt; 0) <b>{</b>
+</span><span><a class="LN" name="207">  207   </a>    hPre = 0;
+</span><span><a class="LN" name="208">  208   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="209">  209   </a>    <span class="KW">if</span> (hPre &gt; yDims[0]) <b>{</b>
+</span><span><a class="LN" name="210">  210   </a>      hPre = yDims[0];
+</span><span><a class="LN" name="211">  211   </a>    <b>}</b>
+</span><span><a class="LN" name="212">  212   </a>  <b>}</b>
+</span><span><a class="LN" name="213">  213   </a>
+</span><span><a class="LN" name="214">  214   </a>  <span class="KW">if</span> (rightIdx &lt; 0) <b>{</b>
+</span><span><a class="LN" name="215">  215   </a>    rightIdx = 0;
+</span><span><a class="LN" name="216">  216   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="217">  217   </a>    <span class="KW">if</span> (rightIdx &gt; yDims[0]) <b>{</b>
+</span><span><a class="LN" name="218">  218   </a>      rightIdx = yDims[0];
+</span><span><a class="LN" name="219">  219   </a>    <b>}</b>
+</span><span><a class="LN" name="220">  220   </a>  <b>}</b>
+</span><span><a class="LN" name="221">  221   </a>
+</span><span><a class="LN" name="222">  222   </a>  mid = hPre - rightIdx;
+</span><span><a class="LN" name="223">  223   </a>  rightIdx = yOrigin[0] + right;
+</span><span><a class="LN" name="224">  224   </a>
+</span><span><a class="LN" name="225">  225   </a>  <span class="CT">// outer Post</span>
+</span><span><a class="LN" name="226">  226   </a>  <span class="CT">// saturate</span>
+</span><span><a class="LN" name="227">  227   </a>  <span class="KW">if</span> (left &lt; 0) <b>{</b>
+</span><span><a class="LN" name="228">  228   </a>    hPre = 0;
+</span><span><a class="LN" name="229">  229   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (left &gt; yDims[0]) <b>{</b>
+</span><span><a class="LN" name="230">  230   </a>    hPre = yDims[0];
+</span><span><a class="LN" name="231">  231   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="232">  232   </a>    hPre = left;
+</span><span><a class="LN" name="233">  233   </a>  <b>}</b>
+</span><span><a class="LN" name="234">  234   </a>
+</span><span><a class="LN" name="235">  235   </a>  order = ((yOrigin[0] + yEnd[0]) - hPre) + 1;
+</span><span><a class="LN" name="236">  236   </a>
+</span><span><a class="LN" name="237">  237   </a>  <span class="CT">// boundary Post</span>
+</span><span><a class="LN" name="238">  238   </a>  <span class="CT">// saturate</span>
+</span><span><a class="LN" name="239">  239   </a>  <span class="KW">if</span> (hPost &lt; 0) <b>{</b>
+</span><span><a class="LN" name="240">  240   </a>    hPost = 0;
+</span><span><a class="LN" name="241">  241   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="242">  242   </a>    <span class="KW">if</span> (hPost &gt; yDims[0]) <b>{</b>
+</span><span><a class="LN" name="243">  243   </a>      hPost = yDims[0];
+</span><span><a class="LN" name="244">  244   </a>    <b>}</b>
+</span><span><a class="LN" name="245">  245   </a>  <b>}</b>
+</span><span><a class="LN" name="246">  246   </a>
+</span><span><a class="LN" name="247">  247   </a>  <span class="KW">if</span> (left &lt; 0) <b>{</b>
+</span><span><a class="LN" name="248">  248   </a>    left = 0;
+</span><span><a class="LN" name="249">  249   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="250">  250   </a>    <span class="KW">if</span> (left &gt; yDims[0]) <b>{</b>
+</span><span><a class="LN" name="251">  251   </a>      left = yDims[0];
+</span><span><a class="LN" name="252">  252   </a>    <b>}</b>
+</span><span><a class="LN" name="253">  253   </a>  <b>}</b>
+</span><span><a class="LN" name="254">  254   </a>
+</span><span><a class="LN" name="255">  255   </a>  left = hPost - left;
+</span><span><a class="LN" name="256">  256   </a>  hPost = order - left;
+</span><span><a class="LN" name="257">  257   </a>  bPreEnd = rightIdx + mid;
+</span><span><a class="LN" name="258">  258   </a>  bPostEnd = hPost + left;
+</span><span><a class="LN" name="259">  259   </a>  <span class="KW">if</span> (bPreEnd - 1 &gt;= hPost) <b>{</b>
+</span><span><a class="LN" name="260">  260   </a>    <span class="CT">// defines situation where hDims &gt; uDims</span>
+</span><span><a class="LN" name="261">  261   </a>    mid = hPost - rightIdx;
+</span><span><a class="LN" name="262">  262   </a>    hPost = bPreEnd;
+</span><span><a class="LN" name="263">  263   </a>    left = bPostEnd - bPreEnd;
+</span><span><a class="LN" name="264">  264   </a>  <b>}</b>
+</span><span><a class="LN" name="265">  265   </a>
+</span><span><a class="LN" name="266">  266   </a>  <span class="CT">// assign to the margin set of mLoc and mWidth</span>
+</span><span><a class="LN" name="267">  267   </a>  mLoc[0] = rightIdx + mid;
+</span><span><a class="LN" name="268">  268   </a>  mWidth[0] = (((yDims[0] - right) - hPre) - mid) - left;
+</span><span><a class="LN" name="269">  269   </a>  mLoc[2] = rightIdx;
+</span><span><a class="LN" name="270">  270   </a>  mWidth[2] = mid;
+</span><span><a class="LN" name="271">  271   </a>  mLoc[4] = hPost;
+</span><span><a class="LN" name="272">  272   </a>  mWidth[4] = left;
+</span><span><a class="LN" name="273">  273   </a>  mLoc[6] = yOrigin[0];
+</span><span><a class="LN" name="274">  274   </a>  mWidth[6] = right;
+</span><span><a class="LN" name="275">  275   </a>  mLoc[8] = order;
+</span><span><a class="LN" name="276">  276   </a>  mWidth[8] = hPre;
+</span><span><a class="LN" name="277">  277   </a>
+</span><span><a class="LN" name="278">  278   </a>  <span class="CT">// margins between y and u</span>
+</span><span><a class="LN" name="279">  279   </a>  right = -yOrigin[1];
+</span><span><a class="LN" name="280">  280   </a>  mid = (yOrigin[1] + yEnd[1]) - uEnd[1];
+</span><span><a class="LN" name="281">  281   </a>
+</span><span><a class="LN" name="282">  282   </a>  <span class="CT">// margins caused by kernel - defined by center location</span>
+</span><span><a class="LN" name="283">  283   </a>  <span class="CT">// hLoc and hEnd are defined relative to origin</span>
+</span><span><a class="LN" name="284">  284   </a>  hPre = -hLoc[1];
+</span><span><a class="LN" name="285">  285   </a>  hPost = hLoc[1] + hEnd[1];
+</span><span><a class="LN" name="286">  286   </a>
+</span><span><a class="LN" name="287">  287   </a>  <span class="CT">// margins outside of kernel's influence around input</span>
+</span><span><a class="LN" name="288">  288   </a>  <span class="CT">// note that we subtract h'Post' from y'Pre'</span>
+</span><span><a class="LN" name="289">  289   </a>  rightIdx = right - hPost;
+</span><span><a class="LN" name="290">  290   </a>
+</span><span><a class="LN" name="291">  291   </a>  <span class="CT">// note that we subtract h'Pre' from y'Post'</span>
+</span><span><a class="LN" name="292">  292   </a>  left = mid - hPre;
+</span><span><a class="LN" name="293">  293   </a>  hPre += right;
+</span><span><a class="LN" name="294">  294   </a>  hPost += mid;
+</span><span><a class="LN" name="295">  295   </a>
+</span><span><a class="LN" name="296">  296   </a>  <span class="CT">// W refers to margin Width</span>
+</span><span><a class="LN" name="297">  297   </a>  <span class="CT">// L refers to margin Location</span>
+</span><span><a class="LN" name="298">  298   </a>  <span class="CT">// outer Pre</span>
+</span><span><a class="LN" name="299">  299   </a>  <span class="CT">// saturate</span>
+</span><span><a class="LN" name="300">  300   </a>  <span class="KW">if</span> (rightIdx &lt; 0) <b>{</b>
+</span><span><a class="LN" name="301">  301   </a>    right = 0;
+</span><span><a class="LN" name="302">  302   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (rightIdx &gt; yDims[1]) <b>{</b>
+</span><span><a class="LN" name="303">  303   </a>    right = yDims[1];
+</span><span><a class="LN" name="304">  304   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="305">  305   </a>    right = rightIdx;
+</span><span><a class="LN" name="306">  306   </a>  <b>}</b>
+</span><span><a class="LN" name="307">  307   </a>
+</span><span><a class="LN" name="308">  308   </a>  <span class="CT">// boundary Pre</span>
+</span><span><a class="LN" name="309">  309   </a>  <span class="CT">// saturate</span>
+</span><span><a class="LN" name="310">  310   </a>  <span class="KW">if</span> (hPre &lt; 0) <b>{</b>
+</span><span><a class="LN" name="311">  311   </a>    hPre = 0;
+</span><span><a class="LN" name="312">  312   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="313">  313   </a>    <span class="KW">if</span> (hPre &gt; yDims[1]) <b>{</b>
+</span><span><a class="LN" name="314">  314   </a>      hPre = yDims[1];
+</span><span><a class="LN" name="315">  315   </a>    <b>}</b>
+</span><span><a class="LN" name="316">  316   </a>  <b>}</b>
+</span><span><a class="LN" name="317">  317   </a>
+</span><span><a class="LN" name="318">  318   </a>  <span class="KW">if</span> (rightIdx &lt; 0) <b>{</b>
+</span><span><a class="LN" name="319">  319   </a>    rightIdx = 0;
+</span><span><a class="LN" name="320">  320   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="321">  321   </a>    <span class="KW">if</span> (rightIdx &gt; yDims[1]) <b>{</b>
+</span><span><a class="LN" name="322">  322   </a>      rightIdx = yDims[1];
+</span><span><a class="LN" name="323">  323   </a>    <b>}</b>
+</span><span><a class="LN" name="324">  324   </a>  <b>}</b>
+</span><span><a class="LN" name="325">  325   </a>
+</span><span><a class="LN" name="326">  326   </a>  mid = hPre - rightIdx;
+</span><span><a class="LN" name="327">  327   </a>  rightIdx = yOrigin[1] + right;
+</span><span><a class="LN" name="328">  328   </a>
+</span><span><a class="LN" name="329">  329   </a>  <span class="CT">// outer Post</span>
+</span><span><a class="LN" name="330">  330   </a>  <span class="CT">// saturate</span>
+</span><span><a class="LN" name="331">  331   </a>  <span class="KW">if</span> (left &lt; 0) <b>{</b>
+</span><span><a class="LN" name="332">  332   </a>    hPre = 0;
+</span><span><a class="LN" name="333">  333   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (left &gt; yDims[1]) <b>{</b>
+</span><span><a class="LN" name="334">  334   </a>    hPre = yDims[1];
+</span><span><a class="LN" name="335">  335   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="336">  336   </a>    hPre = left;
+</span><span><a class="LN" name="337">  337   </a>  <b>}</b>
+</span><span><a class="LN" name="338">  338   </a>
+</span><span><a class="LN" name="339">  339   </a>  order = ((yOrigin[1] + yEnd[1]) - hPre) + 1;
+</span><span><a class="LN" name="340">  340   </a>
+</span><span><a class="LN" name="341">  341   </a>  <span class="CT">// boundary Post</span>
+</span><span><a class="LN" name="342">  342   </a>  <span class="CT">// saturate</span>
+</span><span><a class="LN" name="343">  343   </a>  <span class="KW">if</span> (hPost &lt; 0) <b>{</b>
+</span><span><a class="LN" name="344">  344   </a>    hPost = 0;
+</span><span><a class="LN" name="345">  345   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="346">  346   </a>    <span class="KW">if</span> (hPost &gt; yDims[1]) <b>{</b>
+</span><span><a class="LN" name="347">  347   </a>      hPost = yDims[1];
+</span><span><a class="LN" name="348">  348   </a>    <b>}</b>
+</span><span><a class="LN" name="349">  349   </a>  <b>}</b>
+</span><span><a class="LN" name="350">  350   </a>
+</span><span><a class="LN" name="351">  351   </a>  <span class="KW">if</span> (left &lt; 0) <b>{</b>
+</span><span><a class="LN" name="352">  352   </a>    left = 0;
+</span><span><a class="LN" name="353">  353   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="354">  354   </a>    <span class="KW">if</span> (left &gt; yDims[1]) <b>{</b>
+</span><span><a class="LN" name="355">  355   </a>      left = yDims[1];
+</span><span><a class="LN" name="356">  356   </a>    <b>}</b>
+</span><span><a class="LN" name="357">  357   </a>  <b>}</b>
+</span><span><a class="LN" name="358">  358   </a>
+</span><span><a class="LN" name="359">  359   </a>  left = hPost - left;
+</span><span><a class="LN" name="360">  360   </a>  hPost = order - left;
+</span><span><a class="LN" name="361">  361   </a>  bPreEnd = rightIdx + mid;
+</span><span><a class="LN" name="362">  362   </a>  bPostEnd = hPost + left;
+</span><span><a class="LN" name="363">  363   </a>  <span class="KW">if</span> (bPreEnd - 1 &gt;= hPost) <b>{</b>
+</span><span><a class="LN" name="364">  364   </a>    <span class="CT">// defines situation where hDims &gt; uDims</span>
+</span><span><a class="LN" name="365">  365   </a>    mid = hPost - rightIdx;
+</span><span><a class="LN" name="366">  366   </a>    hPost = bPreEnd;
+</span><span><a class="LN" name="367">  367   </a>    left = bPostEnd - bPreEnd;
+</span><span><a class="LN" name="368">  368   </a>  <b>}</b>
+</span><span><a class="LN" name="369">  369   </a>
+</span><span><a class="LN" name="370">  370   </a>  <span class="CT">// assign to the margin set of mLoc and mWidth</span>
+</span><span><a class="LN" name="371">  371   </a>  mLoc[1] = rightIdx + mid;
+</span><span><a class="LN" name="372">  372   </a>  mWidth[1] = (((yDims[1] - right) - hPre) - mid) - left;
+</span><span><a class="LN" name="373">  373   </a>  mLoc[3] = rightIdx;
+</span><span><a class="LN" name="374">  374   </a>  mWidth[3] = mid;
+</span><span><a class="LN" name="375">  375   </a>  mLoc[5] = hPost;
+</span><span><a class="LN" name="376">  376   </a>  mWidth[5] = left;
+</span><span><a class="LN" name="377">  377   </a>  mLoc[7] = yOrigin[1];
+</span><span><a class="LN" name="378">  378   </a>  mWidth[7] = right;
+</span><span><a class="LN" name="379">  379   </a>  mLoc[9] = order;
+</span><span><a class="LN" name="380">  380   </a>  mWidth[9] = hPre;
+</span><span><a class="LN" name="381">  381   </a>
+</span><span><a class="LN" name="382">  382   </a>  <span class="CT">//  //////////////////////////////////////////</span>
+</span><span><a class="LN" name="383">  383   </a>  <span class="CT">//  COMPUTE ON-BOUNDARY SECTORS</span>
+</span><span><a class="LN" name="384">  384   </a>  <span class="CT">//  //////////////////////////////////////////</span>
+</span><span><a class="LN" name="385">  385   </a>  <span class="CT">// ===========================================</span>
+</span><span><a class="LN" name="386">  386   </a>  <span class="CT">//   |   0   |   1   |   2   |   3   |   4   |</span>
+</span><span><a class="LN" name="387">  387   </a>  <span class="CT">//   | Inside| BndPre|BndPost| OutPre|OutPost|</span>
+</span><span><a class="LN" name="388">  388   </a>  <span class="CT">//    _______________________________________</span>
+</span><span><a class="LN" name="389">  389   </a>  <span class="CT">//   |       |///////|///////|       |       |</span>
+</span><span><a class="LN" name="390">  390   </a>  <span class="CT">//   | VALID |///////|///////|       |       |</span>
+</span><span><a class="LN" name="391">  391   </a>  <span class="CT">//  0| (0,0) |/(0,1)/|/(0,2)/| (0,3) | (0,4) |</span>
+</span><span><a class="LN" name="392">  392   </a>  <span class="CT">//   |       |///////|///////|       |       |</span>
+</span><span><a class="LN" name="393">  393   </a>  <span class="CT">//    _______________________________________</span>
+</span><span><a class="LN" name="394">  394   </a>  <span class="CT">//   |///////|///////|///////|       |       |</span>
+</span><span><a class="LN" name="395">  395   </a>  <span class="CT">//  1|/(1,0)/|/(1,1)/|/(1,2)/| (1,3) | (1,4) |</span>
+</span><span><a class="LN" name="396">  396   </a>  <span class="CT">//   |///////|///////|///////|       |       |</span>
+</span><span><a class="LN" name="397">  397   </a>  <span class="CT">//    _______________________________________</span>
+</span><span><a class="LN" name="398">  398   </a>  <span class="CT">//   |///////|///////|///////|       |       |</span>
+</span><span><a class="LN" name="399">  399   </a>  <span class="CT">//  2|/(2,0)/|/(2,1)/|/(2,2)/| (2,3) | (2,4) |</span>
+</span><span><a class="LN" name="400">  400   </a>  <span class="CT">//   |///////|///////|///////|       |       |</span>
+</span><span><a class="LN" name="401">  401   </a>  <span class="CT">//    _______________________________________</span>
+</span><span><a class="LN" name="402">  402   </a>  <span class="CT">//   |       |       |       |       |       |</span>
+</span><span><a class="LN" name="403">  403   </a>  <span class="CT">//  3| (3,0) | (3,1) | (3,2) | (3,3) | (3,4) |</span>
+</span><span><a class="LN" name="404">  404   </a>  <span class="CT">//   |       |       |       |       |       |</span>
+</span><span><a class="LN" name="405">  405   </a>  <span class="CT">//    _______________________________________</span>
+</span><span><a class="LN" name="406">  406   </a>  <span class="CT">//   |       |       |       |       |       |</span>
+</span><span><a class="LN" name="407">  407   </a>  <span class="CT">//  4| (4,0) | (4,1) | (4,2) | (4,3) | (4,4) |</span>
+</span><span><a class="LN" name="408">  408   </a>  <span class="CT">//   |       |       |       |       |       |</span>
+</span><span><a class="LN" name="409">  409   </a>  <span class="CT">//    ---------------------------------------</span>
+</span><span><a class="LN" name="410">  410   </a>  o[0U] = 0;
+</span><span><a class="LN" name="411">  411   </a>  o[1U] = 1;
+</span><span><a class="LN" name="412">  412   </a>  o[2U] = 2;
+</span><span><a class="LN" name="413">  413   </a>  o[3U] = 3;
+</span><span><a class="LN" name="414">  414   </a>  o[4U] = 4;
+</span><span><a class="LN" name="415">  415   </a>  isEnd = false;
+</span><span><a class="LN" name="416">  416   </a>  c[0U] = 0;
+</span><span><a class="LN" name="417">  417   </a>  c[1U] = 0;
+</span><span><a class="LN" name="418">  418   </a>
+</span><span><a class="LN" name="419">  419   </a>  <span class="CT">// if hDims &lt; uDims then the all INSIDE sector will not be pushed into the boundary sectors... hence the counter needs to skip the all INSIDEs sector and start from one sector down. </span>
+</span><span><a class="LN" name="420">  420   </a>  <span class="KW">while</span> (!isEnd) <b>{</b>
+</span><span><a class="LN" name="421">  421   </a>    hPre = 0;
+</span><span><a class="LN" name="422">  422   </a>    hPost = 0;
+</span><span><a class="LN" name="423">  423   </a>
+</span><span><a class="LN" name="424">  424   </a>    <span class="CT">// compute on-boundary sector</span>
+</span><span><a class="LN" name="425">  425   </a>    <span class="CT">// compute sector if not empty</span>
+</span><span><a class="LN" name="426">  426   </a>    <span class="KW">if</span> (!((mWidth[o[c[0U]] &lt;&lt; 1] &lt;= 0) || (mWidth[(o[c[1U]] &lt;&lt; 1) + 1] &lt;= 0))) <b>{</b>
+</span><span><a class="LN" name="427">  427   </a>      <span class="CT">// compute sector for this dim</span>
+</span><span><a class="LN" name="428">  428   </a>      <span class="CT">// sector start corresponds to margin loc</span>
+</span><span><a class="LN" name="429">  429   </a>      <span class="CT">// apply offset of margin width for sector end</span>
+</span><span><a class="LN" name="430">  430   </a>      <span class="CT">// Inside Sector if 0 in all dimensions</span>
+</span><span><a class="LN" name="431">  431   </a>      isSEmpty = (o[c[0]] == 0);
+</span><span><a class="LN" name="432">  432   </a>      dimIsPre = ((o[c[0]] == 3) || (o[c[0]] == 1));
+</span><span><a class="LN" name="433">  433   </a>      <span class="KW">if</span> (dimIsPre || isSEmpty) <b>{</b>
+</span><span><a class="LN" name="434">  434   </a>        sPreEdges[0] = 0;
+</span><span><a class="LN" name="435">  435   </a>        hPre = 1;
+</span><span><a class="LN" name="436">  436   </a>      <b>}</b>
+</span><span><a class="LN" name="437">  437   </a>
+</span><span><a class="LN" name="438">  438   </a>      <span class="KW">if</span> ((!(dimIsPre || isSEmpty)) || isSEmpty) <b>{</b>
+</span><span><a class="LN" name="439">  439   </a>        sPostEdges[0] = 0;
+</span><span><a class="LN" name="440">  440   </a>        hPost = 1;
+</span><span><a class="LN" name="441">  441   </a>      <b>}</b>
+</span><span><a class="LN" name="442">  442   </a>
+</span><span><a class="LN" name="443">  443   </a>      <span class="CT">// compute sector for this dim</span>
+</span><span><a class="LN" name="444">  444   </a>      <span class="CT">// sector start corresponds to margin loc</span>
+</span><span><a class="LN" name="445">  445   </a>      <span class="CT">// apply offset of margin width for sector end</span>
+</span><span><a class="LN" name="446">  446   </a>      <span class="CT">// Inside Sector if 0 in all dimensions</span>
+</span><span><a class="LN" name="447">  447   </a>      isSEmpty = (o[c[1]] == 0);
+</span><span><a class="LN" name="448">  448   </a>      dimIsPre = ((o[c[1]] == 3) || (o[c[1]] == 1));
+</span><span><a class="LN" name="449">  449   </a>      <span class="KW">if</span> (dimIsPre || isSEmpty) <b>{</b>
+</span><span><a class="LN" name="450">  450   </a>        sPreEdges[hPre] = 1;
+</span><span><a class="LN" name="451">  451   </a>        hPre++;
+</span><span><a class="LN" name="452">  452   </a>      <b>}</b>
+</span><span><a class="LN" name="453">  453   </a>
+</span><span><a class="LN" name="454">  454   </a>      <span class="KW">if</span> ((!(dimIsPre || isSEmpty)) || isSEmpty) <b>{</b>
+</span><span><a class="LN" name="455">  455   </a>        sPostEdges[hPost] = 1;
+</span><span><a class="LN" name="456">  456   </a>        hPost++;
+</span><span><a class="LN" name="457">  457   </a>      <b>}</b>
+</span><span><a class="LN" name="458">  458   </a>
+</span><span><a class="LN" name="459">  459   </a>      <span class="CT">// setup indices for the loops</span>
+</span><span><a class="LN" name="460">  460   </a>      <span class="CT">// Origin stores the origin of Y with respect to U</span>
+</span><span><a class="LN" name="461">  461   </a>      <span class="CT">//  where the origin of Y is at its top left corner</span>
+</span><span><a class="LN" name="462">  462   </a>      <span class="CT">// Compute offset between origin of Y and origin of U(0,0)</span>
+</span><span><a class="LN" name="463">  463   </a>      offset[0U] = -yOrigin[0U];
+</span><span><a class="LN" name="464">  464   </a>      offset[1U] = -yOrigin[1U];
+</span><span><a class="LN" name="465">  465   </a>
+</span><span><a class="LN" name="466">  466   </a>      <span class="CT">// sector start and end were computed relative to U</span>
+</span><span><a class="LN" name="467">  467   </a>      <span class="CT">// make them relative to Y by adding offset</span>
+</span><span><a class="LN" name="468">  468   </a>      sStart[0U] = mLoc[o[c[0]] &lt;&lt; 1] + offset[0U];
+</span><span><a class="LN" name="469">  469   </a>      sEnd[0U] = ((mLoc[o[c[0]] &lt;&lt; 1] + mWidth[o[c[0]] &lt;&lt; 1]) + offset[0U]) - 1;
+</span><span><a class="LN" name="470">  470   </a>      sStart[1U] = mLoc[(o[c[1]] &lt;&lt; 1) + 1] + offset[1U];
+</span><span><a class="LN" name="471">  471   </a>      sEnd[1U] = ((mLoc[(o[c[1]] &lt;&lt; 1) + 1] + mWidth[(o[c[1]] &lt;&lt; 1) + 1]) +
+</span><span><a class="LN" name="472">  472   </a>                  offset[1U]) - 1;
+</span><span><a class="LN" name="473">  473   </a>
+</span><span><a class="LN" name="474">  474   </a>      <span class="CT">// adjust offset for kernel center</span>
+</span><span><a class="LN" name="475">  475   </a>      offset[0U] -= hLoc[0U];
+</span><span><a class="LN" name="476">  476   </a>      offset[1U] -= hLoc[1U];
+</span><span><a class="LN" name="477">  477   </a>
+</span><span><a class="LN" name="478">  478   </a>      <span class="CT">// loop kernel over data</span>
+</span><span><a class="LN" name="479">  479   </a>      idxB[1U] = sStart[1U];
+</span><span><a class="LN" name="480">  480   </a>      <span class="KW">while</span> (idxB[1U] &lt;= sEnd[1U]) <b>{</b>
+</span><span><a class="LN" name="481">  481   </a>        idxA[1U] = idxB[1U] - offset[1U];
+</span><span><a class="LN" name="482">  482   </a>        idxBLin[1U] = yDims[0U] * idxB[1U];
+</span><span><a class="LN" name="483">  483   </a>        idxB[0U] = sStart[0U];
+</span><span><a class="LN" name="484">  484   </a>        <span class="KW">while</span> (idxB[0U] &lt;= sEnd[0U]) <b>{</b>
+</span><span><a class="LN" name="485">  485   </a>          idxA[0U] = idxB[0U] - offset[0U];
+</span><span><a class="LN" name="486">  486   </a>          idxBLin[0U] = idxBLin[1U] + idxB[0U];
+</span><span><a class="LN" name="487">  487   </a>
+</span><span><a class="LN" name="488">  488   </a>          <span class="CT">// loop over kernel and compute conv/corr</span>
+</span><span><a class="LN" name="489">  489   </a>          bPreEnd = 0;
+</span><span><a class="LN" name="490">  490   </a>
+</span><span><a class="LN" name="491">  491   </a>          <span class="CT">// loop over kernel</span>
+</span><span><a class="LN" name="492">  492   </a>          hIdxA[1U] = 0;
+</span><span><a class="LN" name="493">  493   </a>          <span class="KW">while</span> (hIdxA[1U] &lt;= hEnd[1U]) <b>{</b>
+</span><span><a class="LN" name="494">  494   </a>            hIdxB[1U] = idxA[1U] + hIdxA[1U];
+</span><span><a class="LN" name="495">  495   </a>            hIdxA[0U] = 0;
+</span><span><a class="LN" name="496">  496   </a>            <span class="KW">while</span> (hIdxA[0U] &lt;= hEnd[0U]) <b>{</b>
+</span><span><a class="LN" name="497">  497   </a>              hIdxB[0U] = idxA[0U] + hIdxA[0U];
+</span><span><a class="LN" name="498">  498   </a>              temp = <a href="#fcn_PadBSymm_uD" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_PadBSymm_uD');" target="_self"><font color="#1122aa">PadBSymm_uD</font></a>(&amp;u[0U], &amp;uStride[0U], &amp;hIdxB[0U], &amp;uDims[0U],
+</span><span><a class="LN" name="499">  499   </a>                                 &amp;uOrigin[0U], &amp;uEnd[0U], hPre, &amp;sPreEdges[0U],
+</span><span><a class="LN" name="500">  500   </a>                                 hPost, &amp;sPostEdges[0U]);
+</span><span><a class="LN" name="501">  501   </a>
+</span><span><a class="LN" name="502">  502   </a>              <span class="CT">// cache away u for the window</span>
+</span><span><a class="LN" name="503">  503   </a>              uW[bPreEnd] = temp;
+</span><span><a class="LN" name="504">  504   </a>              bPreEnd++;
+</span><span><a class="LN" name="505">  505   </a>              hIdxA[0U]++;
+</span><span><a class="LN" name="506">  506   </a>            <b>}</b>
+</span><span><a class="LN" name="507">  507   </a>
+</span><span><a class="LN" name="508">  508   </a>            hIdxA[1U]++;
+</span><span><a class="LN" name="509">  509   </a>          <b>}</b>
+</span><span><a class="LN" name="510">  510   </a>
+</span><span><a class="LN" name="511">  511   </a>          bPreEnd = hDims[0U] * hDims[1U] - 1;
+</span><span><a class="LN" name="512">  512   </a>          order = ((bPreEnd + 2) &gt;&gt; 1) - 1;
+</span><span><a class="LN" name="513">  513   </a>          <span class="KW">if</span> ((bPreEnd + 1) % 2 == 0) <b>{</b>
+</span><span><a class="LN" name="514">  514   </a>            <span class="CT">// Perform the scanning only if the current partition has</span>
+</span><span><a class="LN" name="515">  515   </a>            <span class="CT">// at least three elements.</span>
+</span><span><a class="LN" name="516">  516   </a>            left = 0;
+</span><span><a class="LN" name="517">  517   </a>            right = bPreEnd;
+</span><span><a class="LN" name="518">  518   </a>            <span class="KW">while</span> (right &gt; left + 1) <b>{</b>
+</span><span><a class="LN" name="519">  519   </a>              <span class="CT">// Use the median of the three values as the partitioning key</span>
+</span><span><a class="LN" name="520">  520   </a>              <span class="CT">// Use median-of-three method to return the partitioning key (pivot). </span>
+</span><span><a class="LN" name="521">  521   </a>              <span class="CT">// This method makes worst-case behavior much less likely and</span>
+</span><span><a class="LN" name="522">  522   </a>              <span class="CT">// avoids the needs for sentinel values outside the array.</span>
+</span><span><a class="LN" name="523">  523   </a>              <span class="CT">// //////////////////////////////////////////////////////////////////// </span>
+</span><span><a class="LN" name="524">  524   </a>              <span class="CT">// First we sort the first, middle, and last element of the partition. </span>
+</span><span><a class="LN" name="525">  525   </a>              mid = (left + right) &gt;&gt; 1;
+</span><span><a class="LN" name="526">  526   </a>              <span class="KW">if</span> (uW[left] &gt; uW[mid]) <b>{</b>
+</span><span><a class="LN" name="527">  527   </a>                temp = uW[left];
+</span><span><a class="LN" name="528">  528   </a>                uW[left] = uW[mid];
+</span><span><a class="LN" name="529">  529   </a>                uW[mid] = temp;
+</span><span><a class="LN" name="530">  530   </a>              <b>}</b>
+</span><span><a class="LN" name="531">  531   </a>
+</span><span><a class="LN" name="532">  532   </a>              <span class="KW">if</span> (uW[left] &gt; uW[right]) <b>{</b>
+</span><span><a class="LN" name="533">  533   </a>                temp = uW[left];
+</span><span><a class="LN" name="534">  534   </a>                uW[left] = uW[right];
+</span><span><a class="LN" name="535">  535   </a>                uW[right] = temp;
+</span><span><a class="LN" name="536">  536   </a>              <b>}</b>
+</span><span><a class="LN" name="537">  537   </a>
+</span><span><a class="LN" name="538">  538   </a>              <span class="KW">if</span> (uW[mid] &gt; uW[right]) <b>{</b>
+</span><span><a class="LN" name="539">  539   </a>                temp = uW[mid];
+</span><span><a class="LN" name="540">  540   </a>                uW[mid] = uW[right];
+</span><span><a class="LN" name="541">  541   </a>                uW[right] = temp;
+</span><span><a class="LN" name="542">  542   </a>              <b>}</b>
+</span><span><a class="LN" name="543">  543   </a>
+</span><span><a class="LN" name="544">  544   </a>              <span class="CT">// //////////////////////////////////////////////////////////////////// </span>
+</span><span><a class="LN" name="545">  545   </a>              <span class="CT">// Now swap the middle value with the next-to-last value.</span>
+</span><span><a class="LN" name="546">  546   </a>              temp = uW[mid];
+</span><span><a class="LN" name="547">  547   </a>              uW[mid] = uW[right - 1];
+</span><span><a class="LN" name="548">  548   </a>              uW[right - 1] = temp;
+</span><span><a class="LN" name="549">  549   </a>
+</span><span><a class="LN" name="550">  550   </a>              <span class="CT">// return pivot for partitioning</span>
+</span><span><a class="LN" name="551">  551   </a>              pivot = uW[right - 1];
+</span><span><a class="LN" name="552">  552   </a>
+</span><span><a class="LN" name="553">  553   </a>              <span class="CT">// Start the partitioning scan.  Note that because we sorted</span>
+</span><span><a class="LN" name="554">  554   </a>              <span class="CT">// the left and right values, we can start the comparisons</span>
+</span><span><a class="LN" name="555">  555   </a>              <span class="CT">// with (left+1) and (right-2).  This is how we avoid the</span>
+</span><span><a class="LN" name="556">  556   </a>              <span class="CT">// need for sentinel values.</span>
+</span><span><a class="LN" name="557">  557   </a>              mid = left;
+</span><span><a class="LN" name="558">  558   </a>              rightIdx = right - 1;
+</span><span><a class="LN" name="559">  559   </a>              isSEmpty = true;
+</span><span><a class="LN" name="560">  560   </a>              <span class="KW">while</span> (isSEmpty) <b>{</b>
+</span><span><a class="LN" name="561">  561   </a>                <span class="KW">do</span> <b>{</b>
+</span><span><a class="LN" name="562">  562   </a>                  mid++;
+</span><span><a class="LN" name="563">  563   </a>                <b>}</b> <span class="KW">while</span> (uW[mid] &lt; pivot);
+</span><span><a class="LN" name="564">  564   </a>
+</span><span><a class="LN" name="565">  565   </a>                <span class="KW">do</span> <b>{</b>
+</span><span><a class="LN" name="566">  566   </a>                  rightIdx--;
+</span><span><a class="LN" name="567">  567   </a>                <b>}</b> <span class="KW">while</span> (uW[rightIdx] &gt; pivot);
+</span><span><a class="LN" name="568">  568   </a>
+</span><span><a class="LN" name="569">  569   </a>                <span class="CT">// pointers crossed -&gt; end scan</span>
+</span><span><a class="LN" name="570">  570   </a>                <span class="KW">if</span> (mid &gt;= rightIdx) <b>{</b>
+</span><span><a class="LN" name="571">  571   </a>                  isSEmpty = false;
+</span><span><a class="LN" name="572">  572   </a>                <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="573">  573   </a>                  <span class="CT">// Swap values at end of current interval.</span>
+</span><span><a class="LN" name="574">  574   </a>                  temp = uW[mid];
+</span><span><a class="LN" name="575">  575   </a>                  uW[mid] = uW[rightIdx];
+</span><span><a class="LN" name="576">  576   </a>                  uW[rightIdx] = temp;
+</span><span><a class="LN" name="577">  577   </a>                <b>}</b>
+</span><span><a class="LN" name="578">  578   </a>              <b>}</b>
+</span><span><a class="LN" name="579">  579   </a>
+</span><span><a class="LN" name="580">  580   </a>              <span class="CT">// One last swap needed at end of scan</span>
+</span><span><a class="LN" name="581">  581   </a>              temp = uW[mid];
+</span><span><a class="LN" name="582">  582   </a>              uW[mid] = uW[right - 1];
+</span><span><a class="LN" name="583">  583   </a>              uW[right - 1] = temp;
+</span><span><a class="LN" name="584">  584   </a>
+</span><span><a class="LN" name="585">  585   </a>              <span class="CT">// Select the left or right subpartition depending on</span>
+</span><span><a class="LN" name="586">  586   </a>              <span class="CT">// the value of order.</span>
+</span><span><a class="LN" name="587">  587   </a>              <span class="KW">if</span> (mid &gt;= order) <b>{</b>
+</span><span><a class="LN" name="588">  588   </a>                right = mid - 1;
+</span><span><a class="LN" name="589">  589   </a>              <b>}</b>
+</span><span><a class="LN" name="590">  590   </a>
+</span><span><a class="LN" name="591">  591   </a>              <span class="KW">if</span> (mid &lt;= order) <b>{</b>
+</span><span><a class="LN" name="592">  592   </a>                left = mid + 1;
+</span><span><a class="LN" name="593">  593   </a>              <b>}</b>
+</span><span><a class="LN" name="594">  594   </a>            <b>}</b>
+</span><span><a class="LN" name="595">  595   </a>
+</span><span><a class="LN" name="596">  596   </a>            <span class="KW">if</span> ((right - left == 1) &amp;&amp; (uW[left] &gt; uW[right])) <b>{</b>
+</span><span><a class="LN" name="597">  597   </a>              <span class="CT">// Last partition has two elements that may not be sorted.</span>
+</span><span><a class="LN" name="598">  598   </a>              temp = uW[left];
+</span><span><a class="LN" name="599">  599   </a>              uW[left] = uW[right];
+</span><span><a class="LN" name="600">  600   </a>              uW[right] = temp;
+</span><span><a class="LN" name="601">  601   </a>            <b>}</b>
+</span><span><a class="LN" name="602">  602   </a>
+</span><span><a class="LN" name="603">  603   </a>            acc = uW[order];
+</span><span><a class="LN" name="604">  604   </a>
+</span><span><a class="LN" name="605">  605   </a>            <span class="CT">// Perform the scanning only if the current partition has</span>
+</span><span><a class="LN" name="606">  606   </a>            <span class="CT">// at least three elements.</span>
+</span><span><a class="LN" name="607">  607   </a>            left = 0;
+</span><span><a class="LN" name="608">  608   </a>            right = bPreEnd;
+</span><span><a class="LN" name="609">  609   </a>            <span class="KW">while</span> (right &gt; left + 1) <b>{</b>
+</span><span><a class="LN" name="610">  610   </a>              <span class="CT">// Use the median of the three values as the partitioning key</span>
+</span><span><a class="LN" name="611">  611   </a>              <span class="CT">// Use median-of-three method to return the partitioning key (pivot). </span>
+</span><span><a class="LN" name="612">  612   </a>              <span class="CT">// This method makes worst-case behavior much less likely and</span>
+</span><span><a class="LN" name="613">  613   </a>              <span class="CT">// avoids the needs for sentinel values outside the array.</span>
+</span><span><a class="LN" name="614">  614   </a>              <span class="CT">// //////////////////////////////////////////////////////////////////// </span>
+</span><span><a class="LN" name="615">  615   </a>              <span class="CT">// First we sort the first, middle, and last element of the partition. </span>
+</span><span><a class="LN" name="616">  616   </a>              mid = (left + right) &gt;&gt; 1;
+</span><span><a class="LN" name="617">  617   </a>              <span class="KW">if</span> (uW[left] &gt; uW[mid]) <b>{</b>
+</span><span><a class="LN" name="618">  618   </a>                temp = uW[left];
+</span><span><a class="LN" name="619">  619   </a>                uW[left] = uW[mid];
+</span><span><a class="LN" name="620">  620   </a>                uW[mid] = temp;
+</span><span><a class="LN" name="621">  621   </a>              <b>}</b>
+</span><span><a class="LN" name="622">  622   </a>
+</span><span><a class="LN" name="623">  623   </a>              <span class="KW">if</span> (uW[left] &gt; uW[right]) <b>{</b>
+</span><span><a class="LN" name="624">  624   </a>                temp = uW[left];
+</span><span><a class="LN" name="625">  625   </a>                uW[left] = uW[right];
+</span><span><a class="LN" name="626">  626   </a>                uW[right] = temp;
+</span><span><a class="LN" name="627">  627   </a>              <b>}</b>
+</span><span><a class="LN" name="628">  628   </a>
+</span><span><a class="LN" name="629">  629   </a>              <span class="KW">if</span> (uW[mid] &gt; uW[right]) <b>{</b>
+</span><span><a class="LN" name="630">  630   </a>                temp = uW[mid];
+</span><span><a class="LN" name="631">  631   </a>                uW[mid] = uW[right];
+</span><span><a class="LN" name="632">  632   </a>                uW[right] = temp;
+</span><span><a class="LN" name="633">  633   </a>              <b>}</b>
+</span><span><a class="LN" name="634">  634   </a>
+</span><span><a class="LN" name="635">  635   </a>              <span class="CT">// //////////////////////////////////////////////////////////////////// </span>
+</span><span><a class="LN" name="636">  636   </a>              <span class="CT">// Now swap the middle value with the next-to-last value.</span>
+</span><span><a class="LN" name="637">  637   </a>              temp = uW[mid];
+</span><span><a class="LN" name="638">  638   </a>              uW[mid] = uW[right - 1];
+</span><span><a class="LN" name="639">  639   </a>              uW[right - 1] = temp;
+</span><span><a class="LN" name="640">  640   </a>
+</span><span><a class="LN" name="641">  641   </a>              <span class="CT">// return pivot for partitioning</span>
+</span><span><a class="LN" name="642">  642   </a>              pivot = uW[right - 1];
+</span><span><a class="LN" name="643">  643   </a>
+</span><span><a class="LN" name="644">  644   </a>              <span class="CT">// Start the partitioning scan.  Note that because we sorted</span>
+</span><span><a class="LN" name="645">  645   </a>              <span class="CT">// the left and right values, we can start the comparisons</span>
+</span><span><a class="LN" name="646">  646   </a>              <span class="CT">// with (left+1) and (right-2).  This is how we avoid the</span>
+</span><span><a class="LN" name="647">  647   </a>              <span class="CT">// need for sentinel values.</span>
+</span><span><a class="LN" name="648">  648   </a>              mid = left;
+</span><span><a class="LN" name="649">  649   </a>              rightIdx = right - 1;
+</span><span><a class="LN" name="650">  650   </a>              isSEmpty = true;
+</span><span><a class="LN" name="651">  651   </a>              <span class="KW">while</span> (isSEmpty) <b>{</b>
+</span><span><a class="LN" name="652">  652   </a>                <span class="KW">do</span> <b>{</b>
+</span><span><a class="LN" name="653">  653   </a>                  mid++;
+</span><span><a class="LN" name="654">  654   </a>                <b>}</b> <span class="KW">while</span> (uW[mid] &lt; pivot);
+</span><span><a class="LN" name="655">  655   </a>
+</span><span><a class="LN" name="656">  656   </a>                <span class="KW">do</span> <b>{</b>
+</span><span><a class="LN" name="657">  657   </a>                  rightIdx--;
+</span><span><a class="LN" name="658">  658   </a>                <b>}</b> <span class="KW">while</span> (uW[rightIdx] &gt; pivot);
+</span><span><a class="LN" name="659">  659   </a>
+</span><span><a class="LN" name="660">  660   </a>                <span class="CT">// pointers crossed -&gt; end scan</span>
+</span><span><a class="LN" name="661">  661   </a>                <span class="KW">if</span> (mid &gt;= rightIdx) <b>{</b>
+</span><span><a class="LN" name="662">  662   </a>                  isSEmpty = false;
+</span><span><a class="LN" name="663">  663   </a>                <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="664">  664   </a>                  <span class="CT">// Swap values at end of current interval.</span>
+</span><span><a class="LN" name="665">  665   </a>                  temp = uW[mid];
+</span><span><a class="LN" name="666">  666   </a>                  uW[mid] = uW[rightIdx];
+</span><span><a class="LN" name="667">  667   </a>                  uW[rightIdx] = temp;
+</span><span><a class="LN" name="668">  668   </a>                <b>}</b>
+</span><span><a class="LN" name="669">  669   </a>              <b>}</b>
+</span><span><a class="LN" name="670">  670   </a>
+</span><span><a class="LN" name="671">  671   </a>              <span class="CT">// One last swap needed at end of scan</span>
+</span><span><a class="LN" name="672">  672   </a>              temp = uW[mid];
+</span><span><a class="LN" name="673">  673   </a>              uW[mid] = uW[right - 1];
+</span><span><a class="LN" name="674">  674   </a>              uW[right - 1] = temp;
+</span><span><a class="LN" name="675">  675   </a>
+</span><span><a class="LN" name="676">  676   </a>              <span class="CT">// Select the left or right subpartition depending on</span>
+</span><span><a class="LN" name="677">  677   </a>              <span class="CT">// the value of order.</span>
+</span><span><a class="LN" name="678">  678   </a>              <span class="KW">if</span> (mid &gt;= order + 1) <b>{</b>
+</span><span><a class="LN" name="679">  679   </a>                right = mid - 1;
+</span><span><a class="LN" name="680">  680   </a>              <b>}</b>
+</span><span><a class="LN" name="681">  681   </a>
+</span><span><a class="LN" name="682">  682   </a>              <span class="KW">if</span> (mid &lt;= order + 1) <b>{</b>
+</span><span><a class="LN" name="683">  683   </a>                left = mid + 1;
+</span><span><a class="LN" name="684">  684   </a>              <b>}</b>
+</span><span><a class="LN" name="685">  685   </a>            <b>}</b>
+</span><span><a class="LN" name="686">  686   </a>
+</span><span><a class="LN" name="687">  687   </a>            <span class="KW">if</span> ((right - left == 1) &amp;&amp; (uW[left] &gt; uW[right])) <b>{</b>
+</span><span><a class="LN" name="688">  688   </a>              <span class="CT">// Last partition has two elements that may not be sorted.</span>
+</span><span><a class="LN" name="689">  689   </a>              temp = uW[left];
+</span><span><a class="LN" name="690">  690   </a>              uW[left] = uW[right];
+</span><span><a class="LN" name="691">  691   </a>              uW[right] = temp;
+</span><span><a class="LN" name="692">  692   </a>            <b>}</b>
+</span><span><a class="LN" name="693">  693   </a>
+</span><span><a class="LN" name="694">  694   </a>            acc += uW[order + 1];
+</span><span><a class="LN" name="695">  695   </a>            acc /= 2.0;
+</span><span><a class="LN" name="696">  696   </a>          <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="697">  697   </a>            <span class="CT">// Perform the scanning only if the current partition has</span>
+</span><span><a class="LN" name="698">  698   </a>            <span class="CT">// at least three elements.</span>
+</span><span><a class="LN" name="699">  699   </a>            left = 0;
+</span><span><a class="LN" name="700">  700   </a>            right = bPreEnd;
+</span><span><a class="LN" name="701">  701   </a>            <span class="KW">while</span> (right &gt; left + 1) <b>{</b>
+</span><span><a class="LN" name="702">  702   </a>              <span class="CT">// Use the median of the three values as the partitioning key</span>
+</span><span><a class="LN" name="703">  703   </a>              <span class="CT">// Use median-of-three method to return the partitioning key (pivot). </span>
+</span><span><a class="LN" name="704">  704   </a>              <span class="CT">// This method makes worst-case behavior much less likely and</span>
+</span><span><a class="LN" name="705">  705   </a>              <span class="CT">// avoids the needs for sentinel values outside the array.</span>
+</span><span><a class="LN" name="706">  706   </a>              <span class="CT">// //////////////////////////////////////////////////////////////////// </span>
+</span><span><a class="LN" name="707">  707   </a>              <span class="CT">// First we sort the first, middle, and last element of the partition. </span>
+</span><span><a class="LN" name="708">  708   </a>              mid = (left + right) &gt;&gt; 1;
+</span><span><a class="LN" name="709">  709   </a>              <span class="KW">if</span> (uW[left] &gt; uW[mid]) <b>{</b>
+</span><span><a class="LN" name="710">  710   </a>                temp = uW[left];
+</span><span><a class="LN" name="711">  711   </a>                uW[left] = uW[mid];
+</span><span><a class="LN" name="712">  712   </a>                uW[mid] = temp;
+</span><span><a class="LN" name="713">  713   </a>              <b>}</b>
+</span><span><a class="LN" name="714">  714   </a>
+</span><span><a class="LN" name="715">  715   </a>              <span class="KW">if</span> (uW[left] &gt; uW[right]) <b>{</b>
+</span><span><a class="LN" name="716">  716   </a>                temp = uW[left];
+</span><span><a class="LN" name="717">  717   </a>                uW[left] = uW[right];
+</span><span><a class="LN" name="718">  718   </a>                uW[right] = temp;
+</span><span><a class="LN" name="719">  719   </a>              <b>}</b>
+</span><span><a class="LN" name="720">  720   </a>
+</span><span><a class="LN" name="721">  721   </a>              <span class="KW">if</span> (uW[mid] &gt; uW[right]) <b>{</b>
+</span><span><a class="LN" name="722">  722   </a>                temp = uW[mid];
+</span><span><a class="LN" name="723">  723   </a>                uW[mid] = uW[right];
+</span><span><a class="LN" name="724">  724   </a>                uW[right] = temp;
+</span><span><a class="LN" name="725">  725   </a>              <b>}</b>
+</span><span><a class="LN" name="726">  726   </a>
+</span><span><a class="LN" name="727">  727   </a>              <span class="CT">// //////////////////////////////////////////////////////////////////// </span>
+</span><span><a class="LN" name="728">  728   </a>              <span class="CT">// Now swap the middle value with the next-to-last value.</span>
+</span><span><a class="LN" name="729">  729   </a>              temp = uW[mid];
+</span><span><a class="LN" name="730">  730   </a>              uW[mid] = uW[right - 1];
+</span><span><a class="LN" name="731">  731   </a>              uW[right - 1] = temp;
+</span><span><a class="LN" name="732">  732   </a>
+</span><span><a class="LN" name="733">  733   </a>              <span class="CT">// return pivot for partitioning</span>
+</span><span><a class="LN" name="734">  734   </a>              pivot = uW[right - 1];
+</span><span><a class="LN" name="735">  735   </a>
+</span><span><a class="LN" name="736">  736   </a>              <span class="CT">// Start the partitioning scan.  Note that because we sorted</span>
+</span><span><a class="LN" name="737">  737   </a>              <span class="CT">// the left and right values, we can start the comparisons</span>
+</span><span><a class="LN" name="738">  738   </a>              <span class="CT">// with (left+1) and (right-2).  This is how we avoid the</span>
+</span><span><a class="LN" name="739">  739   </a>              <span class="CT">// need for sentinel values.</span>
+</span><span><a class="LN" name="740">  740   </a>              mid = left;
+</span><span><a class="LN" name="741">  741   </a>              rightIdx = right - 1;
+</span><span><a class="LN" name="742">  742   </a>              isSEmpty = true;
+</span><span><a class="LN" name="743">  743   </a>              <span class="KW">while</span> (isSEmpty) <b>{</b>
+</span><span><a class="LN" name="744">  744   </a>                <span class="KW">do</span> <b>{</b>
+</span><span><a class="LN" name="745">  745   </a>                  mid++;
+</span><span><a class="LN" name="746">  746   </a>                <b>}</b> <span class="KW">while</span> (uW[mid] &lt; pivot);
+</span><span><a class="LN" name="747">  747   </a>
+</span><span><a class="LN" name="748">  748   </a>                <span class="KW">do</span> <b>{</b>
+</span><span><a class="LN" name="749">  749   </a>                  rightIdx--;
+</span><span><a class="LN" name="750">  750   </a>                <b>}</b> <span class="KW">while</span> (uW[rightIdx] &gt; pivot);
+</span><span><a class="LN" name="751">  751   </a>
+</span><span><a class="LN" name="752">  752   </a>                <span class="CT">// pointers crossed -&gt; end scan</span>
+</span><span><a class="LN" name="753">  753   </a>                <span class="KW">if</span> (mid &gt;= rightIdx) <b>{</b>
+</span><span><a class="LN" name="754">  754   </a>                  isSEmpty = false;
+</span><span><a class="LN" name="755">  755   </a>                <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="756">  756   </a>                  <span class="CT">// Swap values at end of current interval.</span>
+</span><span><a class="LN" name="757">  757   </a>                  temp = uW[mid];
+</span><span><a class="LN" name="758">  758   </a>                  uW[mid] = uW[rightIdx];
+</span><span><a class="LN" name="759">  759   </a>                  uW[rightIdx] = temp;
+</span><span><a class="LN" name="760">  760   </a>                <b>}</b>
+</span><span><a class="LN" name="761">  761   </a>              <b>}</b>
+</span><span><a class="LN" name="762">  762   </a>
+</span><span><a class="LN" name="763">  763   </a>              <span class="CT">// One last swap needed at end of scan</span>
+</span><span><a class="LN" name="764">  764   </a>              temp = uW[mid];
+</span><span><a class="LN" name="765">  765   </a>              uW[mid] = uW[right - 1];
+</span><span><a class="LN" name="766">  766   </a>              uW[right - 1] = temp;
+</span><span><a class="LN" name="767">  767   </a>
+</span><span><a class="LN" name="768">  768   </a>              <span class="CT">// Select the left or right subpartition depending on</span>
+</span><span><a class="LN" name="769">  769   </a>              <span class="CT">// the value of order.</span>
+</span><span><a class="LN" name="770">  770   </a>              <span class="KW">if</span> (mid &gt;= order) <b>{</b>
+</span><span><a class="LN" name="771">  771   </a>                right = mid - 1;
+</span><span><a class="LN" name="772">  772   </a>              <b>}</b>
+</span><span><a class="LN" name="773">  773   </a>
+</span><span><a class="LN" name="774">  774   </a>              <span class="KW">if</span> (mid &lt;= order) <b>{</b>
+</span><span><a class="LN" name="775">  775   </a>                left = mid + 1;
+</span><span><a class="LN" name="776">  776   </a>              <b>}</b>
+</span><span><a class="LN" name="777">  777   </a>            <b>}</b>
+</span><span><a class="LN" name="778">  778   </a>
+</span><span><a class="LN" name="779">  779   </a>            <span class="KW">if</span> ((right - left == 1) &amp;&amp; (uW[left] &gt; uW[right])) <b>{</b>
+</span><span><a class="LN" name="780">  780   </a>              <span class="CT">// Last partition has two elements that may not be sorted.</span>
+</span><span><a class="LN" name="781">  781   </a>              temp = uW[left];
+</span><span><a class="LN" name="782">  782   </a>              uW[left] = uW[right];
+</span><span><a class="LN" name="783">  783   </a>              uW[right] = temp;
+</span><span><a class="LN" name="784">  784   </a>            <b>}</b>
+</span><span><a class="LN" name="785">  785   </a>
+</span><span><a class="LN" name="786">  786   </a>            acc = uW[order];
+</span><span><a class="LN" name="787">  787   </a>          <b>}</b>
+</span><span><a class="LN" name="788">  788   </a>
+</span><span><a class="LN" name="789">  789   </a>          <span class="KW">if</span> (idxBLin[0U] &gt;= 0) <b>{</b>
+</span><span><a class="LN" name="790">  790   </a>            y[idxBLin[0U]] = acc;
+</span><span><a class="LN" name="791">  791   </a>          <b>}</b>
+</span><span><a class="LN" name="792">  792   </a>
+</span><span><a class="LN" name="793">  793   </a>          idxB[0U]++;
+</span><span><a class="LN" name="794">  794   </a>        <b>}</b>
+</span><span><a class="LN" name="795">  795   </a>
+</span><span><a class="LN" name="796">  796   </a>        idxB[1U]++;
+</span><span><a class="LN" name="797">  797   </a>      <b>}</b>
+</span><span><a class="LN" name="798">  798   </a>    <b>}</b>
+</span><span><a class="LN" name="799">  799   </a>
+</span><span><a class="LN" name="800">  800   </a>    <span class="CT">// advance sector counter</span>
+</span><span><a class="LN" name="801">  801   </a>    hPre = 0;
+</span><span><a class="LN" name="802">  802   </a>    <span class="KW">while</span> (hPre &lt; 2) <b>{</b>
+</span><span><a class="LN" name="803">  803   </a>      c[hPre]++;
+</span><span><a class="LN" name="804">  804   </a>      <span class="KW">if</span> (c[hPre] &lt;= 2) <b>{</b>
+</span><span><a class="LN" name="805">  805   </a>        isEnd = false;
+</span><span><a class="LN" name="806">  806   </a>        hPre = 2;
+</span><span><a class="LN" name="807">  807   </a>      <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="808">  808   </a>        c[hPre] = 0;
+</span><span><a class="LN" name="809">  809   </a>        isEnd = true;
+</span><span><a class="LN" name="810">  810   </a>      <b>}</b>
+</span><span><a class="LN" name="811">  811   </a>
+</span><span><a class="LN" name="812">  812   </a>      hPre++;
+</span><span><a class="LN" name="813">  813   </a>    <b>}</b>
+</span><span><a class="LN" name="814">  814   </a>  <b>}</b>
+</span><span><a class="LN" name="815">  815   </a>
+</span><span><a class="LN" name="816">  816   </a>  <span class="CT">// End of S-Function (svipmdnfilter): '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="817">  817   </a><b>}</b>
+</span><span><a class="LN" name="818">  818   </a>
+</span><span><a class="LN" name="819">  819   </a><span class="CT">// Model step function</span>
+</span><span><a class="LN" name="820">  820   </a><span class="DT">void</span> end_poing_filter::<a name="fcn_step">step</a>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> (&amp;arg_end_point)[3], <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a>
+</span><span><a class="LN" name="821">  821   </a>  (&amp;arg_end_point_filtered)[3])
+</span><span><a class="LN" name="822">  822   </a><b>{</b>
+</span><span><a class="LN" name="823">  823   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> h1Dims[2];
+</span><span><a class="LN" name="824">  824   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uDims[2];
+</span><span><a class="LN" name="825">  825   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yDims[2];
+</span><span><a class="LN" name="826">  826   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hLoc[2];
+</span><span><a class="LN" name="827">  827   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yOrigin[2];
+</span><span><a class="LN" name="828">  828   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rateLimiterRate;
+</span><span><a class="LN" name="829">  829   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> h1Dims_0[2];
+</span><span><a class="LN" name="830">  830   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uDims_0[2];
+</span><span><a class="LN" name="831">  831   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yDims_0[2];
+</span><span><a class="LN" name="832">  832   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hLoc_0[2];
+</span><span><a class="LN" name="833">  833   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yOrigin_0[2];
+</span><span><a class="LN" name="834">  834   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> h1Dims_1[2];
+</span><span><a class="LN" name="835">  835   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> uDims_1[2];
+</span><span><a class="LN" name="836">  836   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yDims_1[2];
+</span><span><a class="LN" name="837">  837   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> hLoc_1[2];
+</span><span><a class="LN" name="838">  838   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> yOrigin_1[2];
+</span><span><a class="LN" name="839">  839   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_RateLimiter2;
+</span><span><a class="LN" name="840">  840   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_RateLimiter1;
+</span><span><a class="LN" name="841">  841   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_RateLimiter;
+</span><span><a class="LN" name="842">  842   </a>
+</span><span><a class="LN" name="843">  843   </a>  <span class="CT">// S-Function (svipmdnfilter): '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="844">  844   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('end_point_filter:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/end_point</i></font></a>'</span>
+</span><span><a class="LN" name="845">  845   </a>
+</span><span><a class="LN" name="846">  846   </a>  h1Dims[0U] = 5;
+</span><span><a class="LN" name="847">  847   </a>  h1Dims[1U] = 3;
+</span><span><a class="LN" name="848">  848   </a>  uDims[0U] = 1;
+</span><span><a class="LN" name="849">  849   </a>  uDims[1U] = 1;
+</span><span><a class="LN" name="850">  850   </a>
+</span><span><a class="LN" name="851">  851   </a>  <span class="CT">// set up kernel related coordinates</span>
+</span><span><a class="LN" name="852">  852   </a>  <span class="CT">// compute center</span>
+</span><span><a class="LN" name="853">  853   </a>  <span class="CT">// hLoc is the location of top left corner relative to the center of kernel.</span>
+</span><span><a class="LN" name="854">  854   </a>  hLoc[0U] = -2;
+</span><span><a class="LN" name="855">  855   </a>
+</span><span><a class="LN" name="856">  856   </a>  <span class="CT">// compute center</span>
+</span><span><a class="LN" name="857">  857   </a>  <span class="CT">// hLoc is the location of top left corner relative to the center of kernel.</span>
+</span><span><a class="LN" name="858">  858   </a>  hLoc[1U] = -1;
+</span><span><a class="LN" name="859">  859   </a>
+</span><span><a class="LN" name="860">  860   </a>  <span class="CT">// Region of Support (ROS) definition: A selected region that restricts the input space for processing. </span>
+</span><span><a class="LN" name="861">  861   </a>  <span class="CT">// ======================================================</span>
+</span><span><a class="LN" name="862">  862   </a>  <span class="CT">//                       ---------------------</span>
+</span><span><a class="LN" name="863">  863   </a>  <span class="CT">//                      |ROI                  |</span>
+</span><span><a class="LN" name="864">  864   </a>  <span class="CT">//                      |                     |</span>
+</span><span><a class="LN" name="865">  865   </a>  <span class="CT">//  ----------------------------------------------------</span>
+</span><span><a class="LN" name="866">  866   </a>  <span class="CT">// | INPUT(u)           |                     |         |</span>
+</span><span><a class="LN" name="867">  867   </a>  <span class="CT">// |                    |                     |         |</span>
+</span><span><a class="LN" name="868">  868   </a>  <span class="CT">// |   ---------------------------------------------    |</span>
+</span><span><a class="LN" name="869">  869   </a>  <span class="CT">// |  | ROS             |OUTPUT(y)////////////|     |   |</span>
+</span><span><a class="LN" name="870">  870   </a>  <span class="CT">// |  |                 |/////////////////////|     |   |</span>
+</span><span><a class="LN" name="871">  871   </a>  <span class="CT">// |  |                  ---------------------      |   |</span>
+</span><span><a class="LN" name="872">  872   </a>  <span class="CT">// |  |                                             |   |</span>
+</span><span><a class="LN" name="873">  873   </a>  <span class="CT">// The user's output mode choices of 'Valid', 'Same as input' and 'Full' map onto correspending definitions of a rectangular ROS. </span>
+</span><span><a class="LN" name="874">  874   </a>  <span class="CT">// Output range support is computed as an intersection of ROS with Region of Interest (ROI) </span>
+</span><span><a class="LN" name="875">  875   </a>  <span class="CT">// /////////////////////</span>
+</span><span><a class="LN" name="876">  876   </a>  <span class="CT">// begin ROS computation</span>
+</span><span><a class="LN" name="877">  877   </a>  <span class="CT">// compute ROS based on u, h and output mode</span>
+</span><span><a class="LN" name="878">  878   </a>  <span class="CT">// ROS is SAME AS INPUT</span>
+</span><span><a class="LN" name="879">  879   </a>  <span class="CT">// end ROS computation</span>
+</span><span><a class="LN" name="880">  880   </a>  <span class="CT">// ///////////////////</span>
+</span><span><a class="LN" name="881">  881   </a>  <span class="CT">// /////////////////////////</span>
+</span><span><a class="LN" name="882">  882   </a>  <span class="CT">// begin y sizes computation</span>
+</span><span><a class="LN" name="883">  883   </a>  <span class="CT">// we need to compute yOrigin and yEnd</span>
+</span><span><a class="LN" name="884">  884   </a>  <span class="CT">// yOrigin definition: Location of center of reference (origin) of output (y) coordintate system with respect to input (u) coordinate system </span>
+</span><span><a class="LN" name="885">  885   </a>  <span class="CT">// y sizes are same as ros sizes because there is no ROI</span>
+</span><span><a class="LN" name="886">  886   </a>  yOrigin[0U] = 0;
+</span><span><a class="LN" name="887">  887   </a>  yDims[0U] = 1;
+</span><span><a class="LN" name="888">  888   </a>
+</span><span><a class="LN" name="889">  889   </a>  <span class="CT">// y sizes are same as ros sizes because there is no ROI</span>
+</span><span><a class="LN" name="890">  890   </a>  yOrigin[1U] = 0;
+</span><span><a class="LN" name="891">  891   </a>  yDims[1U] = 1;
+</span><span><a class="LN" name="892">  892   </a>
+</span><span><a class="LN" name="893">  893   </a>  <span class="CT">// make yOrigin same as roiLoc when y is empty</span>
+</span><span><a class="LN" name="894">  894   </a>  <span class="CT">// end y sizes computation</span>
+</span><span><a class="LN" name="895">  895   </a>  <span class="CT">// ///////////////////////</span>
+</span><span><a class="LN" name="896">  896   </a>  <a href="#fcn_MdnFltH15_M_BSymm_uD_yD" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_MdnFltH15_M_BSymm_uD_yD');" target="_self"><font color="#1122aa">MdnFltH15_M_BSymm_uD_yD</font></a>(&amp;hLoc[0U], &amp;h1Dims[0U], &amp;arg_end_point[0], &amp;uDims[0U],
+</span><span><a class="LN" name="897">  897   </a>    &amp;rtb_RateLimiter, &amp;yDims[0U], &amp;yOrigin[0U]);
+</span><span><a class="LN" name="898">  898   </a>
+</span><span><a class="LN" name="899">  899   </a>  <span class="CT">// RateLimiter: '<a href="matlab:coder.internal.code2model('end_point_filter:132')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter</i></font></a>'</span>
+</span><span><a class="LN" name="900">  900   </a>  rateLimiterRate = rtb_RateLimiter - end_point_filter_DW.PrevY;
+</span><span><a class="LN" name="901">  901   </a>  <span class="KW">if</span> (rateLimiterRate &gt; 0.0008) <b>{</b>
+</span><span><a class="LN" name="902">  902   </a>    rtb_RateLimiter = end_point_filter_DW.PrevY + 0.0008;
+</span><span><a class="LN" name="903">  903   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="904">  904   </a>    <span class="KW">if</span> (rateLimiterRate &lt; -0.0008) <b>{</b>
+</span><span><a class="LN" name="905">  905   </a>      rtb_RateLimiter = end_point_filter_DW.PrevY + -0.0008;
+</span><span><a class="LN" name="906">  906   </a>    <b>}</b>
+</span><span><a class="LN" name="907">  907   </a>  <b>}</b>
+</span><span><a class="LN" name="908">  908   </a>
+</span><span><a class="LN" name="909">  909   </a>  end_point_filter_DW.PrevY = rtb_RateLimiter;
+</span><span><a class="LN" name="910">  910   </a>
+</span><span><a class="LN" name="911">  911   </a>  <span class="CT">// End of RateLimiter: '<a href="matlab:coder.internal.code2model('end_point_filter:132')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter</i></font></a>'</span>
+</span><span><a class="LN" name="912">  912   </a>
+</span><span><a class="LN" name="913">  913   </a>  <span class="CT">// S-Function (svipmdnfilter): '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="914">  914   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('end_point_filter:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/end_point</i></font></a>'</span>
+</span><span><a class="LN" name="915">  915   </a>
+</span><span><a class="LN" name="916">  916   </a>  h1Dims_0[0U] = 5;
+</span><span><a class="LN" name="917">  917   </a>  h1Dims_0[1U] = 3;
+</span><span><a class="LN" name="918">  918   </a>  uDims_0[0U] = 1;
+</span><span><a class="LN" name="919">  919   </a>  uDims_0[1U] = 1;
+</span><span><a class="LN" name="920">  920   </a>
+</span><span><a class="LN" name="921">  921   </a>  <span class="CT">// set up kernel related coordinates</span>
+</span><span><a class="LN" name="922">  922   </a>  <span class="CT">// compute center</span>
+</span><span><a class="LN" name="923">  923   </a>  <span class="CT">// hLoc is the location of top left corner relative to the center of kernel.</span>
+</span><span><a class="LN" name="924">  924   </a>  hLoc_0[0U] = -2;
+</span><span><a class="LN" name="925">  925   </a>
+</span><span><a class="LN" name="926">  926   </a>  <span class="CT">// compute center</span>
+</span><span><a class="LN" name="927">  927   </a>  <span class="CT">// hLoc is the location of top left corner relative to the center of kernel.</span>
+</span><span><a class="LN" name="928">  928   </a>  hLoc_0[1U] = -1;
+</span><span><a class="LN" name="929">  929   </a>
+</span><span><a class="LN" name="930">  930   </a>  <span class="CT">// Region of Support (ROS) definition: A selected region that restricts the input space for processing. </span>
+</span><span><a class="LN" name="931">  931   </a>  <span class="CT">// ======================================================</span>
+</span><span><a class="LN" name="932">  932   </a>  <span class="CT">//                       ---------------------</span>
+</span><span><a class="LN" name="933">  933   </a>  <span class="CT">//                      |ROI                  |</span>
+</span><span><a class="LN" name="934">  934   </a>  <span class="CT">//                      |                     |</span>
+</span><span><a class="LN" name="935">  935   </a>  <span class="CT">//  ----------------------------------------------------</span>
+</span><span><a class="LN" name="936">  936   </a>  <span class="CT">// | INPUT(u)           |                     |         |</span>
+</span><span><a class="LN" name="937">  937   </a>  <span class="CT">// |                    |                     |         |</span>
+</span><span><a class="LN" name="938">  938   </a>  <span class="CT">// |   ---------------------------------------------    |</span>
+</span><span><a class="LN" name="939">  939   </a>  <span class="CT">// |  | ROS             |OUTPUT(y)////////////|     |   |</span>
+</span><span><a class="LN" name="940">  940   </a>  <span class="CT">// |  |                 |/////////////////////|     |   |</span>
+</span><span><a class="LN" name="941">  941   </a>  <span class="CT">// |  |                  ---------------------      |   |</span>
+</span><span><a class="LN" name="942">  942   </a>  <span class="CT">// |  |                                             |   |</span>
+</span><span><a class="LN" name="943">  943   </a>  <span class="CT">// The user's output mode choices of 'Valid', 'Same as input' and 'Full' map onto correspending definitions of a rectangular ROS. </span>
+</span><span><a class="LN" name="944">  944   </a>  <span class="CT">// Output range support is computed as an intersection of ROS with Region of Interest (ROI) </span>
+</span><span><a class="LN" name="945">  945   </a>  <span class="CT">// /////////////////////</span>
+</span><span><a class="LN" name="946">  946   </a>  <span class="CT">// begin ROS computation</span>
+</span><span><a class="LN" name="947">  947   </a>  <span class="CT">// compute ROS based on u, h and output mode</span>
+</span><span><a class="LN" name="948">  948   </a>  <span class="CT">// ROS is SAME AS INPUT</span>
+</span><span><a class="LN" name="949">  949   </a>  <span class="CT">// end ROS computation</span>
+</span><span><a class="LN" name="950">  950   </a>  <span class="CT">// ///////////////////</span>
+</span><span><a class="LN" name="951">  951   </a>  <span class="CT">// /////////////////////////</span>
+</span><span><a class="LN" name="952">  952   </a>  <span class="CT">// begin y sizes computation</span>
+</span><span><a class="LN" name="953">  953   </a>  <span class="CT">// we need to compute yOrigin and yEnd</span>
+</span><span><a class="LN" name="954">  954   </a>  <span class="CT">// yOrigin definition: Location of center of reference (origin) of output (y) coordintate system with respect to input (u) coordinate system </span>
+</span><span><a class="LN" name="955">  955   </a>  <span class="CT">// y sizes are same as ros sizes because there is no ROI</span>
+</span><span><a class="LN" name="956">  956   </a>  yOrigin_0[0U] = 0;
+</span><span><a class="LN" name="957">  957   </a>  yDims_0[0U] = 1;
+</span><span><a class="LN" name="958">  958   </a>
+</span><span><a class="LN" name="959">  959   </a>  <span class="CT">// y sizes are same as ros sizes because there is no ROI</span>
+</span><span><a class="LN" name="960">  960   </a>  yOrigin_0[1U] = 0;
+</span><span><a class="LN" name="961">  961   </a>  yDims_0[1U] = 1;
+</span><span><a class="LN" name="962">  962   </a>
+</span><span><a class="LN" name="963">  963   </a>  <span class="CT">// make yOrigin same as roiLoc when y is empty</span>
+</span><span><a class="LN" name="964">  964   </a>  <span class="CT">// end y sizes computation</span>
+</span><span><a class="LN" name="965">  965   </a>  <span class="CT">// ///////////////////////</span>
+</span><span><a class="LN" name="966">  966   </a>  <a href="#fcn_MdnFltH15_M_BSymm_uD_yD" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_MdnFltH15_M_BSymm_uD_yD');" target="_self"><font color="#1122aa">MdnFltH15_M_BSymm_uD_yD</font></a>(&amp;hLoc_0[0U], &amp;h1Dims_0[0U], &amp;arg_end_point[1],
+</span><span><a class="LN" name="967">  967   </a>    &amp;uDims_0[0U], &amp;rtb_RateLimiter1, &amp;yDims_0[0U], &amp;yOrigin_0[0U]);
+</span><span><a class="LN" name="968">  968   </a>
+</span><span><a class="LN" name="969">  969   </a>  <span class="CT">// RateLimiter: '<a href="matlab:coder.internal.code2model('end_point_filter:133')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="970">  970   </a>  rateLimiterRate = rtb_RateLimiter1 - end_point_filter_DW.PrevY_p;
+</span><span><a class="LN" name="971">  971   </a>  <span class="KW">if</span> (rateLimiterRate &gt; 0.0008) <b>{</b>
+</span><span><a class="LN" name="972">  972   </a>    rtb_RateLimiter1 = end_point_filter_DW.PrevY_p + 0.0008;
+</span><span><a class="LN" name="973">  973   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="974">  974   </a>    <span class="KW">if</span> (rateLimiterRate &lt; -0.0008) <b>{</b>
+</span><span><a class="LN" name="975">  975   </a>      rtb_RateLimiter1 = end_point_filter_DW.PrevY_p + -0.0008;
+</span><span><a class="LN" name="976">  976   </a>    <b>}</b>
+</span><span><a class="LN" name="977">  977   </a>  <b>}</b>
+</span><span><a class="LN" name="978">  978   </a>
+</span><span><a class="LN" name="979">  979   </a>  end_point_filter_DW.PrevY_p = rtb_RateLimiter1;
+</span><span><a class="LN" name="980">  980   </a>
+</span><span><a class="LN" name="981">  981   </a>  <span class="CT">// End of RateLimiter: '<a href="matlab:coder.internal.code2model('end_point_filter:133')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="982">  982   </a>
+</span><span><a class="LN" name="983">  983   </a>  <span class="CT">// S-Function (svipmdnfilter): '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="984">  984   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('end_point_filter:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/end_point</i></font></a>'</span>
+</span><span><a class="LN" name="985">  985   </a>
+</span><span><a class="LN" name="986">  986   </a>  h1Dims_1[0U] = 5;
+</span><span><a class="LN" name="987">  987   </a>  h1Dims_1[1U] = 3;
+</span><span><a class="LN" name="988">  988   </a>  uDims_1[0U] = 1;
+</span><span><a class="LN" name="989">  989   </a>  uDims_1[1U] = 1;
+</span><span><a class="LN" name="990">  990   </a>
+</span><span><a class="LN" name="991">  991   </a>  <span class="CT">// set up kernel related coordinates</span>
+</span><span><a class="LN" name="992">  992   </a>  <span class="CT">// compute center</span>
+</span><span><a class="LN" name="993">  993   </a>  <span class="CT">// hLoc is the location of top left corner relative to the center of kernel.</span>
+</span><span><a class="LN" name="994">  994   </a>  hLoc_1[0U] = -2;
+</span><span><a class="LN" name="995">  995   </a>
+</span><span><a class="LN" name="996">  996   </a>  <span class="CT">// compute center</span>
+</span><span><a class="LN" name="997">  997   </a>  <span class="CT">// hLoc is the location of top left corner relative to the center of kernel.</span>
+</span><span><a class="LN" name="998">  998   </a>  hLoc_1[1U] = -1;
+</span><span><a class="LN" name="999">  999   </a>
+</span><span><a class="LN" name="1000"> 1000   </a>  <span class="CT">// Region of Support (ROS) definition: A selected region that restricts the input space for processing. </span>
+</span><span><a class="LN" name="1001"> 1001   </a>  <span class="CT">// ======================================================</span>
+</span><span><a class="LN" name="1002"> 1002   </a>  <span class="CT">//                       ---------------------</span>
+</span><span><a class="LN" name="1003"> 1003   </a>  <span class="CT">//                      |ROI                  |</span>
+</span><span><a class="LN" name="1004"> 1004   </a>  <span class="CT">//                      |                     |</span>
+</span><span><a class="LN" name="1005"> 1005   </a>  <span class="CT">//  ----------------------------------------------------</span>
+</span><span><a class="LN" name="1006"> 1006   </a>  <span class="CT">// | INPUT(u)           |                     |         |</span>
+</span><span><a class="LN" name="1007"> 1007   </a>  <span class="CT">// |                    |                     |         |</span>
+</span><span><a class="LN" name="1008"> 1008   </a>  <span class="CT">// |   ---------------------------------------------    |</span>
+</span><span><a class="LN" name="1009"> 1009   </a>  <span class="CT">// |  | ROS             |OUTPUT(y)////////////|     |   |</span>
+</span><span><a class="LN" name="1010"> 1010   </a>  <span class="CT">// |  |                 |/////////////////////|     |   |</span>
+</span><span><a class="LN" name="1011"> 1011   </a>  <span class="CT">// |  |                  ---------------------      |   |</span>
+</span><span><a class="LN" name="1012"> 1012   </a>  <span class="CT">// |  |                                             |   |</span>
+</span><span><a class="LN" name="1013"> 1013   </a>  <span class="CT">// The user's output mode choices of 'Valid', 'Same as input' and 'Full' map onto correspending definitions of a rectangular ROS. </span>
+</span><span><a class="LN" name="1014"> 1014   </a>  <span class="CT">// Output range support is computed as an intersection of ROS with Region of Interest (ROI) </span>
+</span><span><a class="LN" name="1015"> 1015   </a>  <span class="CT">// /////////////////////</span>
+</span><span><a class="LN" name="1016"> 1016   </a>  <span class="CT">// begin ROS computation</span>
+</span><span><a class="LN" name="1017"> 1017   </a>  <span class="CT">// compute ROS based on u, h and output mode</span>
+</span><span><a class="LN" name="1018"> 1018   </a>  <span class="CT">// ROS is SAME AS INPUT</span>
+</span><span><a class="LN" name="1019"> 1019   </a>  <span class="CT">// end ROS computation</span>
+</span><span><a class="LN" name="1020"> 1020   </a>  <span class="CT">// ///////////////////</span>
+</span><span><a class="LN" name="1021"> 1021   </a>  <span class="CT">// /////////////////////////</span>
+</span><span><a class="LN" name="1022"> 1022   </a>  <span class="CT">// begin y sizes computation</span>
+</span><span><a class="LN" name="1023"> 1023   </a>  <span class="CT">// we need to compute yOrigin and yEnd</span>
+</span><span><a class="LN" name="1024"> 1024   </a>  <span class="CT">// yOrigin definition: Location of center of reference (origin) of output (y) coordintate system with respect to input (u) coordinate system </span>
+</span><span><a class="LN" name="1025"> 1025   </a>  <span class="CT">// y sizes are same as ros sizes because there is no ROI</span>
+</span><span><a class="LN" name="1026"> 1026   </a>  yOrigin_1[0U] = 0;
+</span><span><a class="LN" name="1027"> 1027   </a>  yDims_1[0U] = 1;
+</span><span><a class="LN" name="1028"> 1028   </a>
+</span><span><a class="LN" name="1029"> 1029   </a>  <span class="CT">// y sizes are same as ros sizes because there is no ROI</span>
+</span><span><a class="LN" name="1030"> 1030   </a>  yOrigin_1[1U] = 0;
+</span><span><a class="LN" name="1031"> 1031   </a>  yDims_1[1U] = 1;
+</span><span><a class="LN" name="1032"> 1032   </a>
+</span><span><a class="LN" name="1033"> 1033   </a>  <span class="CT">// make yOrigin same as roiLoc when y is empty</span>
+</span><span><a class="LN" name="1034"> 1034   </a>  <span class="CT">// end y sizes computation</span>
+</span><span><a class="LN" name="1035"> 1035   </a>  <span class="CT">// ///////////////////////</span>
+</span><span><a class="LN" name="1036"> 1036   </a>  <a href="#fcn_MdnFltH15_M_BSymm_uD_yD" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_MdnFltH15_M_BSymm_uD_yD');" target="_self"><font color="#1122aa">MdnFltH15_M_BSymm_uD_yD</font></a>(&amp;hLoc_1[0U], &amp;h1Dims_1[0U], &amp;arg_end_point[2],
+</span><span><a class="LN" name="1037"> 1037   </a>    &amp;uDims_1[0U], &amp;rtb_RateLimiter2, &amp;yDims_1[0U], &amp;yOrigin_1[0U]);
+</span><span><a class="LN" name="1038"> 1038   </a>
+</span><span><a class="LN" name="1039"> 1039   </a>  <span class="CT">// RateLimiter: '<a href="matlab:coder.internal.code2model('end_point_filter:140')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter2</i></font></a>'</span>
+</span><span><a class="LN" name="1040"> 1040   </a>  rateLimiterRate = rtb_RateLimiter2 - end_point_filter_DW.PrevY_o;
+</span><span><a class="LN" name="1041"> 1041   </a>  <span class="KW">if</span> (rateLimiterRate &gt; 0.0008) <b>{</b>
+</span><span><a class="LN" name="1042"> 1042   </a>    rtb_RateLimiter2 = end_point_filter_DW.PrevY_o + 0.0008;
+</span><span><a class="LN" name="1043"> 1043   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="1044"> 1044   </a>    <span class="KW">if</span> (rateLimiterRate &lt; -0.0008) <b>{</b>
+</span><span><a class="LN" name="1045"> 1045   </a>      rtb_RateLimiter2 = end_point_filter_DW.PrevY_o + -0.0008;
+</span><span><a class="LN" name="1046"> 1046   </a>    <b>}</b>
+</span><span><a class="LN" name="1047"> 1047   </a>  <b>}</b>
+</span><span><a class="LN" name="1048"> 1048   </a>
+</span><span><a class="LN" name="1049"> 1049   </a>  end_point_filter_DW.PrevY_o = rtb_RateLimiter2;
+</span><span><a class="LN" name="1050"> 1050   </a>
+</span><span><a class="LN" name="1051"> 1051   </a>  <span class="CT">// End of RateLimiter: '<a href="matlab:coder.internal.code2model('end_point_filter:140')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter2</i></font></a>'</span>
+</span><span><a class="LN" name="1052"> 1052   </a>
+</span><span><a class="LN" name="1053"> 1053   </a>  <span class="CT">// Outport: '<a href="matlab:coder.internal.code2model('end_point_filter:121')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/end_point_filtered</i></font></a>'</span>
+</span><span><a class="LN" name="1054"> 1054   </a>  arg_end_point_filtered[0] = rtb_RateLimiter;
+</span><span><a class="LN" name="1055"> 1055   </a>  arg_end_point_filtered[1] = rtb_RateLimiter1;
+</span><span><a class="LN" name="1056"> 1056   </a>  arg_end_point_filtered[2] = rtb_RateLimiter2;
+</span><span><a class="LN" name="1057"> 1057   </a><b>}</b>
+</span><span><a class="LN" name="1058"> 1058   </a>
+</span><span><a class="LN" name="1059"> 1059   </a><span class="CT">// Model initialize function</span>
+</span><span><a class="LN" name="1060"> 1060   </a><span class="DT">void</span> end_poing_filter::<a name="fcn_initialize">initialize</a>()
+</span><span><a class="LN" name="1061"> 1061   </a><b>{</b>
+</span><span><a class="LN" name="1062"> 1062   </a>  <span class="CT">// Registration code</span>
+</span><span><a class="LN" name="1063"> 1063   </a>
+</span><span><a class="LN" name="1064"> 1064   </a>  <span class="CT">// initialize error status</span>
+</span><span><a class="LN" name="1065"> 1065   </a>  rtmSetErrorStatus((&amp;end_point_filter_M), (NULL));
+</span><span><a class="LN" name="1066"> 1066   </a>
+</span><span><a class="LN" name="1067"> 1067   </a>  <span class="CT">// states (dwork)</span>
+</span><span><a class="LN" name="1068"> 1068   </a>  (<span class="DT">void</span>) memset((<span class="DT">void</span> *)&amp;end_point_filter_DW, 0,
+</span><span><a class="LN" name="1069"> 1069   </a>                <span class="KW">sizeof</span>(<a href="end_point_filter_h.html#type_DW_end_point_filter_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_DW_end_point_filter_T');" target="_self"><font color="#1122aa">DW_end_point_filter_T</font></a>));
+</span><span><a class="LN" name="1070"> 1070   </a>
+</span><span><a class="LN" name="1071"> 1071   </a>  <span class="CT">// InitializeConditions for RateLimiter: '<a href="matlab:coder.internal.code2model('end_point_filter:132')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter</i></font></a>'</span>
+</span><span><a class="LN" name="1072"> 1072   </a>  end_point_filter_DW.PrevY = 0.0;
+</span><span><a class="LN" name="1073"> 1073   </a>
+</span><span><a class="LN" name="1074"> 1074   </a>  <span class="CT">// InitializeConditions for RateLimiter: '<a href="matlab:coder.internal.code2model('end_point_filter:133')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="1075"> 1075   </a>  end_point_filter_DW.PrevY_p = 0.0;
+</span><span><a class="LN" name="1076"> 1076   </a>
+</span><span><a class="LN" name="1077"> 1077   </a>  <span class="CT">// InitializeConditions for RateLimiter: '<a href="matlab:coder.internal.code2model('end_point_filter:140')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter2</i></font></a>'</span>
+</span><span><a class="LN" name="1078"> 1078   </a>  end_point_filter_DW.PrevY_o = 0.0;
+</span><span><a class="LN" name="1079"> 1079   </a><b>}</b>
+</span><span><a class="LN" name="1080"> 1080   </a>
+</span><span><a class="LN" name="1081"> 1081   </a><span class="CT">// Model terminate function</span>
+</span><span><a class="LN" name="1082"> 1082   </a><span class="DT">void</span> end_poing_filter::<a name="fcn_terminate">terminate</a>()
+</span><span><a class="LN" name="1083"> 1083   </a><b>{</b>
+</span><span><a class="LN" name="1084"> 1084   </a>  <span class="CT">// (no terminate code required)</span>
+</span><span><a class="LN" name="1085"> 1085   </a><b>}</b>
+</span><span><a class="LN" name="1086"> 1086   </a>
+</span><span><a class="LN" name="1087"> 1087   </a><span class="CT">// Constructor</span>
+</span><span><a class="LN" name="1088"> 1088   </a>end_poing_filter::end_poing_filter()
+</span><span><a class="LN" name="1089"> 1089   </a><b>{</b>
+</span><span><a class="LN" name="1090"> 1090   </a><b>}</b>
+</span><span><a class="LN" name="1091"> 1091   </a>
+</span><span><a class="LN" name="1092"> 1092   </a><span class="CT">// Destructor</span>
+</span><span><a class="LN" name="1093"> 1093   </a>end_poing_filter::~end_poing_filter()
+</span><span><a class="LN" name="1094"> 1094   </a><b>{</b>
+</span><span><a class="LN" name="1095"> 1095   </a>  <span class="CT">// Currently there is no destructor body generated.</span>
+</span><span><a class="LN" name="1096"> 1096   </a><b>}</b>
+</span><span><a class="LN" name="1097"> 1097   </a>
+</span><span><a class="LN" name="1098"> 1098   </a><span class="CT">// Real-Time Model get method</span>
+</span><span><a class="LN" name="1099"> 1099   </a><a href="end_point_filter_h.html#type_RT_MODEL_end_point_filter_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_RT_MODEL_end_point_filter_T');" target="_self"><font color="#1122aa">RT_MODEL_end_point_filter_T</font></a> * end_poing_filter::<a name="fcn_getRTM">getRTM</a>()
+</span><span><a class="LN" name="1100"> 1100   </a><b>{</b>
+</span><span><a class="LN" name="1101"> 1101   </a>  <span class="KW">return</span> (&amp;end_point_filter_M);
+</span><span><a class="LN" name="1102"> 1102   </a><b>}</b>
+</span><span><a class="LN" name="1103"> 1103   </a>
+</span><span><a class="LN" name="1104"> 1104   </a><span class="CT">//</span>
+</span><span><a class="LN" name="1105"> 1105   </a><span class="CT">// File trailer for generated code.</span>
+</span><span><a class="LN" name="1106"> 1106   </a><span class="CT">//</span>
+</span><span><a class="LN" name="1107"> 1107   </a><span class="CT">// [EOF]</span>
+</span><span><a class="LN" name="1108"> 1108   </a><span class="CT">//</span>
+</span><span><a class="LN" name="1109"> 1109   </a>
+</span></pre>
+</td></tr></table>
+</p>
+</body>
+</html>

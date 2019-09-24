@@ -1,0 +1,180 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>RTW Report - end_point_filter.h</title>
+<style> .LN { font-style: italic; color: #888888 } </style>
+<style> .CT { font-style: italic; color: #117755 } </style>
+<style> .PP { font-style: bold;   color: #992211 } </style>
+<style> .KW { font-style: bold;   color: #112266 } </style>
+<style> .DT { font-style: bold;   color: #112266 } </style>
+<link rel="stylesheet" type="text/css" href="rtwreport.css"></link><script language="JavaScript" type="text/javascript" src="rtwreport_utils.js"></script>
+<SCRIPT type="text/javascript" language="JavaScript" src="slwebview.js"></SCRIPT>
+<SCRIPT type="text/javascript" language="JavaScript" src="id_mapping.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="rtwannotate.js"></SCRIPT>
+</head>
+<body bgcolor="#eeeeee" text="#1122aa" onload="try {if (top) { if (top.rtwFileOnLoad) top.rtwFileOnLoad(window.document); else local_onload();}} catch(err) {};if (typeof rtwannotate === 'function') {rtwannotate('end_point_filter_h_cov.xml');}">
+<p>
+<table border="0" cellspacing="0" cellpadding="6" width="100%%" height="100%%"><tr><td width="100%%" valign="top" bgcolor="#ffffff">
+<h4>File: <a href="../end_point_filter.h" target="rtwreport_document_frame" id="linkToText_plain">end_point_filter.h</a></h4>
+<pre id="RTWcode">
+<span><a class="LN" name="1">    1   </a><span class="CT">//</span>
+</span><span><a class="LN" name="2">    2   </a><span class="CT">// File: end_point_filter.h</span>
+</span><span><a class="LN" name="3">    3   </a><span class="CT">//</span>
+</span><span><a class="LN" name="4">    4   </a><span class="CT">// Code generated for Simulink model 'end_point_filter'.</span>
+</span><span><a class="LN" name="5">    5   </a><span class="CT">//</span>
+</span><span><a class="LN" name="6">    6   </a><span class="CT">// Model version                  : 1.142</span>
+</span><span><a class="LN" name="7">    7   </a><span class="CT">// Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016</span>
+</span><span><a class="LN" name="8">    8   </a><span class="CT">// C/C++ source code generated on : Sun Jun  9 11:45:23 2019</span>
+</span><span><a class="LN" name="9">    9   </a><span class="CT">//</span>
+</span><span><a class="LN" name="10">   10   </a><span class="CT">// Target selection: ert.tlc</span>
+</span><span><a class="LN" name="11">   11   </a><span class="CT">// Embedded hardware selection: Intel-&gt;x86-64 (Windows64)</span>
+</span><span><a class="LN" name="12">   12   </a><span class="CT">// Code generation objectives: Unspecified</span>
+</span><span><a class="LN" name="13">   13   </a><span class="CT">// Validation result: Not run</span>
+</span><span><a class="LN" name="14">   14   </a><span class="CT">//</span>
+</span><span><a class="LN" name="15">   15   </a><font color="#992211">#</font><span class="PP">ifndef</span> RTW_HEADER_end_point_filter_h_
+</span><span><a class="LN" name="16">   16   </a><font color="#992211">#</font><span class="PP">define</span> RTW_HEADER_end_point_filter_h_
+</span><span><a class="LN" name="17">   17   </a><font color="#992211">#</font><span class="PP">include</span> <font color="#992211">&lt;stddef.h&gt;</font>
+</span><span><a class="LN" name="18">   18   </a><font color="#992211">#</font><span class="PP">include</span> <font color="#992211">&lt;string.h&gt;</font>
+</span><span><a class="LN" name="19">   19   </a><font color="#992211">#</font><span class="PP">ifndef</span> end_point_filter_COMMON_INCLUDES_
+</span><span><a class="LN" name="20">   20   </a><font color="#992211">#</font> <span class="PP">define</span> end_point_filter_COMMON_INCLUDES_
+</span><span><a class="LN" name="21">   21   </a><font color="#992211">#</font><span class="PP">include</span> <font color="#992211">&quot;rtwtypes.h&quot;</font>
+</span><span><a class="LN" name="22">   22   </a><font color="#992211">#</font><span class="PP">endif</span>                                 <span class="CT">// end_point_filter_COMMON_INCLUDES_</span>
+</span><span><a class="LN" name="23">   23   </a>
+</span><span><a class="LN" name="24">   24   </a><span class="CT">// Macros for accessing real-time model data structure</span>
+</span><span><a class="LN" name="25">   25   </a><font color="#992211">#</font><span class="PP">ifndef</span> rtmGetErrorStatus
+</span><span><a class="LN" name="26">   26   </a><font color="#992211">#</font> <span class="PP">define</span> rtmGetErrorStatus(rtm)        ((rtm)-&gt;errorStatus)
+</span><span><a class="LN" name="27">   27   </a><font color="#992211">#</font><span class="PP">endif</span>
+</span><span><a class="LN" name="28">   28   </a>
+</span><span><a class="LN" name="29">   29   </a><font color="#992211">#</font><span class="PP">ifndef</span> rtmSetErrorStatus
+</span><span><a class="LN" name="30">   30   </a><font color="#992211">#</font> <span class="PP">define</span> rtmSetErrorStatus(rtm, val)   ((rtm)-&gt;errorStatus = (val))
+</span><span><a class="LN" name="31">   31   </a><font color="#992211">#</font><span class="PP">endif</span>
+</span><span><a class="LN" name="32">   32   </a>
+</span><span><a class="LN" name="33">   33   </a><span class="CT">// Forward declaration for rtModel</span>
+</span><span><a class="LN" name="34">   34   </a><span class="KW">typedef</span> <span class="KW">struct</span> tag_RTM_end_point_filter_T <a name="type_RT_MODEL_end_point_filter_T">RT_MODEL_end_point_filter_T</a>;
+</span><span><a class="LN" name="35">   35   </a>
+</span><span><a class="LN" name="36">   36   </a><span class="CT">// Block states (auto storage) for system '<a href="matlab:coder.internal.code2model('end_point_filter')" name="code2model"><font color="#117755"><i>&lt;Root&gt;</i></font></a>'</span>
+</span><span><a class="LN" name="37">   37   </a><span class="KW">typedef</span> <span class="KW">struct</span> <b>{</b>
+</span><span><a class="LN" name="38">   38   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> PrevY;                        <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:132')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter</i></font></a>'</span>
+</span><span><a class="LN" name="39">   39   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> PrevY_p;                      <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:133')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="40">   40   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> PrevY_o;                      <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:140')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Rate Limiter2</i></font></a>'</span>
+</span><span><a class="LN" name="41">   41   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_bSEnd[2];       <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="42">   42   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_bSPreEdg[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="43">   43   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_bSPstEdg[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="44">   44   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_bSStart[2];     <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="45">   45   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_inSEnd[2];      <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="46">   46   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_inSStart[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="47">   47   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_mLoc[10];       <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="48">   48   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_mWidth[10];     <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="49">   49   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_oSPreEdg[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="50">   50   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_oSPstEdg[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="51">   51   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_oSStart[2];     <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="52">   52   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_oSecEnd[2];     <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="53">   53   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter_sCnt[2];        <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="54">   54   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_bSEnd[2];      <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="55">   55   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_bSPreEdg[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="56">   56   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_bSPstEdg[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="57">   57   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_bSStart[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="58">   58   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_inSEnd[2];     <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="59">   59   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_inSStart[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="60">   60   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_mLoc[10];      <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="61">   61   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_mWidth[10];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="62">   62   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_oSPreEdg[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="63">   63   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_oSPstEdg[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="64">   64   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_oSStart[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="65">   65   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_oSecEnd[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="66">   66   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter1_sCnt[2];       <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="67">   67   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_bSEnd[2];      <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="68">   68   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_bSPreEdg[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="69">   69   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_bSPstEdg[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="70">   70   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_bSStart[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="71">   71   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_inSEnd[2];     <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="72">   72   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_inSStart[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="73">   73   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_mLoc[10];      <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="74">   74   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_mWidth[10];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="75">   75   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_oSPreEdg[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="76">   76   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_oSPstEdg[2];   <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="77">   77   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_oSStart[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="78">   78   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_oSecEnd[2];    <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="79">   79   </a>  <a href="rtwtypes_h.html#type_int32_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_int32_T');" target="_self"><font color="#1122aa">int32_T</font></a> MedianFilter2_sCnt[2];       <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="80">   80   </a>  <a href="rtwtypes_h.html#type_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_boolean_T');" target="_self"><font color="#1122aa">boolean_T</font></a> MedianFilter_isHgtUpd[2];  <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:143')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter</i></font></a>'</span>
+</span><span><a class="LN" name="81">   81   </a>  <a href="rtwtypes_h.html#type_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_boolean_T');" target="_self"><font color="#1122aa">boolean_T</font></a> MedianFilter1_isHgtUpd[2]; <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:144')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter1</i></font></a>'</span>
+</span><span><a class="LN" name="82">   82   </a>  <a href="rtwtypes_h.html#type_boolean_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_boolean_T');" target="_self"><font color="#1122aa">boolean_T</font></a> MedianFilter2_isHgtUpd[2]; <span class="CT">// '<a href="matlab:coder.internal.code2model('end_point_filter:145')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Median Filter2</i></font></a>'</span>
+</span><span><a class="LN" name="83">   83   </a><b>}</b> <a name="type_DW_end_point_filter_T">DW_end_point_filter_T</a>;
+</span><span><a class="LN" name="84">   84   </a>
+</span><span><a class="LN" name="85">   85   </a><span class="CT">// Real-time Model Data Structure</span>
+</span><span><a class="LN" name="86">   86   </a><span class="KW">struct</span> tag_RTM_end_point_filter_T <b>{</b>
+</span><span><a class="LN" name="87">   87   </a>  <span class="DT">const</span> <a href="rtwtypes_h.html#type_char_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_char_T');" target="_self"><font color="#1122aa">char_T</font></a> * <span class="DT">volatile</span> errorStatus;
+</span><span><a class="LN" name="88">   88   </a><b>}</b>;
+</span><span><a class="LN" name="89">   89   </a>
+</span><span><a class="LN" name="90">   90   </a><font color="#992211">#</font><span class="PP">ifdef</span> __cplusplus
+</span><span><a class="LN" name="91">   91   </a>
+</span><span><a class="LN" name="92">   92   </a><span class="DT">extern</span> <font color="#1122ff">&quot;C&quot;</font> <b>{</b>
+</span><span><a class="LN" name="93">   93   </a>
+</span><span><a class="LN" name="94">   94   </a><font color="#992211">#</font><span class="PP">endif</span>
+</span><span><a class="LN" name="95">   95   </a>
+</span><span><a class="LN" name="96">   96   </a><font color="#992211">#</font><span class="PP">ifdef</span> __cplusplus
+</span><span><a class="LN" name="97">   97   </a>
+</span><span><a class="LN" name="98">   98   </a><b>}</b>
+</span><span><a class="LN" name="99">   99   </a><font color="#992211">#</font><span class="PP">endif</span>
+</span><span><a class="LN" name="100">  100   </a>
+</span><span><a class="LN" name="101">  101   </a><span class="CT">// Class declaration for model end_point_filter</span>
+</span><span><a class="LN" name="102">  102   </a>class end_poing_filter <b>{</b>
+</span><span><a class="LN" name="103">  103   </a>  <span class="CT">// public data and function members</span>
+</span><span><a class="LN" name="104">  104   </a> <a name="fcn_public">public</a>:
+</span><span><a class="LN" name="105">  105   </a>  <span class="CT">// model initialize function</span>
+</span><span><a class="LN" name="106">  106   </a>  <span class="DT">void</span> <a href="end_point_filter_cpp.html#fcn_initialize" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_initialize');" target="_self"><font color="#1122aa">initialize</font></a>();
+</span><span><a class="LN" name="107">  107   </a>
+</span><span><a class="LN" name="108">  108   </a>  <span class="CT">// model step function</span>
+</span><span><a class="LN" name="109">  109   </a>  <span class="DT">void</span> <a href="end_point_filter_cpp.html#fcn_step" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_step');" target="_self"><font color="#1122aa">step</font></a>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> (&amp;arg_end_point)[3], <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> (&amp;arg_end_point_filtered)[3]);
+</span><span><a class="LN" name="110">  110   </a>
+</span><span><a class="LN" name="111">  111   </a>  <span class="CT">// model terminate function</span>
+</span><span><a class="LN" name="112">  112   </a>  <span class="DT">void</span> <a href="end_point_filter_cpp.html#fcn_terminate" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_terminate');" target="_self"><font color="#1122aa">terminate</font></a>();
+</span><span><a class="LN" name="113">  113   </a>
+</span><span><a class="LN" name="114">  114   </a>  <span class="CT">// Constructor</span>
+</span><span><a class="LN" name="115">  115   </a>  end_poing_filter();
+</span><span><a class="LN" name="116">  116   </a>
+</span><span><a class="LN" name="117">  117   </a>  <span class="CT">// Destructor</span>
+</span><span><a class="LN" name="118">  118   </a>  ~end_poing_filter();
+</span><span><a class="LN" name="119">  119   </a>
+</span><span><a class="LN" name="120">  120   </a>  <span class="CT">// Real-Time Model get method</span>
+</span><span><a class="LN" name="121">  121   </a>  <a href="#type_RT_MODEL_end_point_filter_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_RT_MODEL_end_point_filter_T');" target="_self"><font color="#1122aa">RT_MODEL_end_point_filter_T</font></a> * <a href="end_point_filter_cpp.html#fcn_getRTM" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'fcn_getRTM');" target="_self"><font color="#1122aa">getRTM</font></a>();
+</span><span><a class="LN" name="122">  122   </a>
+</span><span><a class="LN" name="123">  123   </a>  <span class="CT">// private data and function members</span>
+</span><span><a class="LN" name="124">  124   </a> private:
+</span><span><a class="LN" name="125">  125   </a>  <span class="CT">// Block states</span>
+</span><span><a class="LN" name="126">  126   </a>  <a href="#type_DW_end_point_filter_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_DW_end_point_filter_T');" target="_self"><font color="#1122aa">DW_end_point_filter_T</font></a> end_point_filter_DW;
+</span><span><a class="LN" name="127">  127   </a>
+</span><span><a class="LN" name="128">  128   </a>  <span class="CT">// Real-Time Model</span>
+</span><span><a class="LN" name="129">  129   </a>  <a href="#type_RT_MODEL_end_point_filter_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_RT_MODEL_end_point_filter_T');" target="_self"><font color="#1122aa">RT_MODEL_end_point_filter_T</font></a> end_point_filter_M;
+</span><span><a class="LN" name="130">  130   </a><b>}</b>;
+</span><span><a class="LN" name="131">  131   </a>
+</span><span><a class="LN" name="132">  132   </a><span class="CT">//-</span>
+</span><span><a class="LN" name="133">  133   </a><span class="CT">//  The generated code includes comments that allow you to trace directly</span>
+</span><span><a class="LN" name="134">  134   </a><span class="CT">//  back to the appropriate location in the model.  The basic format</span>
+</span><span><a class="LN" name="135">  135   </a><span class="CT">//  is &lt;system&gt;/block_name, where system is the system number (uniquely</span>
+</span><span><a class="LN" name="136">  136   </a><span class="CT">//  assigned by Simulink) and block_name is the name of the block.</span>
+</span><span><a class="LN" name="137">  137   </a><span class="CT">//</span>
+</span><span><a class="LN" name="138">  138   </a><span class="CT">//  Use the MATLAB hilite_system command to trace the generated code back</span>
+</span><span><a class="LN" name="139">  139   </a><span class="CT">//  to the model.  For example,</span>
+</span><span><a class="LN" name="140">  140   </a><span class="CT">//</span>
+</span><span><a class="LN" name="141">  141   </a><span class="CT">//  hilite_system('&lt;S3&gt;')    - opens system 3</span>
+</span><span><a class="LN" name="142">  142   </a><span class="CT">//  hilite_system('&lt;S3&gt;/Kp') - opens and selects block Kp which resides in S3</span>
+</span><span><a class="LN" name="143">  143   </a><span class="CT">//</span>
+</span><span><a class="LN" name="144">  144   </a><span class="CT">//  Here is the system hierarchy for this model</span>
+</span><span><a class="LN" name="145">  145   </a><span class="CT">//</span>
+</span><span><a class="LN" name="146">  146   </a><span class="CT">//  '<a href="matlab:coder.internal.code2model('end_point_filter')" name="code2model"><font color="#117755"><i>&lt;Root&gt;</i></font></a>' : 'end_point_filter'</span>
+</span><span><a class="LN" name="147">  147   </a><span class="CT">//  '<a href="matlab:coder.internal.code2model('end_point_filter:122')" name="code2model"><font color="#117755"><i>&lt;S1&gt;</i></font></a>'   : 'end_point_filter/LTI filter '</span>
+</span><span><a class="LN" name="148">  148   </a>
+</span><span><a class="LN" name="149">  149   </a><font color="#992211">#</font><span class="PP">endif</span>                                 <span class="CT">// RTW_HEADER_end_point_filter_h_</span>
+</span><span><a class="LN" name="150">  150   </a>
+</span><span><a class="LN" name="151">  151   </a><span class="CT">//</span>
+</span><span><a class="LN" name="152">  152   </a><span class="CT">// File trailer for generated code.</span>
+</span><span><a class="LN" name="153">  153   </a><span class="CT">//</span>
+</span><span><a class="LN" name="154">  154   </a><span class="CT">// [EOF]</span>
+</span><span><a class="LN" name="155">  155   </a><span class="CT">//</span>
+</span><span><a class="LN" name="156">  156   </a>
+</span></pre>
+</td></tr></table>
+</p>
+</body>
+</html>

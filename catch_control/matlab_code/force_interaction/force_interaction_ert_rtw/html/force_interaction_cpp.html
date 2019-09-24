@@ -1,0 +1,680 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>RTW Report - force_interaction.cpp</title>
+<style> .LN { font-style: italic; color: #888888 } </style>
+<style> .CT { font-style: italic; color: #117755 } </style>
+<style> .PP { font-style: bold;   color: #992211 } </style>
+<style> .KW { font-style: bold;   color: #112266 } </style>
+<style> .DT { font-style: bold;   color: #112266 } </style>
+<link rel="stylesheet" type="text/css" href="rtwreport.css"></link><script language="JavaScript" type="text/javascript" src="rtwreport_utils.js"></script>
+<SCRIPT type="text/javascript" language="JavaScript" src="slwebview.js"></SCRIPT>
+<SCRIPT type="text/javascript" language="JavaScript" src="id_mapping.js"></SCRIPT>
+<SCRIPT type="text/javascript" src="rtwannotate.js"></SCRIPT>
+</head>
+<body bgcolor="#eeeeee" text="#1122aa" onload="try {if (top) { if (top.rtwFileOnLoad) top.rtwFileOnLoad(window.document); else local_onload();}} catch(err) {};if (typeof rtwannotate === 'function') {rtwannotate('force_interaction_cpp_cov.xml');}">
+<p>
+<table border="0" cellspacing="0" cellpadding="6" width="100%%" height="100%%"><tr><td width="100%%" valign="top" bgcolor="#ffffff">
+<h4>File: <a href="../force_interaction.cpp" target="rtwreport_document_frame" id="linkToText_plain">force_interaction.cpp</a></h4>
+<pre id="RTWcode">
+<span><a class="LN" name="1">    1   </a><span class="CT">//</span>
+</span><span><a class="LN" name="2">    2   </a><span class="CT">// File: force_interaction.cpp</span>
+</span><span><a class="LN" name="3">    3   </a><span class="CT">//</span>
+</span><span><a class="LN" name="4">    4   </a><span class="CT">// Code generated for Simulink model 'force_interaction'.</span>
+</span><span><a class="LN" name="5">    5   </a><span class="CT">//</span>
+</span><span><a class="LN" name="6">    6   </a><span class="CT">// Model version                  : 1.192</span>
+</span><span><a class="LN" name="7">    7   </a><span class="CT">// Simulink Coder version         : 8.11 (R2016b) 25-Aug-2016</span>
+</span><span><a class="LN" name="8">    8   </a><span class="CT">// C/C++ source code generated on : Sun Jun  9 15:50:41 2019</span>
+</span><span><a class="LN" name="9">    9   </a><span class="CT">//</span>
+</span><span><a class="LN" name="10">   10   </a><span class="CT">// Target selection: ert.tlc</span>
+</span><span><a class="LN" name="11">   11   </a><span class="CT">// Embedded hardware selection: Intel-&gt;x86-64 (Windows64)</span>
+</span><span><a class="LN" name="12">   12   </a><span class="CT">// Code generation objectives: Unspecified</span>
+</span><span><a class="LN" name="13">   13   </a><span class="CT">// Validation result: Not run</span>
+</span><span><a class="LN" name="14">   14   </a><span class="CT">//</span>
+</span><span><a class="LN" name="15">   15   </a><font color="#992211">#</font><span class="PP">include</span> <font color="#992211">&quot;force_interaction.h&quot;</font>
+</span><span><a class="LN" name="16">   16   </a>
+</span><span><a class="LN" name="17">   17   </a><span class="CT">// Model step function</span>
+</span><span><a class="LN" name="18">   18   </a><span class="DT">void</span> ForceInteraction::<a name="fcn_step">step</a>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> (&amp;arg_force_base_)[6], <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> (&amp;arg_delta_x)
+</span><span><a class="LN" name="19">   19   </a>  [3], <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> (&amp;arg_delta_rpy)[3])
+</span><span><a class="LN" name="20">   20   </a><b>{</b>
+</span><span><a class="LN" name="21">   21   </a>  <span class="CT">// local block i/o variables</span>
+</span><span><a class="LN" name="22">   22   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_Sum[3];
+</span><span><a class="LN" name="23">   23   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_Sum_h[3];
+</span><span><a class="LN" name="24">   24   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_RateLimiter3;
+</span><span><a class="LN" name="25">   25   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_RateLimiter2;
+</span><span><a class="LN" name="26">   26   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_RateLimiter1;
+</span><span><a class="LN" name="27">   27   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rateLimiterRate;
+</span><span><a class="LN" name="28">   28   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_FilterCoefficient;
+</span><span><a class="LN" name="29">   29   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_FilterCoefficient_n;
+</span><span><a class="LN" name="30">   30   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_Saturation_idx_0;
+</span><span><a class="LN" name="31">   31   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_FilterCoefficient_idx_0;
+</span><span><a class="LN" name="32">   32   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_Saturation_idx_1;
+</span><span><a class="LN" name="33">   33   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_FilterCoefficient_idx_1;
+</span><span><a class="LN" name="34">   34   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_Saturation1_idx_0;
+</span><span><a class="LN" name="35">   35   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_FilterCoefficient_n_idx_0;
+</span><span><a class="LN" name="36">   36   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_Saturation1_idx_1;
+</span><span><a class="LN" name="37">   37   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> rtb_FilterCoefficient_n_idx_1;
+</span><span><a class="LN" name="38">   38   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> u0;
+</span><span><a class="LN" name="39">   39   </a>  <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> u0_0;
+</span><span><a class="LN" name="40">   40   </a>
+</span><span><a class="LN" name="41">   41   </a>  <span class="CT">// Switch: '<a href="matlab:coder.internal.code2model('force_interaction:135:5')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Switch</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="42">   42   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:151')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant</i></font></a>'</span>
+</span><span><a class="LN" name="43">   43   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:152')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant1</i></font></a>'</span>
+</span><span><a class="LN" name="44">   44   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="45">   45   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:135:7')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/u_GTE_up</i></font></a>'</span>
+</span><span><a class="LN" name="46">   46   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:135:8')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/u_GT_lo</i></font></a>'</span>
+</span><span><a class="LN" name="47">   47   </a>  <span class="CT">//   Switch: '<a href="matlab:coder.internal.code2model('force_interaction:135:6')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="48">   48   </a>
+</span><span><a class="LN" name="49">   49   </a>  <span class="KW">if</span> (arg_force_base_[0] &gt;= 5.0) <b>{</b>
+</span><span><a class="LN" name="50">   50   </a>    rateLimiterRate = 5.0;
+</span><span><a class="LN" name="51">   51   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (arg_force_base_[0] &gt; -5.0) <b>{</b>
+</span><span><a class="LN" name="52">   52   </a>    <span class="CT">// Switch: '<a href="matlab:coder.internal.code2model('force_interaction:135:6')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="53">   53   </a>    rateLimiterRate = arg_force_base_[0];
+</span><span><a class="LN" name="54">   54   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="55">   55   </a>    rateLimiterRate = -5.0;
+</span><span><a class="LN" name="56">   56   </a>  <b>}</b>
+</span><span><a class="LN" name="57">   57   </a>
+</span><span><a class="LN" name="58">   58   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:135:4')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Diff</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="59">   59   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="60">   60   </a>
+</span><span><a class="LN" name="61">   61   </a>  u0 = arg_force_base_[0] - rateLimiterRate;
+</span><span><a class="LN" name="62">   62   </a>
+</span><span><a class="LN" name="63">   63   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:156')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation</i></font></a>'</span>
+</span><span><a class="LN" name="64">   64   </a>  <span class="KW">if</span> (u0 &gt; 40.0) <b>{</b>
+</span><span><a class="LN" name="65">   65   </a>    u0 = 40.0;
+</span><span><a class="LN" name="66">   66   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="67">   67   </a>    <span class="KW">if</span> (u0 &lt; -40.0) <b>{</b>
+</span><span><a class="LN" name="68">   68   </a>      u0 = -40.0;
+</span><span><a class="LN" name="69">   69   </a>    <b>}</b>
+</span><span><a class="LN" name="70">   70   </a>  <b>}</b>
+</span><span><a class="LN" name="71">   71   </a>
+</span><span><a class="LN" name="72">   72   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1671')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter Coefficient</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="73">   73   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1670')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="74">   74   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1668')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Derivative Gain</i></font></a>'</span>
+</span><span><a class="LN" name="75">   75   </a>  <span class="CT">//   Sum: '<a href="matlab:coder.internal.code2model('force_interaction:107:1672')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/SumD</i></font></a>'</span>
+</span><span><a class="LN" name="76">   76   </a>
+</span><span><a class="LN" name="77">   77   </a>  rtb_FilterCoefficient = (0.0 * u0 - force_interaction_DW.Filter_DSTATE[0]) *
+</span><span><a class="LN" name="78">   78   </a>    5.0;
+</span><span><a class="LN" name="79">   79   </a>
+</span><span><a class="LN" name="80">   80   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:107:1665')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Sum</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="81">   81   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1669')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Integrator</i></font></a>'</span>
+</span><span><a class="LN" name="82">   82   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1666')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Proportional Gain</i></font></a>'</span>
+</span><span><a class="LN" name="83">   83   </a>
+</span><span><a class="LN" name="84">   84   </a>  rtb_Sum[0] = (100.0 * u0 + force_interaction_DW.Integrator_DSTATE[0]) +
+</span><span><a class="LN" name="85">   85   </a>    rtb_FilterCoefficient;
+</span><span><a class="LN" name="86">   86   </a>
+</span><span><a class="LN" name="87">   87   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:156')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation</i></font></a>'</span>
+</span><span><a class="LN" name="88">   88   </a>  rtb_Saturation_idx_0 = u0;
+</span><span><a class="LN" name="89">   89   </a>
+</span><span><a class="LN" name="90">   90   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1671')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter Coefficient</i></font></a>'</span>
+</span><span><a class="LN" name="91">   91   </a>  rtb_FilterCoefficient_idx_0 = rtb_FilterCoefficient;
+</span><span><a class="LN" name="92">   92   </a>
+</span><span><a class="LN" name="93">   93   </a>  <span class="CT">// Switch: '<a href="matlab:coder.internal.code2model('force_interaction:135:5')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Switch</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="94">   94   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:151')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant</i></font></a>'</span>
+</span><span><a class="LN" name="95">   95   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:152')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant1</i></font></a>'</span>
+</span><span><a class="LN" name="96">   96   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="97">   97   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:135:7')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/u_GTE_up</i></font></a>'</span>
+</span><span><a class="LN" name="98">   98   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:135:8')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/u_GT_lo</i></font></a>'</span>
+</span><span><a class="LN" name="99">   99   </a>  <span class="CT">//   Switch: '<a href="matlab:coder.internal.code2model('force_interaction:135:6')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="100">  100   </a>
+</span><span><a class="LN" name="101">  101   </a>  <span class="KW">if</span> (arg_force_base_[1] &gt;= 5.0) <b>{</b>
+</span><span><a class="LN" name="102">  102   </a>    rateLimiterRate = 5.0;
+</span><span><a class="LN" name="103">  103   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (arg_force_base_[1] &gt; -5.0) <b>{</b>
+</span><span><a class="LN" name="104">  104   </a>    <span class="CT">// Switch: '<a href="matlab:coder.internal.code2model('force_interaction:135:6')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="105">  105   </a>    rateLimiterRate = arg_force_base_[1];
+</span><span><a class="LN" name="106">  106   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="107">  107   </a>    rateLimiterRate = -5.0;
+</span><span><a class="LN" name="108">  108   </a>  <b>}</b>
+</span><span><a class="LN" name="109">  109   </a>
+</span><span><a class="LN" name="110">  110   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:135:4')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Diff</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="111">  111   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="112">  112   </a>
+</span><span><a class="LN" name="113">  113   </a>  u0 = arg_force_base_[1] - rateLimiterRate;
+</span><span><a class="LN" name="114">  114   </a>
+</span><span><a class="LN" name="115">  115   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:156')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation</i></font></a>'</span>
+</span><span><a class="LN" name="116">  116   </a>  <span class="KW">if</span> (u0 &gt; 40.0) <b>{</b>
+</span><span><a class="LN" name="117">  117   </a>    u0 = 40.0;
+</span><span><a class="LN" name="118">  118   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="119">  119   </a>    <span class="KW">if</span> (u0 &lt; -40.0) <b>{</b>
+</span><span><a class="LN" name="120">  120   </a>      u0 = -40.0;
+</span><span><a class="LN" name="121">  121   </a>    <b>}</b>
+</span><span><a class="LN" name="122">  122   </a>  <b>}</b>
+</span><span><a class="LN" name="123">  123   </a>
+</span><span><a class="LN" name="124">  124   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1671')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter Coefficient</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="125">  125   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1670')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="126">  126   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1668')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Derivative Gain</i></font></a>'</span>
+</span><span><a class="LN" name="127">  127   </a>  <span class="CT">//   Sum: '<a href="matlab:coder.internal.code2model('force_interaction:107:1672')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/SumD</i></font></a>'</span>
+</span><span><a class="LN" name="128">  128   </a>
+</span><span><a class="LN" name="129">  129   </a>  rtb_FilterCoefficient = (0.0 * u0 - force_interaction_DW.Filter_DSTATE[1]) *
+</span><span><a class="LN" name="130">  130   </a>    5.0;
+</span><span><a class="LN" name="131">  131   </a>
+</span><span><a class="LN" name="132">  132   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:107:1665')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Sum</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="133">  133   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1669')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Integrator</i></font></a>'</span>
+</span><span><a class="LN" name="134">  134   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1666')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Proportional Gain</i></font></a>'</span>
+</span><span><a class="LN" name="135">  135   </a>
+</span><span><a class="LN" name="136">  136   </a>  rtb_Sum[1] = (100.0 * u0 + force_interaction_DW.Integrator_DSTATE[1]) +
+</span><span><a class="LN" name="137">  137   </a>    rtb_FilterCoefficient;
+</span><span><a class="LN" name="138">  138   </a>
+</span><span><a class="LN" name="139">  139   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:156')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation</i></font></a>'</span>
+</span><span><a class="LN" name="140">  140   </a>  rtb_Saturation_idx_1 = u0;
+</span><span><a class="LN" name="141">  141   </a>
+</span><span><a class="LN" name="142">  142   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1671')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter Coefficient</i></font></a>'</span>
+</span><span><a class="LN" name="143">  143   </a>  rtb_FilterCoefficient_idx_1 = rtb_FilterCoefficient;
+</span><span><a class="LN" name="144">  144   </a>
+</span><span><a class="LN" name="145">  145   </a>  <span class="CT">// Switch: '<a href="matlab:coder.internal.code2model('force_interaction:135:5')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Switch</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="146">  146   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:151')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant</i></font></a>'</span>
+</span><span><a class="LN" name="147">  147   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:152')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant1</i></font></a>'</span>
+</span><span><a class="LN" name="148">  148   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="149">  149   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:135:7')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/u_GTE_up</i></font></a>'</span>
+</span><span><a class="LN" name="150">  150   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:135:8')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/u_GT_lo</i></font></a>'</span>
+</span><span><a class="LN" name="151">  151   </a>  <span class="CT">//   Switch: '<a href="matlab:coder.internal.code2model('force_interaction:135:6')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="152">  152   </a>
+</span><span><a class="LN" name="153">  153   </a>  <span class="KW">if</span> (arg_force_base_[2] &gt;= 5.0) <b>{</b>
+</span><span><a class="LN" name="154">  154   </a>    rateLimiterRate = 5.0;
+</span><span><a class="LN" name="155">  155   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (arg_force_base_[2] &gt; -5.0) <b>{</b>
+</span><span><a class="LN" name="156">  156   </a>    <span class="CT">// Switch: '<a href="matlab:coder.internal.code2model('force_interaction:135:6')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="157">  157   </a>    rateLimiterRate = arg_force_base_[2];
+</span><span><a class="LN" name="158">  158   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="159">  159   </a>    rateLimiterRate = -5.0;
+</span><span><a class="LN" name="160">  160   </a>  <b>}</b>
+</span><span><a class="LN" name="161">  161   </a>
+</span><span><a class="LN" name="162">  162   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:135:4')" name="code2model"><font color="#117755"><i>&lt;S1&gt;/Diff</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="163">  163   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="164">  164   </a>
+</span><span><a class="LN" name="165">  165   </a>  u0 = arg_force_base_[2] - rateLimiterRate;
+</span><span><a class="LN" name="166">  166   </a>
+</span><span><a class="LN" name="167">  167   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:156')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation</i></font></a>'</span>
+</span><span><a class="LN" name="168">  168   </a>  <span class="KW">if</span> (u0 &gt; 40.0) <b>{</b>
+</span><span><a class="LN" name="169">  169   </a>    u0 = 40.0;
+</span><span><a class="LN" name="170">  170   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="171">  171   </a>    <span class="KW">if</span> (u0 &lt; -40.0) <b>{</b>
+</span><span><a class="LN" name="172">  172   </a>      u0 = -40.0;
+</span><span><a class="LN" name="173">  173   </a>    <b>}</b>
+</span><span><a class="LN" name="174">  174   </a>  <b>}</b>
+</span><span><a class="LN" name="175">  175   </a>
+</span><span><a class="LN" name="176">  176   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1671')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter Coefficient</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="177">  177   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1670')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="178">  178   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1668')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Derivative Gain</i></font></a>'</span>
+</span><span><a class="LN" name="179">  179   </a>  <span class="CT">//   Sum: '<a href="matlab:coder.internal.code2model('force_interaction:107:1672')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/SumD</i></font></a>'</span>
+</span><span><a class="LN" name="180">  180   </a>
+</span><span><a class="LN" name="181">  181   </a>  rtb_FilterCoefficient = (0.0 * u0 - force_interaction_DW.Filter_DSTATE[2]) *
+</span><span><a class="LN" name="182">  182   </a>    5.0;
+</span><span><a class="LN" name="183">  183   </a>
+</span><span><a class="LN" name="184">  184   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:107:1665')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Sum</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="185">  185   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1669')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Integrator</i></font></a>'</span>
+</span><span><a class="LN" name="186">  186   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1666')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Proportional Gain</i></font></a>'</span>
+</span><span><a class="LN" name="187">  187   </a>
+</span><span><a class="LN" name="188">  188   </a>  rtb_Sum[2] = (100.0 * u0 + force_interaction_DW.Integrator_DSTATE[2]) +
+</span><span><a class="LN" name="189">  189   </a>    rtb_FilterCoefficient;
+</span><span><a class="LN" name="190">  190   </a>
+</span><span><a class="LN" name="191">  191   </a>  <span class="CT">// DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:195:387')" name="code2model"><font color="#117755"><i>&lt;S7&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="192">  192   </a>  <b>{</b>
+</span><span><a class="LN" name="193">  193   </a>    rtb_RateLimiter3 = 0.0600918954997801*force_interaction_DW.Internal_DSTATE;
+</span><span><a class="LN" name="194">  194   </a>    rtb_RateLimiter3 += 0.0018814114433874374*rtb_Sum[0];
+</span><span><a class="LN" name="195">  195   </a>  <b>}</b>
+</span><span><a class="LN" name="196">  196   </a>
+</span><span><a class="LN" name="197">  197   </a>  <span class="CT">// RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:155')" name="code2model"><font color="#117755"><i>&lt;S5&gt;/Rate Limiter</i></font></a>'</span>
+</span><span><a class="LN" name="198">  198   </a>  rateLimiterRate = rtb_RateLimiter3 - force_interaction_DW.PrevY;
+</span><span><a class="LN" name="199">  199   </a>  <span class="KW">if</span> (rateLimiterRate &gt; 0.008) <b>{</b>
+</span><span><a class="LN" name="200">  200   </a>    rtb_RateLimiter3 = force_interaction_DW.PrevY + 0.008;
+</span><span><a class="LN" name="201">  201   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="202">  202   </a>    <span class="KW">if</span> (rateLimiterRate &lt; -0.008) <b>{</b>
+</span><span><a class="LN" name="203">  203   </a>      rtb_RateLimiter3 = force_interaction_DW.PrevY + -0.008;
+</span><span><a class="LN" name="204">  204   </a>    <b>}</b>
+</span><span><a class="LN" name="205">  205   </a>  <b>}</b>
+</span><span><a class="LN" name="206">  206   </a>
+</span><span><a class="LN" name="207">  207   </a>  force_interaction_DW.PrevY = rtb_RateLimiter3;
+</span><span><a class="LN" name="208">  208   </a>
+</span><span><a class="LN" name="209">  209   </a>  <span class="CT">// End of RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:155')" name="code2model"><font color="#117755"><i>&lt;S5&gt;/Rate Limiter</i></font></a>'</span>
+</span><span><a class="LN" name="210">  210   </a>
+</span><span><a class="LN" name="211">  211   </a>  <span class="CT">// DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:196:387')" name="code2model"><font color="#117755"><i>&lt;S8&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="212">  212   </a>  <b>{</b>
+</span><span><a class="LN" name="213">  213   </a>    rtb_RateLimiter2 = 0.0600918954997801*force_interaction_DW.Internal_DSTATE_m;
+</span><span><a class="LN" name="214">  214   </a>    rtb_RateLimiter2 += 0.0018814114433874374*rtb_Sum[1];
+</span><span><a class="LN" name="215">  215   </a>  <b>}</b>
+</span><span><a class="LN" name="216">  216   </a>
+</span><span><a class="LN" name="217">  217   </a>  <span class="CT">// RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:189')" name="code2model"><font color="#117755"><i>&lt;S5&gt;/Rate Limiter3</i></font></a>'</span>
+</span><span><a class="LN" name="218">  218   </a>  rateLimiterRate = rtb_RateLimiter2 - force_interaction_DW.PrevY_m;
+</span><span><a class="LN" name="219">  219   </a>  <span class="KW">if</span> (rateLimiterRate &gt; 0.008) <b>{</b>
+</span><span><a class="LN" name="220">  220   </a>    rtb_RateLimiter2 = force_interaction_DW.PrevY_m + 0.008;
+</span><span><a class="LN" name="221">  221   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="222">  222   </a>    <span class="KW">if</span> (rateLimiterRate &lt; -0.008) <b>{</b>
+</span><span><a class="LN" name="223">  223   </a>      rtb_RateLimiter2 = force_interaction_DW.PrevY_m + -0.008;
+</span><span><a class="LN" name="224">  224   </a>    <b>}</b>
+</span><span><a class="LN" name="225">  225   </a>  <b>}</b>
+</span><span><a class="LN" name="226">  226   </a>
+</span><span><a class="LN" name="227">  227   </a>  force_interaction_DW.PrevY_m = rtb_RateLimiter2;
+</span><span><a class="LN" name="228">  228   </a>
+</span><span><a class="LN" name="229">  229   </a>  <span class="CT">// End of RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:189')" name="code2model"><font color="#117755"><i>&lt;S5&gt;/Rate Limiter3</i></font></a>'</span>
+</span><span><a class="LN" name="230">  230   </a>
+</span><span><a class="LN" name="231">  231   </a>  <span class="CT">// DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:197:387')" name="code2model"><font color="#117755"><i>&lt;S9&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="232">  232   </a>  <b>{</b>
+</span><span><a class="LN" name="233">  233   </a>    rtb_RateLimiter1 = 0.0600918954997801*
+</span><span><a class="LN" name="234">  234   </a>      force_interaction_DW.Internal_DSTATE_mt;
+</span><span><a class="LN" name="235">  235   </a>    rtb_RateLimiter1 += 0.0018814114433874374*rtb_Sum[2];
+</span><span><a class="LN" name="236">  236   </a>  <b>}</b>
+</span><span><a class="LN" name="237">  237   </a>
+</span><span><a class="LN" name="238">  238   </a>  <span class="CT">// RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:190')" name="code2model"><font color="#117755"><i>&lt;S5&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="239">  239   </a>  rateLimiterRate = rtb_RateLimiter1 - force_interaction_DW.PrevY_b;
+</span><span><a class="LN" name="240">  240   </a>  <span class="KW">if</span> (rateLimiterRate &gt; 0.008) <b>{</b>
+</span><span><a class="LN" name="241">  241   </a>    rtb_RateLimiter1 = force_interaction_DW.PrevY_b + 0.008;
+</span><span><a class="LN" name="242">  242   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="243">  243   </a>    <span class="KW">if</span> (rateLimiterRate &lt; -0.008) <b>{</b>
+</span><span><a class="LN" name="244">  244   </a>      rtb_RateLimiter1 = force_interaction_DW.PrevY_b + -0.008;
+</span><span><a class="LN" name="245">  245   </a>    <b>}</b>
+</span><span><a class="LN" name="246">  246   </a>  <b>}</b>
+</span><span><a class="LN" name="247">  247   </a>
+</span><span><a class="LN" name="248">  248   </a>  force_interaction_DW.PrevY_b = rtb_RateLimiter1;
+</span><span><a class="LN" name="249">  249   </a>
+</span><span><a class="LN" name="250">  250   </a>  <span class="CT">// End of RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:190')" name="code2model"><font color="#117755"><i>&lt;S5&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="251">  251   </a>
+</span><span><a class="LN" name="252">  252   </a>  <span class="CT">// Outport: '<a href="matlab:coder.internal.code2model('force_interaction:121')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/delta_x</i></font></a>'</span>
+</span><span><a class="LN" name="253">  253   </a>  arg_delta_x[0] = rtb_RateLimiter3;
+</span><span><a class="LN" name="254">  254   </a>  arg_delta_x[1] = rtb_RateLimiter2;
+</span><span><a class="LN" name="255">  255   </a>  arg_delta_x[2] = rtb_RateLimiter1;
+</span><span><a class="LN" name="256">  256   </a>
+</span><span><a class="LN" name="257">  257   </a>  <span class="CT">// Switch: '<a href="matlab:coder.internal.code2model('force_interaction:136:5')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Switch</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="258">  258   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:153')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant2</i></font></a>'</span>
+</span><span><a class="LN" name="259">  259   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:154')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant3</i></font></a>'</span>
+</span><span><a class="LN" name="260">  260   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="261">  261   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:7')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GTE_up</i></font></a>'</span>
+</span><span><a class="LN" name="262">  262   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:8')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GT_lo</i></font></a>'</span>
+</span><span><a class="LN" name="263">  263   </a>  <span class="CT">//   Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="264">  264   </a>  <span class="CT">//   Sum: '<a href="matlab:coder.internal.code2model('force_interaction:136:4')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Diff</i></font></a>'</span>
+</span><span><a class="LN" name="265">  265   </a>  <span class="CT">//   Switch: '<a href="matlab:coder.internal.code2model('force_interaction:136:6')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="266">  266   </a>
+</span><span><a class="LN" name="267">  267   </a>  <span class="KW">if</span> (arg_force_base_[3] &gt;= 0.3) <b>{</b>
+</span><span><a class="LN" name="268">  268   </a>    rateLimiterRate = 0.3;
+</span><span><a class="LN" name="269">  269   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (arg_force_base_[3] &gt; -0.3) <b>{</b>
+</span><span><a class="LN" name="270">  270   </a>    rateLimiterRate = arg_force_base_[3];
+</span><span><a class="LN" name="271">  271   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="272">  272   </a>    rateLimiterRate = -0.3;
+</span><span><a class="LN" name="273">  273   </a>  <b>}</b>
+</span><span><a class="LN" name="274">  274   </a>
+</span><span><a class="LN" name="275">  275   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:136:4')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Diff</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="276">  276   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="277">  277   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:7')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GTE_up</i></font></a>'</span>
+</span><span><a class="LN" name="278">  278   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:8')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GT_lo</i></font></a>'</span>
+</span><span><a class="LN" name="279">  279   </a>  <span class="CT">//   Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="280">  280   </a>  <span class="CT">//   Switch: '<a href="matlab:coder.internal.code2model('force_interaction:136:6')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="281">  281   </a>
+</span><span><a class="LN" name="282">  282   </a>  u0_0 = arg_force_base_[3] - rateLimiterRate;
+</span><span><a class="LN" name="283">  283   </a>
+</span><span><a class="LN" name="284">  284   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="285">  285   </a>  <span class="KW">if</span> (u0_0 &gt; 3.0) <b>{</b>
+</span><span><a class="LN" name="286">  286   </a>    u0_0 = 3.0;
+</span><span><a class="LN" name="287">  287   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="288">  288   </a>    <span class="KW">if</span> (u0_0 &lt; -3.0) <b>{</b>
+</span><span><a class="LN" name="289">  289   </a>      u0_0 = -3.0;
+</span><span><a class="LN" name="290">  290   </a>    <b>}</b>
+</span><span><a class="LN" name="291">  291   </a>  <b>}</b>
+</span><span><a class="LN" name="292">  292   </a>
+</span><span><a class="LN" name="293">  293   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1671')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter Coefficient</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="294">  294   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1670')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="295">  295   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1668')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Derivative Gain</i></font></a>'</span>
+</span><span><a class="LN" name="296">  296   </a>  <span class="CT">//   Sum: '<a href="matlab:coder.internal.code2model('force_interaction:137:1672')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/SumD</i></font></a>'</span>
+</span><span><a class="LN" name="297">  297   </a>
+</span><span><a class="LN" name="298">  298   </a>  rtb_FilterCoefficient_n = (0.0 * u0_0 - force_interaction_DW.Filter_DSTATE_b[0])
+</span><span><a class="LN" name="299">  299   </a>    * 5.0;
+</span><span><a class="LN" name="300">  300   </a>
+</span><span><a class="LN" name="301">  301   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:137:1665')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Sum</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="302">  302   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1669')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Integrator</i></font></a>'</span>
+</span><span><a class="LN" name="303">  303   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1666')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Proportional Gain</i></font></a>'</span>
+</span><span><a class="LN" name="304">  304   </a>
+</span><span><a class="LN" name="305">  305   </a>  rtb_Sum_h[0] = (0.0 * u0_0 + force_interaction_DW.Integrator_DSTATE_h[0]) +
+</span><span><a class="LN" name="306">  306   </a>    rtb_FilterCoefficient_n;
+</span><span><a class="LN" name="307">  307   </a>
+</span><span><a class="LN" name="308">  308   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="309">  309   </a>  rtb_Saturation1_idx_0 = u0_0;
+</span><span><a class="LN" name="310">  310   </a>
+</span><span><a class="LN" name="311">  311   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1671')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter Coefficient</i></font></a>'</span>
+</span><span><a class="LN" name="312">  312   </a>  rtb_FilterCoefficient_n_idx_0 = rtb_FilterCoefficient_n;
+</span><span><a class="LN" name="313">  313   </a>
+</span><span><a class="LN" name="314">  314   </a>  <span class="CT">// Switch: '<a href="matlab:coder.internal.code2model('force_interaction:136:5')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Switch</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="315">  315   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:153')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant2</i></font></a>'</span>
+</span><span><a class="LN" name="316">  316   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:154')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant3</i></font></a>'</span>
+</span><span><a class="LN" name="317">  317   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="318">  318   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:7')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GTE_up</i></font></a>'</span>
+</span><span><a class="LN" name="319">  319   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:8')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GT_lo</i></font></a>'</span>
+</span><span><a class="LN" name="320">  320   </a>  <span class="CT">//   Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="321">  321   </a>  <span class="CT">//   Sum: '<a href="matlab:coder.internal.code2model('force_interaction:136:4')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Diff</i></font></a>'</span>
+</span><span><a class="LN" name="322">  322   </a>  <span class="CT">//   Switch: '<a href="matlab:coder.internal.code2model('force_interaction:136:6')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="323">  323   </a>
+</span><span><a class="LN" name="324">  324   </a>  <span class="KW">if</span> (arg_force_base_[4] &gt;= 0.3) <b>{</b>
+</span><span><a class="LN" name="325">  325   </a>    rateLimiterRate = 0.3;
+</span><span><a class="LN" name="326">  326   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (arg_force_base_[4] &gt; -0.3) <b>{</b>
+</span><span><a class="LN" name="327">  327   </a>    rateLimiterRate = arg_force_base_[4];
+</span><span><a class="LN" name="328">  328   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="329">  329   </a>    rateLimiterRate = -0.3;
+</span><span><a class="LN" name="330">  330   </a>  <b>}</b>
+</span><span><a class="LN" name="331">  331   </a>
+</span><span><a class="LN" name="332">  332   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:136:4')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Diff</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="333">  333   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="334">  334   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:7')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GTE_up</i></font></a>'</span>
+</span><span><a class="LN" name="335">  335   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:8')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GT_lo</i></font></a>'</span>
+</span><span><a class="LN" name="336">  336   </a>  <span class="CT">//   Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="337">  337   </a>  <span class="CT">//   Switch: '<a href="matlab:coder.internal.code2model('force_interaction:136:6')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="338">  338   </a>
+</span><span><a class="LN" name="339">  339   </a>  u0_0 = arg_force_base_[4] - rateLimiterRate;
+</span><span><a class="LN" name="340">  340   </a>
+</span><span><a class="LN" name="341">  341   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="342">  342   </a>  <span class="KW">if</span> (u0_0 &gt; 3.0) <b>{</b>
+</span><span><a class="LN" name="343">  343   </a>    u0_0 = 3.0;
+</span><span><a class="LN" name="344">  344   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="345">  345   </a>    <span class="KW">if</span> (u0_0 &lt; -3.0) <b>{</b>
+</span><span><a class="LN" name="346">  346   </a>      u0_0 = -3.0;
+</span><span><a class="LN" name="347">  347   </a>    <b>}</b>
+</span><span><a class="LN" name="348">  348   </a>  <b>}</b>
+</span><span><a class="LN" name="349">  349   </a>
+</span><span><a class="LN" name="350">  350   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1671')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter Coefficient</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="351">  351   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1670')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="352">  352   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1668')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Derivative Gain</i></font></a>'</span>
+</span><span><a class="LN" name="353">  353   </a>  <span class="CT">//   Sum: '<a href="matlab:coder.internal.code2model('force_interaction:137:1672')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/SumD</i></font></a>'</span>
+</span><span><a class="LN" name="354">  354   </a>
+</span><span><a class="LN" name="355">  355   </a>  rtb_FilterCoefficient_n = (0.0 * u0_0 - force_interaction_DW.Filter_DSTATE_b[1])
+</span><span><a class="LN" name="356">  356   </a>    * 5.0;
+</span><span><a class="LN" name="357">  357   </a>
+</span><span><a class="LN" name="358">  358   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:137:1665')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Sum</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="359">  359   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1669')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Integrator</i></font></a>'</span>
+</span><span><a class="LN" name="360">  360   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1666')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Proportional Gain</i></font></a>'</span>
+</span><span><a class="LN" name="361">  361   </a>
+</span><span><a class="LN" name="362">  362   </a>  rtb_Sum_h[1] = (0.0 * u0_0 + force_interaction_DW.Integrator_DSTATE_h[1]) +
+</span><span><a class="LN" name="363">  363   </a>    rtb_FilterCoefficient_n;
+</span><span><a class="LN" name="364">  364   </a>
+</span><span><a class="LN" name="365">  365   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="366">  366   </a>  rtb_Saturation1_idx_1 = u0_0;
+</span><span><a class="LN" name="367">  367   </a>
+</span><span><a class="LN" name="368">  368   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1671')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter Coefficient</i></font></a>'</span>
+</span><span><a class="LN" name="369">  369   </a>  rtb_FilterCoefficient_n_idx_1 = rtb_FilterCoefficient_n;
+</span><span><a class="LN" name="370">  370   </a>
+</span><span><a class="LN" name="371">  371   </a>  <span class="CT">// Switch: '<a href="matlab:coder.internal.code2model('force_interaction:136:5')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Switch</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="372">  372   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:153')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant2</i></font></a>'</span>
+</span><span><a class="LN" name="373">  373   </a>  <span class="CT">//   Constant: '<a href="matlab:coder.internal.code2model('force_interaction:154')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Constant3</i></font></a>'</span>
+</span><span><a class="LN" name="374">  374   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="375">  375   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:7')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GTE_up</i></font></a>'</span>
+</span><span><a class="LN" name="376">  376   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:8')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GT_lo</i></font></a>'</span>
+</span><span><a class="LN" name="377">  377   </a>  <span class="CT">//   Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="378">  378   </a>  <span class="CT">//   Sum: '<a href="matlab:coder.internal.code2model('force_interaction:136:4')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Diff</i></font></a>'</span>
+</span><span><a class="LN" name="379">  379   </a>  <span class="CT">//   Switch: '<a href="matlab:coder.internal.code2model('force_interaction:136:6')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="380">  380   </a>
+</span><span><a class="LN" name="381">  381   </a>  <span class="KW">if</span> (arg_force_base_[5] &gt;= 0.3) <b>{</b>
+</span><span><a class="LN" name="382">  382   </a>    rateLimiterRate = 0.3;
+</span><span><a class="LN" name="383">  383   </a>  <b>}</b> <span class="KW">else</span> <span class="KW">if</span> (arg_force_base_[5] &gt; -0.3) <b>{</b>
+</span><span><a class="LN" name="384">  384   </a>    rateLimiterRate = arg_force_base_[5];
+</span><span><a class="LN" name="385">  385   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="386">  386   </a>    rateLimiterRate = -0.3;
+</span><span><a class="LN" name="387">  387   </a>  <b>}</b>
+</span><span><a class="LN" name="388">  388   </a>
+</span><span><a class="LN" name="389">  389   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:136:4')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Diff</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="390">  390   </a>  <span class="CT">//   Inport: '<a href="matlab:coder.internal.code2model('force_interaction:105')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/force_base_</i></font></a>'</span>
+</span><span><a class="LN" name="391">  391   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:7')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GTE_up</i></font></a>'</span>
+</span><span><a class="LN" name="392">  392   </a>  <span class="CT">//   RelationalOperator: '<a href="matlab:coder.internal.code2model('force_interaction:136:8')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/u_GT_lo</i></font></a>'</span>
+</span><span><a class="LN" name="393">  393   </a>  <span class="CT">//   Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="394">  394   </a>  <span class="CT">//   Switch: '<a href="matlab:coder.internal.code2model('force_interaction:136:6')" name="code2model"><font color="#117755"><i>&lt;S2&gt;/Switch1</i></font></a>'</span>
+</span><span><a class="LN" name="395">  395   </a>
+</span><span><a class="LN" name="396">  396   </a>  u0_0 = arg_force_base_[5] - rateLimiterRate;
+</span><span><a class="LN" name="397">  397   </a>
+</span><span><a class="LN" name="398">  398   </a>  <span class="CT">// Saturate: '<a href="matlab:coder.internal.code2model('force_interaction:157')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/Saturation1</i></font></a>'</span>
+</span><span><a class="LN" name="399">  399   </a>  <span class="KW">if</span> (u0_0 &gt; 3.0) <b>{</b>
+</span><span><a class="LN" name="400">  400   </a>    u0_0 = 3.0;
+</span><span><a class="LN" name="401">  401   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="402">  402   </a>    <span class="KW">if</span> (u0_0 &lt; -3.0) <b>{</b>
+</span><span><a class="LN" name="403">  403   </a>      u0_0 = -3.0;
+</span><span><a class="LN" name="404">  404   </a>    <b>}</b>
+</span><span><a class="LN" name="405">  405   </a>  <b>}</b>
+</span><span><a class="LN" name="406">  406   </a>
+</span><span><a class="LN" name="407">  407   </a>  <span class="CT">// Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1671')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter Coefficient</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="408">  408   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1670')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="409">  409   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1668')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Derivative Gain</i></font></a>'</span>
+</span><span><a class="LN" name="410">  410   </a>  <span class="CT">//   Sum: '<a href="matlab:coder.internal.code2model('force_interaction:137:1672')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/SumD</i></font></a>'</span>
+</span><span><a class="LN" name="411">  411   </a>
+</span><span><a class="LN" name="412">  412   </a>  rtb_FilterCoefficient_n = (0.0 * u0_0 - force_interaction_DW.Filter_DSTATE_b[2])
+</span><span><a class="LN" name="413">  413   </a>    * 5.0;
+</span><span><a class="LN" name="414">  414   </a>
+</span><span><a class="LN" name="415">  415   </a>  <span class="CT">// Sum: '<a href="matlab:coder.internal.code2model('force_interaction:137:1665')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Sum</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="416">  416   </a>  <span class="CT">//   DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1669')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Integrator</i></font></a>'</span>
+</span><span><a class="LN" name="417">  417   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1666')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Proportional Gain</i></font></a>'</span>
+</span><span><a class="LN" name="418">  418   </a>
+</span><span><a class="LN" name="419">  419   </a>  rtb_Sum_h[2] = (0.0 * u0_0 + force_interaction_DW.Integrator_DSTATE_h[2]) +
+</span><span><a class="LN" name="420">  420   </a>    rtb_FilterCoefficient_n;
+</span><span><a class="LN" name="421">  421   </a>
+</span><span><a class="LN" name="422">  422   </a>  <span class="CT">// DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:194:387')" name="code2model"><font color="#117755"><i>&lt;S19&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="423">  423   </a>  <b>{</b>
+</span><span><a class="LN" name="424">  424   </a>    rtb_RateLimiter1 = 0.0600918954997801*force_interaction_DW.Internal_DSTATE_a;
+</span><span><a class="LN" name="425">  425   </a>    rtb_RateLimiter1 += 0.0018814114433874374*rtb_Sum_h[0];
+</span><span><a class="LN" name="426">  426   </a>  <b>}</b>
+</span><span><a class="LN" name="427">  427   </a>
+</span><span><a class="LN" name="428">  428   </a>  <span class="CT">// RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:191')" name="code2model"><font color="#117755"><i>&lt;S6&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="429">  429   </a>  rateLimiterRate = rtb_RateLimiter1 - force_interaction_DW.PrevY_me;
+</span><span><a class="LN" name="430">  430   </a>  <span class="KW">if</span> (rateLimiterRate &gt; 0.008) <b>{</b>
+</span><span><a class="LN" name="431">  431   </a>    rtb_RateLimiter1 = force_interaction_DW.PrevY_me + 0.008;
+</span><span><a class="LN" name="432">  432   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="433">  433   </a>    <span class="KW">if</span> (rateLimiterRate &lt; -0.008) <b>{</b>
+</span><span><a class="LN" name="434">  434   </a>      rtb_RateLimiter1 = force_interaction_DW.PrevY_me + -0.008;
+</span><span><a class="LN" name="435">  435   </a>    <b>}</b>
+</span><span><a class="LN" name="436">  436   </a>  <b>}</b>
+</span><span><a class="LN" name="437">  437   </a>
+</span><span><a class="LN" name="438">  438   </a>  force_interaction_DW.PrevY_me = rtb_RateLimiter1;
+</span><span><a class="LN" name="439">  439   </a>
+</span><span><a class="LN" name="440">  440   </a>  <span class="CT">// End of RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:191')" name="code2model"><font color="#117755"><i>&lt;S6&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="441">  441   </a>
+</span><span><a class="LN" name="442">  442   </a>  <span class="CT">// DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:198:387')" name="code2model"><font color="#117755"><i>&lt;S20&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="443">  443   </a>  <b>{</b>
+</span><span><a class="LN" name="444">  444   </a>    rtb_RateLimiter2 = 0.0600918954997801*force_interaction_DW.Internal_DSTATE_p;
+</span><span><a class="LN" name="445">  445   </a>    rtb_RateLimiter2 += 0.0018814114433874374*rtb_Sum_h[1];
+</span><span><a class="LN" name="446">  446   </a>  <b>}</b>
+</span><span><a class="LN" name="447">  447   </a>
+</span><span><a class="LN" name="448">  448   </a>  <span class="CT">// RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:192')" name="code2model"><font color="#117755"><i>&lt;S6&gt;/Rate Limiter2</i></font></a>'</span>
+</span><span><a class="LN" name="449">  449   </a>  rateLimiterRate = rtb_RateLimiter2 - force_interaction_DW.PrevY_m0;
+</span><span><a class="LN" name="450">  450   </a>  <span class="KW">if</span> (rateLimiterRate &gt; 0.008) <b>{</b>
+</span><span><a class="LN" name="451">  451   </a>    rtb_RateLimiter2 = force_interaction_DW.PrevY_m0 + 0.008;
+</span><span><a class="LN" name="452">  452   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="453">  453   </a>    <span class="KW">if</span> (rateLimiterRate &lt; -0.008) <b>{</b>
+</span><span><a class="LN" name="454">  454   </a>      rtb_RateLimiter2 = force_interaction_DW.PrevY_m0 + -0.008;
+</span><span><a class="LN" name="455">  455   </a>    <b>}</b>
+</span><span><a class="LN" name="456">  456   </a>  <b>}</b>
+</span><span><a class="LN" name="457">  457   </a>
+</span><span><a class="LN" name="458">  458   </a>  force_interaction_DW.PrevY_m0 = rtb_RateLimiter2;
+</span><span><a class="LN" name="459">  459   </a>
+</span><span><a class="LN" name="460">  460   </a>  <span class="CT">// End of RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:192')" name="code2model"><font color="#117755"><i>&lt;S6&gt;/Rate Limiter2</i></font></a>'</span>
+</span><span><a class="LN" name="461">  461   </a>
+</span><span><a class="LN" name="462">  462   </a>  <span class="CT">// DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:199:387')" name="code2model"><font color="#117755"><i>&lt;S21&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="463">  463   </a>  <b>{</b>
+</span><span><a class="LN" name="464">  464   </a>    rtb_RateLimiter3 = 0.0600918954997801*
+</span><span><a class="LN" name="465">  465   </a>      force_interaction_DW.Internal_DSTATE_mg;
+</span><span><a class="LN" name="466">  466   </a>    rtb_RateLimiter3 += 0.0018814114433874374*rtb_Sum_h[2];
+</span><span><a class="LN" name="467">  467   </a>  <b>}</b>
+</span><span><a class="LN" name="468">  468   </a>
+</span><span><a class="LN" name="469">  469   </a>  <span class="CT">// RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:193')" name="code2model"><font color="#117755"><i>&lt;S6&gt;/Rate Limiter3</i></font></a>'</span>
+</span><span><a class="LN" name="470">  470   </a>  rateLimiterRate = rtb_RateLimiter3 - force_interaction_DW.PrevY_c;
+</span><span><a class="LN" name="471">  471   </a>  <span class="KW">if</span> (rateLimiterRate &gt; 0.008) <b>{</b>
+</span><span><a class="LN" name="472">  472   </a>    rtb_RateLimiter3 = force_interaction_DW.PrevY_c + 0.008;
+</span><span><a class="LN" name="473">  473   </a>  <b>}</b> <span class="KW">else</span> <b>{</b>
+</span><span><a class="LN" name="474">  474   </a>    <span class="KW">if</span> (rateLimiterRate &lt; -0.008) <b>{</b>
+</span><span><a class="LN" name="475">  475   </a>      rtb_RateLimiter3 = force_interaction_DW.PrevY_c + -0.008;
+</span><span><a class="LN" name="476">  476   </a>    <b>}</b>
+</span><span><a class="LN" name="477">  477   </a>  <b>}</b>
+</span><span><a class="LN" name="478">  478   </a>
+</span><span><a class="LN" name="479">  479   </a>  force_interaction_DW.PrevY_c = rtb_RateLimiter3;
+</span><span><a class="LN" name="480">  480   </a>
+</span><span><a class="LN" name="481">  481   </a>  <span class="CT">// End of RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:193')" name="code2model"><font color="#117755"><i>&lt;S6&gt;/Rate Limiter3</i></font></a>'</span>
+</span><span><a class="LN" name="482">  482   </a>
+</span><span><a class="LN" name="483">  483   </a>  <span class="CT">// Outport: '<a href="matlab:coder.internal.code2model('force_interaction:150')" name="code2model"><font color="#117755"><i>&lt;Root&gt;/delta_rpy</i></font></a>'</span>
+</span><span><a class="LN" name="484">  484   </a>  arg_delta_rpy[0] = rtb_RateLimiter1;
+</span><span><a class="LN" name="485">  485   </a>  arg_delta_rpy[1] = rtb_RateLimiter2;
+</span><span><a class="LN" name="486">  486   </a>  arg_delta_rpy[2] = rtb_RateLimiter3;
+</span><span><a class="LN" name="487">  487   </a>
+</span><span><a class="LN" name="488">  488   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1669')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Integrator</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="489">  489   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1667')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Integral Gain</i></font></a>'</span>
+</span><span><a class="LN" name="490">  490   </a>
+</span><span><a class="LN" name="491">  491   </a>  force_interaction_DW.Integrator_DSTATE[0] += 0.0 * rtb_Saturation_idx_0 *
+</span><span><a class="LN" name="492">  492   </a>    0.002;
+</span><span><a class="LN" name="493">  493   </a>
+</span><span><a class="LN" name="494">  494   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1670')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="495">  495   </a>  force_interaction_DW.Filter_DSTATE[0] += 0.002 * rtb_FilterCoefficient_idx_0;
+</span><span><a class="LN" name="496">  496   </a>
+</span><span><a class="LN" name="497">  497   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1669')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Integrator</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="498">  498   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1667')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Integral Gain</i></font></a>'</span>
+</span><span><a class="LN" name="499">  499   </a>
+</span><span><a class="LN" name="500">  500   </a>  force_interaction_DW.Integrator_DSTATE[1] += 0.0 * rtb_Saturation_idx_1 *
+</span><span><a class="LN" name="501">  501   </a>    0.002;
+</span><span><a class="LN" name="502">  502   </a>
+</span><span><a class="LN" name="503">  503   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1670')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="504">  504   </a>  force_interaction_DW.Filter_DSTATE[1] += 0.002 * rtb_FilterCoefficient_idx_1;
+</span><span><a class="LN" name="505">  505   </a>
+</span><span><a class="LN" name="506">  506   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1669')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Integrator</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="507">  507   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:107:1667')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Integral Gain</i></font></a>'</span>
+</span><span><a class="LN" name="508">  508   </a>
+</span><span><a class="LN" name="509">  509   </a>  force_interaction_DW.Integrator_DSTATE[2] += 0.0 * u0 * 0.002;
+</span><span><a class="LN" name="510">  510   </a>
+</span><span><a class="LN" name="511">  511   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:107:1670')" name="code2model"><font color="#117755"><i>&lt;S3&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="512">  512   </a>  force_interaction_DW.Filter_DSTATE[2] += 0.002 * rtb_FilterCoefficient;
+</span><span><a class="LN" name="513">  513   </a>
+</span><span><a class="LN" name="514">  514   </a>  <span class="CT">// Update for DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:195:387')" name="code2model"><font color="#117755"><i>&lt;S7&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="515">  515   </a>  <b>{</b>
+</span><span><a class="LN" name="516">  516   </a>    <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> xnew[1];
+</span><span><a class="LN" name="517">  517   </a>    xnew[0] = 0.99623717711322513*force_interaction_DW.Internal_DSTATE;
+</span><span><a class="LN" name="518">  518   </a>    xnew[0] += 0.0625*rtb_Sum[0];
+</span><span><a class="LN" name="519">  519   </a>    (<span class="DT">void</span>) memcpy(&amp;force_interaction_DW.Internal_DSTATE, xnew,
+</span><span><a class="LN" name="520">  520   </a>                  <span class="KW">sizeof</span>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a>)*1);
+</span><span><a class="LN" name="521">  521   </a>  <b>}</b>
+</span><span><a class="LN" name="522">  522   </a>
+</span><span><a class="LN" name="523">  523   </a>  <span class="CT">// Update for DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:196:387')" name="code2model"><font color="#117755"><i>&lt;S8&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="524">  524   </a>  <b>{</b>
+</span><span><a class="LN" name="525">  525   </a>    <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> xnew[1];
+</span><span><a class="LN" name="526">  526   </a>    xnew[0] = 0.99623717711322513*force_interaction_DW.Internal_DSTATE_m;
+</span><span><a class="LN" name="527">  527   </a>    xnew[0] += 0.0625*rtb_Sum[1];
+</span><span><a class="LN" name="528">  528   </a>    (<span class="DT">void</span>) memcpy(&amp;force_interaction_DW.Internal_DSTATE_m, xnew,
+</span><span><a class="LN" name="529">  529   </a>                  <span class="KW">sizeof</span>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a>)*1);
+</span><span><a class="LN" name="530">  530   </a>  <b>}</b>
+</span><span><a class="LN" name="531">  531   </a>
+</span><span><a class="LN" name="532">  532   </a>  <span class="CT">// Update for DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:197:387')" name="code2model"><font color="#117755"><i>&lt;S9&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="533">  533   </a>  <b>{</b>
+</span><span><a class="LN" name="534">  534   </a>    <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> xnew[1];
+</span><span><a class="LN" name="535">  535   </a>    xnew[0] = 0.99623717711322513*force_interaction_DW.Internal_DSTATE_mt;
+</span><span><a class="LN" name="536">  536   </a>    xnew[0] += 0.0625*rtb_Sum[2];
+</span><span><a class="LN" name="537">  537   </a>    (<span class="DT">void</span>) memcpy(&amp;force_interaction_DW.Internal_DSTATE_mt, xnew,
+</span><span><a class="LN" name="538">  538   </a>                  <span class="KW">sizeof</span>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a>)*1);
+</span><span><a class="LN" name="539">  539   </a>  <b>}</b>
+</span><span><a class="LN" name="540">  540   </a>
+</span><span><a class="LN" name="541">  541   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1669')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Integrator</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="542">  542   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1667')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Integral Gain</i></font></a>'</span>
+</span><span><a class="LN" name="543">  543   </a>
+</span><span><a class="LN" name="544">  544   </a>  force_interaction_DW.Integrator_DSTATE_h[0] += 0.0 * rtb_Saturation1_idx_0 *
+</span><span><a class="LN" name="545">  545   </a>    0.002;
+</span><span><a class="LN" name="546">  546   </a>
+</span><span><a class="LN" name="547">  547   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1670')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="548">  548   </a>  force_interaction_DW.Filter_DSTATE_b[0] += 0.002 *
+</span><span><a class="LN" name="549">  549   </a>    rtb_FilterCoefficient_n_idx_0;
+</span><span><a class="LN" name="550">  550   </a>
+</span><span><a class="LN" name="551">  551   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1669')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Integrator</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="552">  552   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1667')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Integral Gain</i></font></a>'</span>
+</span><span><a class="LN" name="553">  553   </a>
+</span><span><a class="LN" name="554">  554   </a>  force_interaction_DW.Integrator_DSTATE_h[1] += 0.0 * rtb_Saturation1_idx_1 *
+</span><span><a class="LN" name="555">  555   </a>    0.002;
+</span><span><a class="LN" name="556">  556   </a>
+</span><span><a class="LN" name="557">  557   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1670')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="558">  558   </a>  force_interaction_DW.Filter_DSTATE_b[1] += 0.002 *
+</span><span><a class="LN" name="559">  559   </a>    rtb_FilterCoefficient_n_idx_1;
+</span><span><a class="LN" name="560">  560   </a>
+</span><span><a class="LN" name="561">  561   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1669')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Integrator</i></font></a>' incorporates:</span>
+</span><span><a class="LN" name="562">  562   </a>  <span class="CT">//   Gain: '<a href="matlab:coder.internal.code2model('force_interaction:137:1667')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Integral Gain</i></font></a>'</span>
+</span><span><a class="LN" name="563">  563   </a>
+</span><span><a class="LN" name="564">  564   </a>  force_interaction_DW.Integrator_DSTATE_h[2] += 0.0 * u0_0 * 0.002;
+</span><span><a class="LN" name="565">  565   </a>
+</span><span><a class="LN" name="566">  566   </a>  <span class="CT">// Update for DiscreteIntegrator: '<a href="matlab:coder.internal.code2model('force_interaction:137:1670')" name="code2model"><font color="#117755"><i>&lt;S4&gt;/Filter</i></font></a>'</span>
+</span><span><a class="LN" name="567">  567   </a>  force_interaction_DW.Filter_DSTATE_b[2] += 0.002 * rtb_FilterCoefficient_n;
+</span><span><a class="LN" name="568">  568   </a>
+</span><span><a class="LN" name="569">  569   </a>  <span class="CT">// Update for DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:194:387')" name="code2model"><font color="#117755"><i>&lt;S19&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="570">  570   </a>  <b>{</b>
+</span><span><a class="LN" name="571">  571   </a>    <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> xnew[1];
+</span><span><a class="LN" name="572">  572   </a>    xnew[0] = 0.99623717711322513*force_interaction_DW.Internal_DSTATE_a;
+</span><span><a class="LN" name="573">  573   </a>    xnew[0] += 0.0625*rtb_Sum_h[0];
+</span><span><a class="LN" name="574">  574   </a>    (<span class="DT">void</span>) memcpy(&amp;force_interaction_DW.Internal_DSTATE_a, xnew,
+</span><span><a class="LN" name="575">  575   </a>                  <span class="KW">sizeof</span>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a>)*1);
+</span><span><a class="LN" name="576">  576   </a>  <b>}</b>
+</span><span><a class="LN" name="577">  577   </a>
+</span><span><a class="LN" name="578">  578   </a>  <span class="CT">// Update for DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:198:387')" name="code2model"><font color="#117755"><i>&lt;S20&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="579">  579   </a>  <b>{</b>
+</span><span><a class="LN" name="580">  580   </a>    <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> xnew[1];
+</span><span><a class="LN" name="581">  581   </a>    xnew[0] = 0.99623717711322513*force_interaction_DW.Internal_DSTATE_p;
+</span><span><a class="LN" name="582">  582   </a>    xnew[0] += 0.0625*rtb_Sum_h[1];
+</span><span><a class="LN" name="583">  583   </a>    (<span class="DT">void</span>) memcpy(&amp;force_interaction_DW.Internal_DSTATE_p, xnew,
+</span><span><a class="LN" name="584">  584   </a>                  <span class="KW">sizeof</span>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a>)*1);
+</span><span><a class="LN" name="585">  585   </a>  <b>}</b>
+</span><span><a class="LN" name="586">  586   </a>
+</span><span><a class="LN" name="587">  587   </a>  <span class="CT">// Update for DiscreteStateSpace: '<a href="matlab:coder.internal.code2model('force_interaction:199:387')" name="code2model"><font color="#117755"><i>&lt;S21&gt;/Internal</i></font></a>'</span>
+</span><span><a class="LN" name="588">  588   </a>  <b>{</b>
+</span><span><a class="LN" name="589">  589   </a>    <a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a> xnew[1];
+</span><span><a class="LN" name="590">  590   </a>    xnew[0] = 0.99623717711322513*force_interaction_DW.Internal_DSTATE_mg;
+</span><span><a class="LN" name="591">  591   </a>    xnew[0] += 0.0625*rtb_Sum_h[2];
+</span><span><a class="LN" name="592">  592   </a>    (<span class="DT">void</span>) memcpy(&amp;force_interaction_DW.Internal_DSTATE_mg, xnew,
+</span><span><a class="LN" name="593">  593   </a>                  <span class="KW">sizeof</span>(<a href="rtwtypes_h.html#type_real_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_real_T');" target="_self"><font color="#1122aa">real_T</font></a>)*1);
+</span><span><a class="LN" name="594">  594   </a>  <b>}</b>
+</span><span><a class="LN" name="595">  595   </a><b>}</b>
+</span><span><a class="LN" name="596">  596   </a>
+</span><span><a class="LN" name="597">  597   </a><span class="CT">// Model initialize function</span>
+</span><span><a class="LN" name="598">  598   </a><span class="DT">void</span> ForceInteraction::<a name="fcn_initialize">initialize</a>()
+</span><span><a class="LN" name="599">  599   </a><b>{</b>
+</span><span><a class="LN" name="600">  600   </a>  <span class="CT">// Registration code</span>
+</span><span><a class="LN" name="601">  601   </a>
+</span><span><a class="LN" name="602">  602   </a>  <span class="CT">// initialize error status</span>
+</span><span><a class="LN" name="603">  603   </a>  rtmSetErrorStatus((&amp;force_interaction_M), (NULL));
+</span><span><a class="LN" name="604">  604   </a>
+</span><span><a class="LN" name="605">  605   </a>  <span class="CT">// states (dwork)</span>
+</span><span><a class="LN" name="606">  606   </a>  (<span class="DT">void</span>) memset((<span class="DT">void</span> *)&amp;force_interaction_DW, 0,
+</span><span><a class="LN" name="607">  607   </a>                <span class="KW">sizeof</span>(<a href="force_interaction_h.html#type_DW_force_interaction_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_DW_force_interaction_T');" target="_self"><font color="#1122aa">DW_force_interaction_T</font></a>));
+</span><span><a class="LN" name="608">  608   </a>
+</span><span><a class="LN" name="609">  609   </a>  <span class="CT">// InitializeConditions for RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:155')" name="code2model"><font color="#117755"><i>&lt;S5&gt;/Rate Limiter</i></font></a>'</span>
+</span><span><a class="LN" name="610">  610   </a>  force_interaction_DW.PrevY = 0.0;
+</span><span><a class="LN" name="611">  611   </a>
+</span><span><a class="LN" name="612">  612   </a>  <span class="CT">// InitializeConditions for RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:189')" name="code2model"><font color="#117755"><i>&lt;S5&gt;/Rate Limiter3</i></font></a>'</span>
+</span><span><a class="LN" name="613">  613   </a>  force_interaction_DW.PrevY_m = 0.0;
+</span><span><a class="LN" name="614">  614   </a>
+</span><span><a class="LN" name="615">  615   </a>  <span class="CT">// InitializeConditions for RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:190')" name="code2model"><font color="#117755"><i>&lt;S5&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="616">  616   </a>  force_interaction_DW.PrevY_b = 0.0;
+</span><span><a class="LN" name="617">  617   </a>
+</span><span><a class="LN" name="618">  618   </a>  <span class="CT">// InitializeConditions for RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:191')" name="code2model"><font color="#117755"><i>&lt;S6&gt;/Rate Limiter1</i></font></a>'</span>
+</span><span><a class="LN" name="619">  619   </a>  force_interaction_DW.PrevY_me = 0.0;
+</span><span><a class="LN" name="620">  620   </a>
+</span><span><a class="LN" name="621">  621   </a>  <span class="CT">// InitializeConditions for RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:192')" name="code2model"><font color="#117755"><i>&lt;S6&gt;/Rate Limiter2</i></font></a>'</span>
+</span><span><a class="LN" name="622">  622   </a>  force_interaction_DW.PrevY_m0 = 0.0;
+</span><span><a class="LN" name="623">  623   </a>
+</span><span><a class="LN" name="624">  624   </a>  <span class="CT">// InitializeConditions for RateLimiter: '<a href="matlab:coder.internal.code2model('force_interaction:193')" name="code2model"><font color="#117755"><i>&lt;S6&gt;/Rate Limiter3</i></font></a>'</span>
+</span><span><a class="LN" name="625">  625   </a>  force_interaction_DW.PrevY_c = 0.0;
+</span><span><a class="LN" name="626">  626   </a><b>}</b>
+</span><span><a class="LN" name="627">  627   </a>
+</span><span><a class="LN" name="628">  628   </a><span class="CT">// Model terminate function</span>
+</span><span><a class="LN" name="629">  629   </a><span class="DT">void</span> ForceInteraction::<a name="fcn_terminate">terminate</a>()
+</span><span><a class="LN" name="630">  630   </a><b>{</b>
+</span><span><a class="LN" name="631">  631   </a>  <span class="CT">// (no terminate code required)</span>
+</span><span><a class="LN" name="632">  632   </a><b>}</b>
+</span><span><a class="LN" name="633">  633   </a>
+</span><span><a class="LN" name="634">  634   </a><span class="CT">// Constructor</span>
+</span><span><a class="LN" name="635">  635   </a>ForceInteraction::ForceInteraction()
+</span><span><a class="LN" name="636">  636   </a><b>{</b>
+</span><span><a class="LN" name="637">  637   </a><b>}</b>
+</span><span><a class="LN" name="638">  638   </a>
+</span><span><a class="LN" name="639">  639   </a><span class="CT">// Destructor</span>
+</span><span><a class="LN" name="640">  640   </a>ForceInteraction::~ForceInteraction()
+</span><span><a class="LN" name="641">  641   </a><b>{</b>
+</span><span><a class="LN" name="642">  642   </a>  <span class="CT">// Currently there is no destructor body generated.</span>
+</span><span><a class="LN" name="643">  643   </a><b>}</b>
+</span><span><a class="LN" name="644">  644   </a>
+</span><span><a class="LN" name="645">  645   </a><span class="CT">// Real-Time Model get method</span>
+</span><span><a class="LN" name="646">  646   </a><a href="force_interaction_h.html#type_RT_MODEL_force_interaction_T" onclick="if (top) if (top.docHiliteMe) top.docHiliteMe(window, 'type_RT_MODEL_force_interaction_T');" target="_self"><font color="#1122aa">RT_MODEL_force_interaction_T</font></a> * ForceInteraction::<a name="fcn_getRTM">getRTM</a>()
+</span><span><a class="LN" name="647">  647   </a><b>{</b>
+</span><span><a class="LN" name="648">  648   </a>  <span class="KW">return</span> (&amp;force_interaction_M);
+</span><span><a class="LN" name="649">  649   </a><b>}</b>
+</span><span><a class="LN" name="650">  650   </a>
+</span><span><a class="LN" name="651">  651   </a><span class="CT">//</span>
+</span><span><a class="LN" name="652">  652   </a><span class="CT">// File trailer for generated code.</span>
+</span><span><a class="LN" name="653">  653   </a><span class="CT">//</span>
+</span><span><a class="LN" name="654">  654   </a><span class="CT">// [EOF]</span>
+</span><span><a class="LN" name="655">  655   </a><span class="CT">//</span>
+</span><span><a class="LN" name="656">  656   </a>
+</span></pre>
+</td></tr></table>
+</p>
+</body>
+</html>

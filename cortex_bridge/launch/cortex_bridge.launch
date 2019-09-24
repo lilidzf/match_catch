@@ -1,0 +1,19 @@
+<launch>
+    <param name="local_ip" value="10.1.1.139"/>
+    <param name="cortex_ip" value="10.1.1.198"/>
+
+    <!--<param name="local_ip" value="192.168.5.101"/>-->
+    <!--<param name="cortex_ip" value="192.168.5.41"/>-->
+    <node name="cortex_bridge" type="cortex_bridge" pkg="cortex_bridge" output="screen">
+    </node>
+
+
+    <!--<node name="rviz_nokov" pkg="rviz" type="rviz" args="-d $(find cortex_bridge)/config/nokov.rviz">-->
+    <!--</node>-->
+
+
+    <node pkg="tf" type="static_transform_publisher" name="tf_map2world"
+          args="0 0 0 0 0 0 map world 250" />
+
+</launch>
+

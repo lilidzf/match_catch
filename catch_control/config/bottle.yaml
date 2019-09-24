@@ -1,0 +1,10 @@
+bottle_x_y_z: [0.2, 0, 0.868]
+bottle_height: 0.055
+gripper_z: 1.045
+pose_orien: false
+# 樱桃
+#rgb_bias_x_y: [0.0, 0.025, 0.008]
+#hand_dis: 14.0
+# 李子
+rgb_bias_x_y: [0.02, 0.0, -0.009]
+hand_dis: 30.0

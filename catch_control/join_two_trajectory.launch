@@ -1,0 +1,19 @@
+<launch>
+    <arg name="debug" default="false" />
+    <arg     if="$(arg debug)" name="launch_prefix" value="gdb -ex run --args" />
+<!--    <arg     if="$(arg debug)" name="launch_prefix" value="xterm -e gdb &#45;&#45;args" />-->
+    <arg     unless="$(arg debug)" name="launch_prefix" value="" />
+
+    <rosparam command="load" file="$(find catch_control)/config/hand.yaml" />
+
+    <group ns = "moveit_group">
+        <node pkg="catch_control" type="test_tra_node" name="join_two_trajectory_node" output="screen" launch-prefix="$(arg launch_prefix)" />
+<!--        <node pkg="catch_control" type="join_two_trajectory_node" name="join_two_trajectory_node" output="screen" launch-prefix="$(arg launch_prefix)" />-->
+        <rosparam command="load" file="$(find catch_control)/config/hand.yaml" />
+    </group>
+
+    <node pkg="turtlesim" type="turtlesim_node" name="turtle1" />
+    <node pkg="turtlesim" type="turtle_teleop_key" name="turtle_keyboard" output="screen"/>
+
+
+</launch>

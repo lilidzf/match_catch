@@ -1,0 +1,14 @@
+bias_marker_x: 1.8
+velocity_factor: 0.5
+plan_rate: 0.8
+marker_bias_threshold: 0.05
+imediately: false
+plan_time_leap: 0.01
+turtle_x_y_z: [0.2, 0, 1]
+# 作为marker点阀值,超过则开始重新规划的一个依据
+#hand_x_y_z: [-0.5, -0.5, 0.5]
+# arm_length = 1
+# map_length = 2.3
+# hand_bias: 0.123
+# ur5e_base_thickness: 0.015
+# table_z: 0.793
