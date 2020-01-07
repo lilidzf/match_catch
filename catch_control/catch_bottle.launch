@@ -12,8 +12,8 @@
 
 <!--    &lt;!&ndash; 10.1.1.179 &ndash;&gt;-->
     <group ns = "UR5e">
-<!--        <include file="$(find ur_modern_driver)/launch/ur5e_bringup.launch"/>-->
-        <include file="$(find ur_modern_driver)/launch/ur5e_ros_control.launch"/>
+        <include file="$(find ur_modern_driver)/launch/ur5e_bringup.launch"/>
+<!--        <include file="$(find ur_modern_driver)/launch/ur5e_ros_control.launch"/>-->
     </group>
 
 

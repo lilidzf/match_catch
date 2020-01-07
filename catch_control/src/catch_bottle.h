@@ -84,14 +84,14 @@ public:
         ROS_INFO("sub done");
 
         //action client
-//        client_ = new Client(UR_name_prefix+"/follow_joint_trajectory", true);
-//        client_->waitForServer(ros::Duration());
-        // servoj client
+        client_ = new Client(UR_name_prefix+"/follow_joint_trajectory", true);
+        client_->waitForServer(ros::Duration());
 
-        client_servoj_ = new Client(UR_name_prefix+"/pos_based_pos_traj_controller/follow_joint_trajectory",true);
-        ROS_INFO("wait for servoj client");
-        client_servoj_->waitForServer(ros::Duration());
-        ROS_INFO("servoj clent connect!");
+        // servoj client
+//        client_servoj_ = new Client(UR_name_prefix+"/pos_based_pos_traj_controller/follow_joint_trajectory",true);
+//        ROS_INFO("wait for servoj client");
+//        client_servoj_->waitForServer(ros::Duration());
+//        ROS_INFO("servoj clent connect!");
 
 //        ROS_INFO_STREAM("begin to innitialize wrench " );
 //        bsub_wrench_ = false;
@@ -438,6 +438,7 @@ public:
     }
 
 // control Robotiq in [mm]
+
     void robotiq_hand_move(float position,float vel, float force){
         ROS_INFO_STREAM("hand move, position="<<position<<"  vel="<<vel<<"  force="<<force);
         robotiq_85_msgs::GripperCmd hand_cmd;
@@ -459,6 +460,65 @@ public:
 
     }
 
+
+    void SetStartVelocity(double StartVel)
+    {
+//      StartVel = 65 - 3000
+        std_msgs::String l_hand_cmd;
+        std::ostringstream oss;
+        oss << StartVel;
+        l_hand_cmd.data = "s"+ oss.str();
+        std::cout << l_hand_cmd.data << std::endl;
+        hand_cmd.publish(l_hand_cmd);
+        ros::Duration(2).sleep();
+    }
+
+    void SetOverVelocity(double OverVel)
+    {
+//      OverVel = 65 - 3000
+        std_msgs::String l_hand_cmd;
+        std::ostringstream oss;
+        oss << OverVel;
+        l_hand_cmd.data = "o"+ oss.str();
+        std::cout << l_hand_cmd.data << std::endl;
+        hand_cmd.publish(l_hand_cmd);
+        ros::Duration(2).sleep();
+    }
+
+    void UpAccelerate(double UpAcc)
+    {
+//      UpAcc = 0-5  对应1700 3400 6800 13600 27200 54400
+        std_msgs::String l_hand_cmd;
+        std::ostringstream oss;
+        oss << UpAcc;
+        l_hand_cmd.data = "u"+ oss.str();
+        std::cout << l_hand_cmd.data << std::endl;
+        hand_cmd.publish(l_hand_cmd);
+        ros::Duration(2).sleep();
+    }
+
+    void DownAccelerate(double DownAcc)
+    {
+//      DownAcc = 0-5  对应1700 3400 6800 13600 27200 54400
+        std_msgs::String l_hand_cmd;
+        std::ostringstream oss;
+        oss << DownAcc;
+        l_hand_cmd.data = "d"+ oss.str();
+        std::cout << l_hand_cmd.data << std::endl;
+        hand_cmd.publish(l_hand_cmd);
+        ros::Duration(2).sleep();
+    }
+    void SetMaxVelocity(double MaxVel)
+    {
+//      MaxVelax = 3000 - 16000 default(4000)
+        std_msgs::String l_hand_cmd;
+        std::ostringstream oss;
+        oss << MaxVel;
+        l_hand_cmd.data = "m"+ oss.str();
+        std::cout << l_hand_cmd.data << std::endl;
+        hand_cmd.publish(l_hand_cmd);
+//        ros::Duration(2).sleep();
+    }
     void HandMoveToFixedPosition(double Ang)
     {
         int dir;
@@ -471,9 +531,11 @@ public:
             dir = 1;
             displace = TransAngleToDisplace(all_angle[0]) - TransAngleToDisplace(0);
             step = ceil(TransDisplaceToStep(displace));//转换成整数arduino中写的程序需要
-            std::cout << "displace: " << displace << std::endl << "step: " << step << std::endl << "dir: " << dir <<  std::endl;
+            current_displacement_ = current_displacement_ + step;
+            std::cout << "current_displacement_: " << current_displacement_ << std::endl;
+            std::cout << "displace: " << displace  << " step: " << step  << " dir: " << dir <<  std::endl;
             lei_hand_move(step,dir);
-            time = step / 3200 + 5;
+            time = ceil(step / 16000) + 2;
             std::cout << "time: " << time << std::endl;
             ros::Duration(time).sleep();
         }
@@ -485,9 +547,11 @@ public:
                 dir = 1;
                 displace = TransAngleToDisplace(all_angle[all_angle.size() -1 ]) - TransAngleToDisplace(all_angle[all_angle.size() -2 ]);
                 step = ceil(TransDisplaceToStep(displace));
-                std::cout << "displace: " << displace << std::endl << "step: " << step << std::endl << "dir: " << dir << std::endl;
+                current_displacement_ = current_displacement_ + step;
+                std::cout << "current_displacement_: " << current_displacement_ << std::endl;
+                std::cout << "displace: " << displace  << " step: " << step  << " dir: " << dir <<  std::endl;
                 lei_hand_move(step,dir);
-                time = step / 3200 + 5;
+                time = ceil(step / 16000) + 2;
                 std::cout << "time: " << time << std::endl;
                 ros::Duration(time).sleep();
             }
@@ -496,14 +560,16 @@ public:
                 dir = 0;
                 displace = TransAngleToDisplace(all_angle[all_angle.size() -2 ]) - TransAngleToDisplace(all_angle[all_angle.size() -1 ]);
                 step = ceil(TransDisplaceToStep(displace));
-                std::cout << "displace: " << displace << std::endl << "step: " << step << std::endl << "dir: " << dir << std::endl;
+                current_displacement_ = current_displacement_ - step;
+                std::cout << "current_displacement_: " << current_displacement_ << std::endl;
+                std::cout << "displace: " << displace  << " step: " << step  << " dir: " << dir <<  std::endl;
                 lei_hand_move(step,dir);
-                time = step / 3200 + 4;
+                time = ceil(step / 16000) + 2;
                 std::cout << "time: " << time << std::endl;
                 ros::Duration(time).sleep();
             }
         }
-        ROS_INFO("Complete a moving");
+        ROS_INFO("Complete moving");
     }
     double TransDisplaceToStep(double Displacement)
     {
@@ -527,43 +593,49 @@ public:
         rot(0,0) = cos(angle_);rot(0,1) = sin(angle_);
         rot(1,0) = -sin(angle_);rot(1,1) = cos(angle_);
         VectorXd v(2);
-//        std::cout << "rot = " << std::endl << rot << std::endl;
         v(0) = C[0] - B[0];v(1) = C[1] - B[1];
-//        std::cout << "v = " << std::endl << v << std::endl;
         VectorXd BC_ = rot * v;
-//        std::cout << "BC_ = " << std::endl << BC_ << std::endl;
         VectorXd C_(2);
         C_(0) = B[0] + BC_(0); C_(1) = B[1] + BC_(1);
-//        std::cout << "C_ = " << std::endl << C_ << std::endl;
         double displacement = (C_[1] - sqrt(pow(a,2) -pow((C_(0) - Ax),2))) - Ay;
-//        ROS_INFO("displacement:");
-//        ROS_INFO_STREAM(displacement);
         return displacement;
-//        double rot[2][2] ={cos(angle_) , sin(angle_) ; -sin(angle_) , };
     }
 
     void hand_ExtStop()
     {
         ROS_INFO("ExtStop");
         hand_move_init(2);
-        ros::Duration(3).sleep();
+        ros::Duration(2).sleep();
         all_angle.clear();
     }
+
+    void hand_ExtEnabled()
+    {
+        ROS_INFO("ExtEnabled");
+        hand_move_init(0);
+        ros::Duration(2).sleep();
+        all_angle.clear();
+    }
+
     void hand_init()
     {
-        //注意Time
-        //Step 3200 = Displacement 2mm = time 1 sec
+        //注意Time,和运动速度有关
         ROS_INFO("Waiting for intialization");
+//        ROS_INFO("Setting Velocity");
+        SetMaxVelocity(16000);
+        ros::Duration(2).sleep();
+
         hand_move_init(0);
-        ros::Duration(3).sleep();
+        ros::Duration(2).sleep();
         hand_move_init(1);
-        ros::Duration(14).sleep();
+        ros::Duration(4).sleep();
         hand_move_init(2);
-        ros::Duration(3).sleep();
+        ros::Duration(2).sleep();
         hand_move_init(3);
-        ros::Duration(14).sleep();
+        ros::Duration(4).sleep();
         ROS_INFO("Complete initialization");
         all_angle.clear();
+        current_displacement_ = 0;
     }
 
     void hand_move_init(int num){
@@ -579,7 +651,7 @@ public:
         oss << step;
         ss << dir;
         l_hand_cmd.data = oss.str() + " " + ss.str();
-        std::cout << l_hand_cmd.data << std::endl;
+//        std::cout << l_hand_cmd.data << std::endl;
         hand_cmd.publish(l_hand_cmd);
     }
 
@@ -692,18 +764,37 @@ public:
 
     }
 
+    void GetCurr(){
+        force_update_all_state();
+        KDL::Frame CurrFrame = frame_wrist3_base_;
+        ROS_INFO_STREAM("CurrentFrame x=" <<CurrFrame.p.data[0]<<" y=" <<CurrFrame.p.data[1] <<" z=" <<CurrFrame.p.data[2]);
+    }
+
+    void move_straight(double x,double y,double z,double time )
+    {
+
+        KDL::Vector end;
+        end.data[0] = x;
+        end.data[1] = y;
+        end.data[2] = z;
+        move_line(end,time);
+
+    }
     void move_to_xyz(double x,double y, double z,double time,bool b_relative){
         force_update_all_state();
         KDL::Frame next_frame = frame_wrist3_base_;
         KDL::JntArray next_jnts(6);
         if(b_relative){
-            ROS_INFO_STREAM("move to position relative to current point   x="<<x<<"   y="<<y<<"  z"<<z);
+            ROS_INFO_STREAM("move to position relative to current point   x="<<x<<"   y="<<y<<"  z="<<z);
             next_frame.p.data[0] += x;
+//            ROS_INFO_STREAM("current x = " << next_frame.p.data[0]);
             next_frame.p.data[1] += y;
+//            ROS_INFO_STREAM("current y = " << next_frame.p.data[1]);
             next_frame.p.data[2] += z;
+//            ROS_INFO_STREAM("current z = " << next_frame.p.data[2]);
 
         } else{
-            ROS_INFO_STREAM("move to fixed position     x="<<x<<"   y="<<y<<"  z"<<z);
+            ROS_INFO_STREAM("move to fixed position     x="<<x<<"   y="<<y<<"  z="<<z);
             next_frame.p.data[0] = x;
             next_frame.p.data[1] = y;
             next_frame.p.data[2] = z;
@@ -1375,8 +1466,6 @@ private:
     KDL::Frame frame_wrist3_base_;//fk result
     KDL::Vector end_point_;
 
-    std::vector<double> all_angle;
-
     // Robotiq Hand
     ros::Subscriber sub_hand_;
     ros::Publisher pub_hand_cmd_;
@@ -1401,6 +1490,10 @@ private:
 
     //Hand of Lei
     ros::Publisher hand_cmd;
+    ros::Publisher current_position;
+    std::vector<double> all_angle;
+    double current_displacement_ = 0;
+
 
     robotiq_85_msgs::GripperStat hand_state_;
     bool b_hand_sub_;

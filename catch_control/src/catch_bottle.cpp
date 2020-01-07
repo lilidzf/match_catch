@@ -1,6 +1,10 @@
 #include <ros/ros.h>
 #include "catch_bottle.h"
-
+#include <vector>
+#include <istream>
+#include <Eigen/Geometry>
+#include <Eigen/Core>
+#include <Eigen/Dense>
 
 
 
@@ -21,34 +25,43 @@ int main(int argc, char** argv)
     UR UR5e(nh, urdf_param, "base_link", "tool0", timeout, UR_name_prefix,hand_name_prefix);
     ros::Duration(0.5).sleep();
     ros::spinOnce();
-    KDL::JntArray tmp(6);
-    std::vector<double> gravity_up_joints;
-    nh.getParam("gravity_up_joints", gravity_up_joints);
-    for (int j = 0; j <6; ++j) {
-        tmp(j) = gravity_up_joints[j]/180*M_PI;
-    }
+//    KDL::JntArray tmp(6);
+//    std::vector<double> gravity_up_joints;
+//    nh.getParam("gravity_up_joints", gravity_up_joints);
+//    for (int j = 0; j <6; ++j) {
+//        tmp(j) = gravity_up_joints[j]/180*M_PI;
+//    }
 
-    double angle = 30;
+//    double angle = 30;
     ROS_INFO("Wait for movement");
 
-//    UR5e.lei_hand_move(6400,1);
-//    ros::Duration(5).sleep();
-//    ros::Duration((34807 / 3200) + 4).sleep();
-//      UR5e.hand_ExtStop();
-      UR5e.hand_init();
-//
-    UR5e.HandMoveToFixedPosition(20);
-////
-    UR5e.HandMoveToFixedPosition(50);
-//
-    UR5e.HandMoveToFixedPosition(90);
-////
-//    UR5e.HandMoveToFixedPosition(50);
-//
-    UR5e.HandMoveToFixedPosition(20);
+    UR5e.GetCurr();
+    for(int i =1 ; i<100 ;i++) {
+        UR5e.move_to_xyz(0, 0.001, 0, 0.1, 1);
+    }
+//    UR5e.move_straight(0.144686,0.436581,0.802392,5);
 
-    UR5e.HandMoveToFixedPosition(0);
-//
+//    UR5e.hand_ExtStop();
+//    UR5e.SetMaxVelocity(16000);
+//    ros::Duration(2).sleep();
+//    UR5e.lei_hand_move(16000,1);
+
+//    ros::Duration(2).sleep();
+////
+//    UR5e.hand_init();
+//////////
+//    UR5e.HandMoveToFixedPosition(20);
+////////
+//    UR5e.HandMoveToFixedPosition(30);
+//////
+//    UR5e.HandMoveToFixedPosition(90);
+////////
+////    UR5e.HandMoveToFixedPosition(50);
+//////
+//    UR5e.HandMoveToFixedPosition(10);
+////
+//    UR5e.HandMoveToFixedPosition(0);
+////
 
 
 
@@ -108,7 +121,7 @@ int main(int argc, char** argv)
 //
 //    ros::Duration(0.2).sleep();
 ////    fruit[2] += 0.146 + 0.077 + 0.1;
-////    UR5e.move_line(fruit,1);
+//    UR5e.move_line(fruit,1);
 //    UR5e.move_to_grasp_new_function(fruit);
 //
 ////    UR5e.test_move_line(fruit);

@@ -1,8 +1,9 @@
+
 #include <ros/ros.h>
 #include <serial/serial.h>  //ROS已经内置了的串口包
 #include <std_msgs/String.h>
-//#include <std_msgs/Empty.h>
-
+#include <string>
+#include <iostream>
 //  串口采集数据
 
 serial::Serial ser; //声明串口对象
@@ -15,8 +16,18 @@ void write_callback(const std_msgs::String::ConstPtr& msg)
 
 void print_value_screen(const std_msgs::String::ConstPtr& msg)
 {
-    ROS_INFO("SensorValue: %s", msg->data.c_str());
-    ROS_INFO("GetSensorValue\n");
+
+   std::string data;
+   data = msg -> data;
+   double SensorValue = atof(data.c_str());
+//   double sensorValue = stod(data);
+   std::cout << "data:" << data << std::endl;
+   std::cout << "SensorValue:" << SensorValue << std::endl;
+//   std::cout << "sensorValue:" << sensorValue << std::endl;
+
+
+//    ROS_INFO("SensorValue: %s", msg->data.c_str());
+//    ROS_INFO("GetSensorValue\n");
 }
 //
 int main (int argc, char** argv)
@@ -59,10 +70,10 @@ int main (int argc, char** argv)
     while(ros::ok())
     {
         if(ser.available()){
-            ROS_INFO_STREAM("Reading from serial port\n");
+//            ROS_INFO_STREAM("Reading from serial port\n");
             std_msgs::String result;
             result.data = ser.read(ser.available());
-            ROS_INFO_STREAM("GetSensorValue: " << result.data);
+//            ROS_INFO_STREAM("GetSensorValue: " << result.data);
             read_pub.publish(result);
         }
         ros::spinOnce();

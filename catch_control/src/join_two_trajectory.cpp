@@ -7,7 +7,7 @@
 #include <moveit/planning_scene_interface/planning_scene_interface.h>
 #include <moveit/robot_model_loader/robot_model_loader.h>
 #include <moveit_msgs/CollisionObject.h>
-#include "mymoveit.h"
+//#include "mymoveit.h"
 #include "join_two_trajectory.h"
 #include <kdl/chainfksolverpos_recursive.hpp>
 #include <moveit_visual_tools/moveit_visual_tools.h>
